@@ -1,5 +1,5 @@
 <template>
-  <button id="base-button" :class="{plain}" @click="clickBtn">
+  <button class="base-button" :class="{plain}" @click="clickBtn">
     <slot></slot>
   </button>
 </template>
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#base-button {
+.base-button {
   width: 120px;
   height: 40px;
   background-color: #333333;

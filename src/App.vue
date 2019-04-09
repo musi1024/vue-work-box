@@ -3,7 +3,7 @@
     <!-- <base-button :plain="false" class="demo-btn">按钮</base-button> -->
     <base-button :plain="true" @CLICK_BTN="clickBtn" disabled>按钮</base-button>
     <base-button :plain="false" @CLICK_BTN="clickBtn">按钮</base-button>
-    <base-dialog v-if="showDialog" @CLOSE_DIALOG="closeDialog" width="80vw" title="1">
+    <base-dialog v-if="showDialog" @CLOSE_DIALOG="closeDialog" width="8 0vw" title="1">
       <template v-slot:header>
         title
         <base-button class="dialog-close" :plain="true" @CLICK_BTN="closeDialog">x</base-button>

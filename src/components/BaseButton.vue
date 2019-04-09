@@ -84,6 +84,7 @@ export default {
     width: 20px;
     height: 20px;
     font-size: 14px;
+    margin: 0px;
     border: none;
   }
 }

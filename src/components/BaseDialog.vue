@@ -68,7 +68,7 @@ export default {
   &-main {
     color: #4c4c4c;
     position: relative;
-    padding: 0 20px;
+    padding: 10px 20px;
   }
 }
 

@@ -9,7 +9,7 @@ import { setTimeout, clearTimeout } from 'timers';
 export default {
   name: 'BaseButton',
   props: {
-    plain: { type: Boolean, default: false }  
+    plain: { type: Boolean, default: false }
   },
   data() {
     return {

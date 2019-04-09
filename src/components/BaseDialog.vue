@@ -2,10 +2,15 @@
   <transition name="dialog">
     <div class="base-dialog" @click="closeDialog">
       <section class="base-dialog-container" :style="{ width }" @click.stop>
-        <div class="base-dialog-header">
+        <header class="base-dialog-header">
           <slot name="header"></slot>
+        </header>
+        <main class="base-dialog-main">
+          <slot name="main"></slot>
+        </main>
+        <div class="base-dialog-footer">
+          <slot name="footer"></slot>
         </div>
-        <slot></slot>
       </section>
     </div>
   </transition>
@@ -18,10 +23,9 @@ export default {
     width: {
       type: String,
       default: '50%'
-    },
+    }
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     closeDialog() {
       this.$emit('CLOSE_DIALOG');
@@ -48,18 +52,23 @@ export default {
 
   &-container {
     margin: 0 auto;
-    padding: 0 10px 20px 10px;
+    padding: 0;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.08);
     border: 1px solid #e6e6e6;
     transition: all 0.3s ease;
   }
-  &-header {
+  &-header,
+  &-footer {
     color: #4c4c4c;
-    font-size: 14px;
-    padding: 0 0 20px;
+    padding: 20px 0;
     position: relative;
+  }
+  &-main {
+    color: #4c4c4c;
+    position: relative;
+    padding: 0 20px;
   }
 }
 

@@ -44,6 +44,7 @@ export default {
   color: white;
   font-size: 14px;
   padding: 0;
+  margin: 0 10px;
   display: inline-flex;
   justify-content: center;
   align-items: center;

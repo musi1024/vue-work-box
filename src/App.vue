@@ -5,10 +5,16 @@
     <base-button :plain="false" @CLICK_BTN="clickBtn">按钮</base-button>
     <base-dialog v-if="showDialog" @CLOSE_DIALOG="closeDialog" width="80vw" title="1">
       <template v-slot:header>
-        <h1>title</h1>
+        title
         <base-button class="dialog-close" :plain="true" @CLICK_BTN="closeDialog">x</base-button>
       </template>
-      this is dialog
+      <template
+        v-slot:main
+      >this is dialogthis is dialogthis is dialogthis is dialogthis is dialogthis is dialogthis is dialogthis is dialogthis is dialogthis is dialogthis is dialogthis is dialogthis is dialogthis is dialogthis is dialogthis is dialog</template>
+      <template v-slot:footer>
+        <base-button :plain="true" @CLICK_BTN="closeDialog">取消</base-button>
+        <base-button :plain="false" @CLICK_BTN="closeDialog">确认</base-button>
+      </template>
     </base-dialog>
   </div>
 </template>

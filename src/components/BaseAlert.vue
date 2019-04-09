@@ -7,7 +7,9 @@
       <main class="base-alert-main">
         <slot name="main"></slot>
       </main>
-      <button class="base-alert-close" v-if="hasClose || !autoClose" @click="closeAlert">x</button>
+      <button class="base-alert-close" v-if="hasClose || !autoClose" @click="closeAlert">
+        <slot name="close"></slot>
+      </button>
     </section>
   </transition>
 </template>

@@ -12,6 +12,7 @@
     >
       <template v-slot:icon>I</template>
       <template v-slot:main>tttttttttt</template>
+      <template v-slot:close>x</template>
     </base-alert>
     <base-dialog v-if="showDialog" @CLOSE_DIALOG="closeDialog" width="80vw" title="1">
       <template v-slot:header>

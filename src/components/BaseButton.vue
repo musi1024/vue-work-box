@@ -43,7 +43,7 @@ export default {
   border: none;
   color: white;
   font-size: 14px;
-  padding: 0; 
+  padding: 0;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -74,6 +74,16 @@ export default {
     position: absolute;
     top: 100px;
     left: 0;
+  }
+
+  &.dialog-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    border: none;
   }
 }
 </style>

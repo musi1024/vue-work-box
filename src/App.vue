@@ -6,7 +6,7 @@
     <base-dialog v-if="showDialog" @CLOSE_DIALOG="closeDialog" width="80vw" title="1">
       <template v-slot:header>
         <h1>title</h1>
-        <button class="dialog-btn-close">x</button>
+        <base-button class="dialog-close" :plain="true" @CLICK_BTN="closeDialog">x</base-button>
       </template>
       this is dialog
     </base-dialog>
@@ -51,10 +51,5 @@ export default {
   width: 100vw;
   height: 100vh;
   position: relative;
-}
-.dialog-btn-close {
-  position: absolute;
-  top: 0;
-  right: 10px;
 }
 </style>

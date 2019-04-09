@@ -48,7 +48,7 @@ export default {
 
   &-container {
     margin: 0 auto;
-    padding: 20px 10px;
+    padding: 0 10px 20px 10px;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.08);

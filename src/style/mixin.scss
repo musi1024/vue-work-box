@@ -1,0 +1,30 @@
+@function px($x, $designWidth: 750) {
+  @return $x / $designWidth * 100 + vw;
+}
+
+@mixin set-size($w, $h) {
+  width: px($w);
+  height: px($h);
+}
+
+@mixin set-lt($left, $top) {
+  position: absolute;
+  left: px($left);
+  top: px($top);
+}
+
+@mixin set-rb($right, $bottom) {
+  position: absolute;
+  right: px($right);
+  bottom: px($bottom);
+}
+
+@mixin set-property($property, $x) {
+  #{$property}: px($x);
+}
+
+@mixin set-image($url) {
+  background-image: url($url);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}

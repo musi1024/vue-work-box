@@ -5,7 +5,10 @@ module.exports = {
       // 给 sass-loader 传递选项
       sass: {
         // @/ 是 src/ 的别名
-        data: `@import "@/style/common.scss";`
+        data: `
+          @import "@/style/common.scss";
+          @import "@/style/mixin.scss";
+        `
       }
     }
   }

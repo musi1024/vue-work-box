@@ -34,10 +34,11 @@ export default {
   },
   methods: {
     clickBtn() {
-      console.log('click');
+      console.log('click btn');
       this.showDialog = true;
     },
     closeDialog() {
+      console.log('close dialog');
       this.showDialog = false;
     }
   }

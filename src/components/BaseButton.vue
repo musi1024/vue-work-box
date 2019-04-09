@@ -14,18 +14,18 @@ export default {
   data() {
     return {
       lock: false,
-      lockTIme: null
+      lockTime: null
     };
   },
   beforeDestroy() {
-    clearTimeout(this.lockTIme);
+    clearTimeout(this.lockTime);
   },
   methods: {
     clickBtn() {
       if (!this.lock) {
         this.lock = true;
         this.$emit('CLICK_BTN');
-        this.lockTIme = setTimeout(() => {
+        this.lockTime = setTimeout(() => {
           this.lock = false;
         }, 500);
       }

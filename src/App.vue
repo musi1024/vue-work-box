@@ -1,9 +1,18 @@
 <template>
   <div id="app">
     <!-- <base-button :plain="false" class="demo-btn">按钮</base-button> -->
-    <base-button :plain="true" @CLICK_BTN="clickBtn" disabled>不可用按钮</base-button>
-    <base-button :plain="false" @CLICK_BTN="clickBtn">触发dialog按钮</base-button>
-    <base-alert>this is an BaseAlert</base-alert>
+    <base-button :plain="true" @CLICK_BTN="clickDialogBtn" disabled>不可用按钮</base-button>
+    <base-button @CLICK_BTN="clickDialogBtn">触发dialog按钮</base-button>
+    <base-button @CLICK_BTN="clickAlertBtn">触发alert按钮</base-button>
+    <base-alert
+      :show-alert="showAlert"
+      :has-icon="true"
+      :auto-close="false"
+      @CLOSE_ALERT="closeAlert"
+    >
+      <template v-slot:icon>I</template>
+      <template v-slot:main>tttttttttt</template>
+    </base-alert>
     <base-dialog v-if="showDialog" @CLOSE_DIALOG="closeDialog" width="80vw" title="1">
       <template v-slot:header>
         here is title
@@ -12,7 +21,7 @@
       <template v-slot:main>here is main</template>
       <template v-slot:footer>
         <base-button :plain="true" @CLICK_BTN="closeDialog">取消</base-button>
-        <base-button :plain="false" @CLICK_BTN="closeDialog">确认</base-button>
+        <base-button @CLICK_BTN="closeDialog">确认</base-button>
       </template>
     </base-dialog>
   </div>
@@ -32,17 +41,26 @@ export default {
   },
   data() {
     return {
-      showDialog: false
+      showDialog: false,
+      showAlert: false
     };
   },
   methods: {
-    clickBtn() {
-      console.log('click btn');
+    clickDialogBtn() {
+      console.log('click dialog btn');
       this.showDialog = true;
+    },
+    clickAlertBtn() {
+      console.log('click alert btn');
+      this.showAlert = true;
     },
     closeDialog() {
       console.log('close dialog');
       this.showDialog = false;
+    },
+    closeAlert() {
+      console.log('close alert');
+      this.showAlert = false;
     }
   }
 };

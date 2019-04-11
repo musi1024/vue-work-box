@@ -25,6 +25,9 @@
         <base-button @CLICK_BTN="closeDialog">确认</base-button>
       </template>
     </base-dialog>
+    <Marquee :content="arr">
+      <span class="marquee-content" v-for="(item, index) in arr" :key="index">{{item}}</span>
+    </Marquee>
   </div>
 </template>
 
@@ -32,19 +35,33 @@
 import BaseButton from './components/BaseButton';
 import BaseDialog from './components/BaseDialog';
 import BaseAlert from './components/BaseAlert';
+import Marquee from './components/Marquee';
 
 export default {
   name: 'App',
   components: {
     'base-button': BaseButton,
     'base-dialog': BaseDialog,
-    'base-alert': BaseAlert
+    'base-alert': BaseAlert,
+    Marquee
   },
   data() {
     return {
       showDialog: false,
-      showAlert: false
+      showAlert: false,
+      arr: []
     };
+  },
+  mounted() {
+    this.arr = [
+      '手机用户:151****013获得二等奖',
+      '科比:获得一个篮球',
+      '网友:获得现金5元',
+      '网友:获得现金5元',
+      '网友:获得现金5元',
+      '网友:获得现金5元',
+      '网友:获得现金5元'
+    ];
   },
   methods: {
     clickDialogBtn() {
@@ -78,5 +95,8 @@ export default {
   width: 100vw;
   height: 100vh;
   position: relative;
+  .marquee-content {
+    margin-left: 20px;
+  }
 }
 </style>

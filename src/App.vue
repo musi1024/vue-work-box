@@ -1,104 +1,106 @@
 <template>
   <div id="app">
-    <!-- <base-button :plain="false" class="demo-btn">按钮</base-button> -->
-    <base-button :plain="true" @CLICK_BTN="clickDialogBtn" disabled>不可用按钮</base-button>
-    <base-button @CLICK_BTN="clickDialogBtn">触发dialog按钮</base-button>
-    <base-button @CLICK_BTN="clickAlertBtn">触发alert按钮</base-button>
-    <base-button @CLICK_BTN="clickFlipBtn">触发flip按钮</base-button>
-    <base-alert
-      :show-alert="showAlert"
-      :has-icon="true"
-      :auto-close="false"
-      @CLOSE_ALERT="closeAlert"
-    >
-      <template v-slot:icon>I</template>
-      <template v-slot:main>tttttttttt</template>
-      <template v-slot:close>x</template>
-    </base-alert>
-    <base-dialog v-if="showDialog" @CLOSE_DIALOG="closeDialog" width="80vw" title="1">
-      <template v-slot:header>
-        here is title
-        <base-button class="dialog-close" :plain="true" @CLICK_BTN="closeDialog">x</base-button>
+    <transition name="loading">
+      <router-view v-if="!isLoading"></router-view>
+    </transition>
+    <transition name="loading">
+      <template v-if="isLoading">
+        <p class="loading-percent">loading... {{percent}}%</p>
       </template>
-      <template v-slot:main>here is main</template>
-      <template v-slot:footer>
-        <base-button :plain="true" @CLICK_BTN="closeDialog">取消</base-button>
-        <base-button @CLICK_BTN="closeDialog">确认</base-button>
-      </template>
-    </base-dialog>
-    <Marquee :content="arr">
-      <span class="marquee-content" v-for="(item, index) in arr" :key="index">{{item}}</span>
-    </Marquee>
-    <flip-card class="flip-card" :start-flip="flip">
-      <template v-slot:face>
-        <div class="card-face"></div>
-      </template>
-      <template v-slot:back>
-        <div class="card-back"></div>
-      </template>
-    </flip-card>
+    </transition>
   </div>
 </template>
 
 <script>
-import BaseButton from './components/BaseButton';
-import BaseDialog from './components/BaseDialog';
-import BaseAlert from './components/BaseAlert';
-import Marquee from './components/Marquee';
-import FlipCard from './components/FlipCard';
-// import { setTimeout } from 'timers';
+const preloadImgs = [
+  require('@/assets/images/1.jpg'),
+  require('@/assets/images/2.jpg'),
+  require('@/assets/images/banner_1_0.jpg'),
+  require('@/assets/images/banner_1_1.jpg'),
+  require('@/assets/images/banner_1_2.jpg'),
+  require('@/assets/images/banner_1_3.jpg'),
+  require('@/assets/images/banner_1_4.jpg'),
+  require('@/assets/images/banner_1_5.jpg'),
+  require('@/assets/images/banner_2_0.jpg'),
+  require('@/assets/images/banner_2_1.jpg'),
+  require('@/assets/images/banner_2_2.jpg'),
+  require('@/assets/images/banner_2_3.jpg'),
+  require('@/assets/images/banner_2_4.jpg'),
+  require('@/assets/images/banner_2_5.jpg'),
+  require('@/assets/images/banner_3_0.jpg'),
+  require('@/assets/images/banner_3_1.jpg'),
+  require('@/assets/images/banner_3_2.jpg'),
+  require('@/assets/images/banner_3_3.jpg'),
+  require('@/assets/images/banner_3_4.jpg'),
+  require('@/assets/images/banner_3_5.jpg'),
+  require('@/assets/images/banner_4_0.jpg'),
+  require('@/assets/images/banner_4_1.jpg'),
+  require('@/assets/images/banner_4_2.jpg'),
+  require('@/assets/images/banner_4_3.jpg'),
+  require('@/assets/images/banner_4_4.jpg'),
+  require('@/assets/images/banner_4_5.jpg'),
+  require('@/assets/images/banner_5_0.jpg'),
+  require('@/assets/images/banner_5_1.jpg'),
+  require('@/assets/images/banner_5_2.jpg'),
+  require('@/assets/images/banner_5_3.jpg'),
+  require('@/assets/images/banner_5_4.jpg'),
+  require('@/assets/images/banner_5_5.jpg'),
+  require('@/assets/images/banner_6_0.jpg'),
+  require('@/assets/images/banner_6_1.jpg'),
+  require('@/assets/images/banner_6_2.jpg'),
+  require('@/assets/images/banner_6_3.jpg'),
+  require('@/assets/images/banner_6_4.jpg'),
+  require('@/assets/images/banner_6_5.jpg'),
+  require('@/assets/images/default-gift.png'),
+  require('@/assets/images/demo-btn.png'),
+  require('@/assets/images/guide_1.png'),
+  require('@/assets/images/guide_2.png'),
+  require('@/assets/images/guide_3.png'),
+  require('@/assets/images/guide_4.png'),
+  require('@/assets/images/guide_close.png'),
+  require('@/assets/images/guide_img_1.png'),
+  require('@/assets/images/guide_img_2.png'),
+  require('@/assets/images/guide_img_3.png'),
+  require('@/assets/images/guide_img_4.png'),
+  require('@/assets/images/guide_point.png'),
+  require('@/assets/images/share_0.jpg'),
+  require('@/assets/images/share_1.jpg'),
+  require('@/assets/images/share_2.jpg'),
+  require('@/assets/images/share_3.jpg'),
+  require('@/assets/images/share_4.jpg'),
+  require('@/assets/images/share_5.jpg')
+];
 
 export default {
   name: 'App',
-  components: {
-    'base-button': BaseButton,
-    'base-dialog': BaseDialog,
-    'base-alert': BaseAlert,
-    'flip-card': FlipCard,
-    Marquee
-  },
   data() {
     return {
-      showDialog: false,
-      showAlert: false,
-      arr: [],
-      flip: false
+      isLoading: true,
+      percent: 0
     };
   },
   mounted() {
-    this.arr = [
-      '111111111111111',
-      '222222222222222',
-      '333333333333333',
-      '444444444444444',
-      '555555555555555',
-      '666666666666666',
-      '777777777777777'
-    ];
+    this.loading();
   },
   methods: {
-    clickDialogBtn() {
-      console.log('click dialog btn');
-      this.showDialog = true;
+    async loading() {
+      let count = 0;
+      for (let i = 0; i < preloadImgs.length; i++) {
+        await this._loadImg(preloadImgs[i]);
+        count++;
+        this.percent = parseInt((count / preloadImgs.length) * 100);
+      }
+      this.isLoading = false;
     },
-    clickAlertBtn() {
-      console.log('click alert btn');
-      this.showAlert = true;
-    },
-    closeDialog() {
-      console.log('close dialog');
-      this.showDialog = false;
-    },
-    closeAlert() {
-      console.log('close alert');
-      this.showAlert = false;
-    },
-    clickFlipBtn() {
-      console.log('flip');
-      this.flip = true;
-      // setTimeout(() => {
-      //   this.text = '22222';
-      // }, 1000);
+
+    _loadImg(src) {
+      return new Promise(resolve => {
+        let img = new Image();
+        img.onload = () => {
+          resolve(img);
+        };
+        img.src = src;
+      });
     }
   }
 };
@@ -115,23 +117,12 @@ export default {
   width: 100vw;
   height: 100vh;
   position: relative;
-  .marquee-content {
-    margin-left: 20px;
+  .loading-enter-active {
+    animation: fadeIn 0.1s;
   }
-  .flip-card {
-    margin: 40px;
-    width: 200px;
-    height: 200px;
-    .card-back {
-      width: 200px;
-      height: 200px;
-      @include set-image('./assets/images/2.jpg');
-    }
-    .card-face {
-      width: 200px;
-      height: 200px;
-      @include set-image('./assets/images/1.jpg');
-    }
+
+  .loading-leave-active {
+    animation: fadeIn 0.2s 0.3s reverse;
   }
 }
 </style>

@@ -25,7 +25,7 @@ export default {
     },
     speed: {
       type: Number,
-      default: 100
+      default: 50
     }
   },
   mounted() {},

@@ -89,9 +89,8 @@ export default {
         await this._loadImg(preloadImgs[i]);
         count++;
         this.percent = parseInt((count / preloadImgs.length) * 100);
-        console.log(count, preloadImgs.length);
-        this.isLoading = this.percent == 100 ? false : true;
       }
+      this.isLoading = this.percent == 100 ? false : true;
     },
 
     _loadImg(src) {
@@ -123,14 +122,6 @@ export default {
   }
   .page-enter-active {
     animation: fadeIn 1s;
-  }
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 </style>

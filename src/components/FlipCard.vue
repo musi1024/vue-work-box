@@ -51,27 +51,13 @@ export default {
     backface-visibility: hidden;
   }
   &-back {
-    transform: rotateY(180deg);
+    transform: rotateY(-180deg);
     &.scale {
       animation: scale 1.2s ease-in-out infinite alternate-reverse;
     }
   }
   &.flip {
     animation: flip 2s ease-in-out;
-  }
-}
-
-@keyframes flip {
-  to {
-    transform: rotateY(180deg);
-  }
-}
-@keyframes scale {
-  100% {
-    transform: scale(1);
-  }
-  0% {
-    transform: scale(1.2);
   }
 }
 </style>

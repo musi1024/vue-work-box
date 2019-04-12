@@ -94,16 +94,4 @@ export default {
     animation: marquee-infinite linear infinite;
   }
 }
-
-@keyframes marquee {
-  to {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-@keyframes marquee-infinite {
-  to {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
 </style>

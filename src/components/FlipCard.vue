@@ -4,6 +4,7 @@
     :class="{flip}"
     @animationend="scale = true"
     @webkitAnimationEnd="scale = true"
+    @click="flip = true"
   >
     <div class="card flip-card-face">
       <slot name="face"></slot>
@@ -47,8 +48,6 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-  }
-  &-face {
     backface-visibility: hidden;
   }
   &-back {
@@ -58,7 +57,7 @@ export default {
     }
   }
   &.flip {
-    animation: flip 1s ease-in-out;
+    animation: flip 2s ease-in-out;
   }
 }
 

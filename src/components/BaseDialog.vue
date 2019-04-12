@@ -78,7 +78,7 @@ export default {
 }
 .dialog-enter-active,
 .dialog-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.8s;
 }
 </style>
 

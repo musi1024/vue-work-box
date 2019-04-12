@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <transition name="loading">
-      <router-view v-if="!isLoading"></router-view>
-    </transition>
-    <transition name="loading">
       <template v-if="isLoading">
         <p class="loading-percent">loading... {{percent}}%</p>
       </template>
+    </transition>
+    <transition name="page">
+      <router-view v-if="!isLoading"></router-view>
     </transition>
   </div>
 </template>
@@ -89,8 +89,9 @@ export default {
         await this._loadImg(preloadImgs[i]);
         count++;
         this.percent = parseInt((count / preloadImgs.length) * 100);
+        console.log(count, preloadImgs.length);
+        this.isLoading = this.percent == 100 ? false : true;
       }
-      this.isLoading = false;
     },
 
     _loadImg(src) {
@@ -120,9 +121,16 @@ export default {
   .loading-enter-active {
     animation: fadeIn 0.1s;
   }
-
-  .loading-leave-active {
-    animation: fadeIn 0.2s 0.3s reverse;
+  .page-enter-active {
+    animation: fadeIn 1s;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 </style>

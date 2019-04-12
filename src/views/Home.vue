@@ -34,9 +34,9 @@
       <template v-slot:face>
         <div class="card-face"></div>
       </template>
-      <!-- <template v-slot:back>
+      <template v-slot:back>
         <div class="card-back"></div>
-      </template> -->
+      </template>
     </flip-card>
   </div>
 </template>

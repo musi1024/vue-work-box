@@ -29,11 +29,14 @@
     <Marquee :content="arr">
       <span class="marquee-content" v-for="(item, index) in arr" :key="index">{{item}}</span>
     </Marquee>
-    <div class="dd" :class="{flip}">
-      https://codepen.io/shayhowe/pen/Fvjnf
-      <div class="bb face"></div>
-      <div class="bb back"></div>
-    </div>
+    <flip-card class="flip-card" :start-flip="flip">
+      <template v-slot:face>
+        <div class="card-face"></div>
+      </template>
+      <template v-slot:back>
+        <div class="card-back"></div>
+      </template>
+    </flip-card>
   </div>
 </template>
 
@@ -42,7 +45,8 @@ import BaseButton from './components/BaseButton';
 import BaseDialog from './components/BaseDialog';
 import BaseAlert from './components/BaseAlert';
 import Marquee from './components/Marquee';
-import { setTimeout } from 'timers';
+import FlipCard from './components/FlipCard';
+// import { setTimeout } from 'timers';
 
 export default {
   name: 'App',
@@ -50,6 +54,7 @@ export default {
     'base-button': BaseButton,
     'base-dialog': BaseDialog,
     'base-alert': BaseAlert,
+    'flip-card': FlipCard,
     Marquee
   },
   data() {
@@ -57,9 +62,7 @@ export default {
       showDialog: false,
       showAlert: false,
       arr: [],
-      flip: false,
-      flipEnd: false,
-      text: '1111'
+      flip: false
     };
   },
   mounted() {
@@ -93,9 +96,9 @@ export default {
     clickFlipBtn() {
       console.log('flip');
       this.flip = true;
-      setTimeout(() => {
-        this.text = '22222';
-      }, 1000);
+      // setTimeout(() => {
+      //   this.text = '22222';
+      // }, 1000);
     }
   }
 };
@@ -115,31 +118,19 @@ export default {
   .marquee-content {
     margin-left: 20px;
   }
-  .dd {
-    position: absolute;
+  .flip-card {
+    margin: 40px;
     width: 200px;
     height: 200px;
-    top: 50%;
-    left: 50%;
-    margin-left: -75px;
-    transition: all 1s linear;
-    & > .bb {
+    .card-back {
       width: 200px;
       height: 200px;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    .face {
-      @include set-image('./assets/images/1.jpg');
-    }
-    .back {
       @include set-image('./assets/images/2.jpg');
-      z-index: 1;
     }
-    &.flip {
-      transform: rotateY(180deg);
-      backface-visibility: hidden;
+    .card-face {
+      width: 200px;
+      height: 200px;
+      @include set-image('./assets/images/1.jpg');
     }
   }
 }

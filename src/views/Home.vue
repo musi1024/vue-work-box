@@ -30,7 +30,7 @@
     <Marquee :content="arr">
       <span class="marquee-content" v-for="(item, index) in arr" :key="index">{{item}}</span>
     </Marquee>
-    <flip-card class="flip-card" :start-flip="flip">
+    <flip-card class="flip-card" :start-flip="flip" :has-follow-up="true" @CLICK_CARD="clickFlipBtn">
       <template v-slot:face>
         <div class="card-face"></div>
       </template>
@@ -95,9 +95,6 @@ export default {
     clickFlipBtn() {
       console.log('flip');
       this.flip = true;
-      // setTimeout(() => {
-      //   this.text = '22222';
-      // }, 1000);
     }
   }
 };

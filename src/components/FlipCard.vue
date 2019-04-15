@@ -2,15 +2,18 @@
   <div
     class="flip-card"
     :class="{flip}"
-    @animationend="scale = true"
-    @webkitAnimationEnd="scale = true"
-    @click="flip = true"
+    @animationend="flipEnd"
+    @webkitAnimationEnd="flipEnd"
+    @click="clickCard"
   >
-    <div class="card flip-card-face">
+    <div class="card flip-card-face" v-if="!disabled">
       <slot name="face"></slot>
     </div>
-    <div class="card flip-card-back" :class="{scale}">
+    <div class="card flip-card-back" :class="{scale, disabled}">
       <slot name="back"></slot>
+    </div>
+    <div class="flip-card-text">
+      <slot name="text"></slot>
     </div>
   </div>
 </template>
@@ -22,13 +25,27 @@ export default {
     startFlip: {
       type: Boolean,
       default: false
+    },
+    hasFollowUp: {
+      type: Boolean
     }
   },
   data() {
     return {
       flip: this.startFlip,
-      scale: false
+      scale: false,
+      disabled: false
     };
+  },
+  methods: {
+    clickCard() {
+      this.$emit('CLICK_CARD');
+    },
+    flipEnd() {
+      this.$emit('FLIP_END');
+      this.scale = this.hasFollowUp;
+      this.disabled = !this.hasFollowUp;
+    }
   },
   watch: {
     startFlip(val) {
@@ -55,6 +72,15 @@ export default {
     &.scale {
       animation: scale 1.2s ease-in-out infinite alternate-reverse;
     }
+    &.disabled {
+      transform: rotateY(360deg);
+    }
+  }
+  &-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   &.flip {
     animation: flip 2s ease-in-out;

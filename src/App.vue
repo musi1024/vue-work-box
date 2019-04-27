@@ -20,12 +20,12 @@ export default {
   name: 'App',
   data() {
     return {
-      isLoading: true,
+      isLoading: false,
       percent: 0
     };
   },
   mounted() {
-    this.loading();
+    // this.loading();
   },
   methods: {
     async loading() {

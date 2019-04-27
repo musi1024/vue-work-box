@@ -65,18 +65,6 @@ export default {
     border: 1px solid #333333;
   }
 
-  &.demo-btn {
-    background-image: url('../assets/images/demo-btn.png');
-    background-size: 100%;
-    background-repeat: no-repeat;
-    width: 258px;
-    height: 60px;
-    background-color: white;
-    position: absolute;
-    top: 100px;
-    left: 0;
-  }
-
   &.dialog-close {
     position: absolute;
     top: 0;

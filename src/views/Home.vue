@@ -111,12 +111,12 @@ export default {
   .card-back {
     width: 200px;
     height: 200px;
-    @include set-image('../assets/images/2.jpg');
+    background-color: red;
   }
   .card-face {
     width: 200px;
     height: 200px;
-    @include set-image('../assets/images/1.jpg');
+    background-color: blueviolet;
   }
 }
 </style>

@@ -1,107 +1,247 @@
 <template>
   <div>
-    <!--mescroll滚动区域的基本结构-->
-    <mescroll-vue ref="mescroll" :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
-      <!--内容...-->
-    </mescroll-vue>
+    <!--模拟的标题-->
+    <p class="header">商品列表</p>
+    <!--滑动区域-->
+    <div ref="mescroll" class="mescroll">
+      <div class="notice">
+        <p class="btn-change" @click="isEdit=!isEdit">模拟后台修改商品信息{{isEdit}}</p>
+      </div>
+      <!--展示上拉加载的数据列表-->
+      <ul id="dataList" class="data-list">
+        <li v-for="pd in dataList" :key="pd.id">
+          <!-- <img class="pd-img" :imgurl="pd.pdImg" src="../../../static/mock/img/loading.png"> -->
+          <p class="pd-name">{{pd.pdName}}</p>
+          <p class="pd-price">{{pd.pdPrice}} 元</p>
+          <p class="pd-sold">已售{{pd.pdSold}}件</p>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
-			
-			<script>
-// 引入mescroll的vue组件
-import MescrollVue from 'mescroll.js/mescroll.vue';
+
+<script>
+// 引入mescroll.min.js和mescroll.min.css
+import MeScroll from 'mescroll.js';
+import 'mescroll.js/mescroll.min.css';
+// 模拟数据
+import mockData from '../mock/pdlist';
+import mockDataEdit from '../mock/pdlistEdit';
 
 export default {
-  name: 'xxx',
-  components: {
-    MescrollVue // 注册mescroll组件
-  },
+  name: 'listProducts',
   data() {
     return {
       mescroll: null, // mescroll实例对象
-      mescrollDown: {}, //下拉刷新的配置. (如果下拉刷新和上拉加载处理的逻辑是一样的,则mescrollDown可不用写了)
-      mescrollUp: {
-        // 上拉加载的配置.
-        callback: this.upCallback, // 上拉回调,此处简写; 相当于 callback: function(page, mescroll) { }
-        //以下是一些常用的配置,当然不写也可以的.
-        page: {
-          num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
-          size: 10 //每页数据条数,默认10
-        },
-        htmlNodata: '<p class="upwarp-nodata">-- END --</p>',
-        noMoreSize: 5, //如果列表已无数据,可设置列表的总数量要大于5才显示无更多数据;
-        // 避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
-        // 这就是为什么无更多数据有时候不显示的原因
-        toTop: {
-          //回到顶部按钮
-          src: './static/mescroll/mescroll-totop.png', //图片路径,默认null,支持网络图
-          offset: 1000 //列表滚动1000px才显示回到顶部按钮
-        },
-        empty: {
-          //列表第一页无任何数据时,显示的空提示布局; 需配置warpId才显示
-          warpId: 'xxid', //父布局的id (1.3.5版本支持传入dom元素)
-          icon: './static/mescroll/mescroll-empty.png', //图标,默认null,支持网络图
-          tip: '暂无相关数据~' //提示
-        }
-      },
-      dataList: [] // 列表数据
+      dataList: [], // 列表数据
+      isEdit: false // 是否获取编辑的列表数据
     };
+  },
+  mounted: function() {
+    // 创建MeScroll对象
+    this.mescroll = new MeScroll(this.$refs.mescroll, {
+      // 在vue的mounted生命周期初始化mescroll,确保此处配置的ref有值
+      up: {
+        callback: this.upCallback,
+        page: {
+          num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
+          size: 10 // 每页数据的数量
+        },
+        noMoreSize: 5, // 如果列表已无数据,可设置列表的总数量要大于等于5条才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
+        toTop: {
+          // 配置回到顶部按钮
+          src: './static/mescroll/mescroll-totop.png'
+        },
+        lazyLoad: {
+          use: true // 是否开启懒加载,默认false
+        }
+      }
+    });
   },
   beforeRouteEnter(to, from, next) {
     // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
     next(vm => {
-      // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
-      vm.$refs.mescroll && vm.$refs.mescroll.beforeRouteEnter(); // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
+      if (vm.mescroll) {
+        // 恢复到之前设置的isBounce状态
+        if (vm.mescroll.lastBounce != null)
+          vm.mescroll.setBounce(vm.mescroll.lastBounce);
+        // 滚动到之前列表的位置(注意:路由使用keep-alive才生效)
+        if (vm.mescroll.lastScrollTop) {
+          vm.mescroll.setScrollTop(vm.mescroll.lastScrollTop);
+          setTimeout(() => {
+            // 需延时,因为setScrollTop内部会触发onScroll,可能会渐显回到顶部按钮
+            vm.mescroll.setTopBtnFadeDuration(0); // 设置回到顶部按钮显示时无渐显动画
+          }, 16);
+        }
+      }
     });
   },
   beforeRouteLeave(to, from, next) {
     // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
-    // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteLeave方法
-    this.$refs.mescroll && this.$refs.mescroll.beforeRouteLeave(); // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+    if (this.mescroll) {
+      this.mescroll.lastBounce = this.mescroll.optUp.isBounce; // 记录当前是否禁止ios回弹
+      this.mescroll.setBounce(true); // 允许bounce
+      this.mescroll.lastScrollTop = this.mescroll.getScrollTop(); // 记录当前滚动条的位置
+      this.mescroll.hideTopBtn(0); // 隐藏回到顶部按钮,无渐隐动画
+    }
     next();
   },
   methods: {
-    // mescroll组件初始化的回调,可获取到mescroll对象
-    mescrollInit(mescroll) {
-      this.mescroll = mescroll; // 如果this.mescroll对象没有使用到,则mescrollInit可以不用配置
-    },
     // 上拉回调 page = {num:1, size:10}; num:当前页 ,默认从1开始; size:每页数据条数,默认10
-    upCallback(page, mescroll) {
-      // 联网请求
-      axios
-        .get('xxxxxx', {
-          params: {
-            num: page.num, // 页码
-            size: page.size // 每页长度
-          }
-        })
-        .then(response => {
-          // 请求的列表数据
-          let arr = response.data;
+    upCallback(page) {
+      // 模拟联网
+      this.getListDataFromNet(
+        this.pdType,
+        page.num,
+        page.size,
+        arr => {
           // 如果是第一页需手动制空列表
           if (page.num === 1) this.dataList = [];
           // 把请求到的数据添加到列表
           this.dataList = this.dataList.concat(arr);
           // 数据渲染成功后,隐藏下拉刷新的状态
           this.$nextTick(() => {
-            mescroll.endSuccess(arr.length);
+            this.mescroll.endSuccess(arr.length);
           });
-        })
-        .catch(e => {
-          // 联网失败的回调,隐藏下拉刷新和上拉加载的状态;
-          mescroll.endErr();
-        });
+        },
+        () => {
+          this.mescroll.endErr();
+        }
+      );
+    },
+    /* 联网加载列表数据
+     * 在您的实际项目中,请参考官方写法: http://www.mescroll.com/api.html#tagUpCallback
+     * 请忽略getListDataFromNet的逻辑,这里仅仅是在本地模拟分页数据,本地演示用
+     * 实际项目以您服务器接口返回的数据为准,无需本地处理分页.
+     */
+    getListDataFromNet(
+      pdType,
+      pageNum,
+      pageSize,
+      successCallback
+      // errorCallback
+    ) {
+      // 延时一秒,模拟联网
+      setTimeout(() => {
+        // axios.get("xxxxxx", {
+        //   params: {
+        //     num: page.num, //页码
+        //     size: page.size //每页长度
+        //   }
+        // }).then((response)=> {
+        // 模拟分页数据
+        var listData = [];
+        for (var i = (pageNum - 1) * pageSize; i < pageNum * pageSize; i++) {
+          if (this.isEdit) {
+            if (i === mockDataEdit.length) break;
+            listData.push(mockDataEdit[i]);
+          } else {
+            if (i === mockData.length) break;
+            listData.push(mockData[i]);
+          }
+        }
+        // 回调
+        successCallback(listData);
+        // }).catch((e)=> {
+        //   //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+        //   errorCallback&&errorCallback()
+        // })
+      }, 1000);
     }
   }
 };
 </script>
-			
-			<style scoped>
-/*通过fixed固定mescroll的高度*/
+
+<style scoped>
+/*以fixed的方式固定mescroll的高度*/
 .mescroll {
   position: fixed;
   top: 44px;
   bottom: 0;
   height: auto;
+}
+
+.header {
+  z-index: 9990;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  background-color: white;
+}
+
+.header .btn-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 12px;
+  line-height: 22px;
+}
+
+.header .btn-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 12px;
+}
+
+.notice {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #555;
+}
+
+.btn-change {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 14px;
+  padding: 3px 15px;
+  text-align: center;
+  border: 1px solid #ff6990;
+  border-radius: 20px;
+  color: #ff6990;
+}
+
+.btn-change:active {
+  opacity: 0.5;
+}
+
+.data-list li {
+  position: relative;
+  padding: 10px 8px 10px 120px;
+  border-bottom: 1px solid #eee;
+}
+
+.data-list .pd-img {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  width: 80px;
+  height: 80px;
+}
+
+.data-list .pd-name {
+  font-size: 16px;
+  line-height: 20px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.data-list .pd-price {
+  margin-top: 8px;
+  color: red;
+}
+
+.data-list .pd-sold {
+  font-size: 12px;
+  margin-top: 8px;
+  color: gray;
 }
 </style>

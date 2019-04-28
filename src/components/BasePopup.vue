@@ -33,12 +33,12 @@ export default {
   align-items: center;
   transition: opacity 0.3s ease;
   background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid red;
-  animation: bounceInto 0.3s ease-in-out;
+
   &-container {
     width: 50vw;
     height: 50vh;
     background-color: #000000;
+    animation: bounceInto 0.3s ease-in-out;
   }
 }
 </style>

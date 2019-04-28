@@ -1,7 +1,7 @@
 <template>
   <transition name="popup">
     <div class="base-popup" @click="closePopup">
-      <div class="base-popup-container">
+      <div class="base-popup-container" @click.stop>
         <slot></slot>
       </div>
     </div>
@@ -40,6 +40,15 @@ export default {
     background-color: #000000;
     animation: bounceInto 0.3s ease-in-out;
   }
+}
+
+.popup-enter,
+.popup-leave-to {
+  opacity: 0;
+}
+.popup-enter-active,
+.popup-leave-active {
+  transition: opacity 0.8s;
 }
 </style>
 

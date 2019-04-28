@@ -1,11 +1,11 @@
 <template>
   <div id="home">
-    <!-- <base-button :plain="false" class="demo-btn">按钮</base-button> -->
-    <div class="loading"></div>
     <base-button :plain="true" @CLICK="clickDialogBtn" disabled>不可用按钮</base-button>
     <base-button @CLICK="clickDialogBtn">触发dialog按钮</base-button>
     <base-button @CLICK="clickAlertBtn">触发alert按钮</base-button>
     <base-button @CLICK="clickFlipBtn">触发flip按钮</base-button>
+    <base-button @CLICK="clickPopupBtn">触发popup按钮</base-button>
+    <base-popup v-show="showPopup" @CLOSE_POPUP="closePopup"></base-popup>
     <base-alert
       :show-alert="showAlert"
       :has-icon="true"
@@ -45,6 +45,7 @@
 import BaseButton from '@/components/BaseButton';
 import BaseDialog from '@/components/BaseDialog';
 import BaseAlert from '@/components/BaseAlert';
+import BasePopup from '@/components/BasePopup';
 import Marquee from '@/components/Marquee';
 import FlipCard from '@/components/FlipCard';
 export default {
@@ -53,6 +54,7 @@ export default {
     'base-button': BaseButton,
     'base-dialog': BaseDialog,
     'base-alert': BaseAlert,
+    'base-popup': BasePopup,
     'flip-card': FlipCard,
     Marquee
   },
@@ -60,6 +62,7 @@ export default {
     return {
       showDialog: false,
       showAlert: false,
+      showPopup: false,
       arr: [],
       flip: false
     };
@@ -95,6 +98,14 @@ export default {
     clickFlipBtn() {
       console.log('flip');
       this.flip = true;
+    },
+    closePopup() {
+      console.log('close popup');
+      this.showPopup = false;
+    },
+    clickPopupBtn() {
+      console.log('click popup btn');
+      this.showPopup = true;
     }
   }
 };

@@ -1,17 +1,7 @@
 <template>
   <transition name="dialog">
     <div class="base-dialog" @click="closeDialog">
-      <section class="base-dialog-container" :style="{ width }" @click.stop>
-        <header class="base-dialog-header">
-          <slot name="header"></slot>
-        </header>
-        <main class="base-dialog-main">
-          <slot name="main"></slot>
-        </main>
-        <div class="base-dialog-footer">
-          <slot name="footer"></slot>
-        </div>
-      </section>
+      <slot></slot>
     </div>
   </transition>
 </template>
@@ -19,13 +9,6 @@
 <script>
 export default {
   name: 'BaseDialog',
-  props: {
-    width: {
-      type: String,
-      default: '50%'
-    }
-  },
-  computed: {},
   methods: {
     closeDialog() {
       this.$emit('CLOSE_DIALOG');
@@ -34,7 +17,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .base-dialog {
   width: 100vw;
   height: 100vh;
@@ -49,26 +32,17 @@ export default {
   transition: opacity 0.3s ease;
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid red;
-
-  &-container {
-    margin: 0 auto;
-    padding: 0;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e6e6e6;
-    transition: all 0.3s ease;
-  }
-  &-header,
-  &-footer {
-    color: #4c4c4c;
-    padding: 20px 0;
-    position: relative;
-  }
-  &-main {
-    color: #4c4c4c;
-    position: relative;
-    padding: 10px 20px;
+}
+.test-dialog-container {
+  width: 60vw;
+  height: 60vh;
+  background-color: #000000;
+  border-radius: 4px;
+  box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e6e6e6;
+  transition: all 0.3s ease;
+  & h3 {
+    margin-bottom: 10px;
   }
 }
 

@@ -17,7 +17,7 @@
       <template v-slot:close>x</template>
     </base-alert>
     <base-dialog class="test-dialog" v-show="showDialog" @CLOSE_DIALOG="closeDialog">
-      <div class="test-dialog-container">
+      <div class="test-dialog-container" @click.stop>
         <h3>here is title</h3>
         <base-button @CLICK="closeDialog">确认</base-button>
       </div>

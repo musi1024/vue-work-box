@@ -24,7 +24,7 @@ export default {
     clickBtn() {
       if (!this.lock) {
         this.lock = true;
-        this.$emit('CLICK_BTN');
+        this.$emit('CLICK');
         this.lockTime = setTimeout(() => {
           this.lock = false;
         }, 500);

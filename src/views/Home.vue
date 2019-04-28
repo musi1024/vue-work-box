@@ -2,10 +2,10 @@
   <div id="home">
     <!-- <base-button :plain="false" class="demo-btn">按钮</base-button> -->
     <div class="loading"></div>
-    <base-button :plain="true" @CLICK_BTN="clickDialogBtn" disabled>不可用按钮</base-button>
-    <base-button @CLICK_BTN="clickDialogBtn">触发dialog按钮</base-button>
-    <base-button @CLICK_BTN="clickAlertBtn">触发alert按钮</base-button>
-    <base-button @CLICK_BTN="clickFlipBtn">触发flip按钮</base-button>
+    <base-button :plain="true" @CLICK="clickDialogBtn" disabled>不可用按钮</base-button>
+    <base-button @CLICK="clickDialogBtn">触发dialog按钮</base-button>
+    <base-button @CLICK="clickAlertBtn">触发alert按钮</base-button>
+    <base-button @CLICK="clickFlipBtn">触发flip按钮</base-button>
     <base-alert
       :show-alert="showAlert"
       :has-icon="true"
@@ -16,21 +16,21 @@
       <template v-slot:main>tttttttttt</template>
       <template v-slot:close>x</template>
     </base-alert>
-    <base-dialog v-show="showDialog" @CLOSE_DIALOG="closeDialog" width="80vw" title="1">
-      <template v-slot:header>
-        here is title
-        <base-button class="dialog-close" :plain="true" @CLICK_BTN="closeDialog">x</base-button>
-      </template>
-      <template v-slot:main>here is main</template>
-      <template v-slot:footer>
-        <base-button :plain="true" @CLICK_BTN="closeDialog">取消</base-button>
-        <base-button @CLICK_BTN="closeDialog">确认</base-button>
-      </template>
+    <base-dialog class="test-dialog" v-show="showDialog" @CLOSE_DIALOG="closeDialog">
+      <div class="test-dialog-container">
+        <h3>here is title</h3>
+        <base-button @CLICK="closeDialog">确认</base-button>
+      </div>
     </base-dialog>
     <Marquee :content="arr">
       <span class="marquee-content" v-for="(item, index) in arr" :key="index">{{item}}</span>
     </Marquee>
-    <flip-card class="flip-card" :start-flip="flip" :has-follow-up="true" @CLICK_CARD="clickFlipBtn">
+    <flip-card
+      class="flip-card"
+      :start-flip="flip"
+      :has-follow-up="true"
+      @CLICK_CARD="clickFlipBtn"
+    >
       <template v-slot:face>
         <div class="card-face"></div>
       </template>

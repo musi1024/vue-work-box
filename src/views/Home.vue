@@ -38,16 +38,23 @@
         <div class="card-back"></div>
       </template>
     </flip-card>
+    <base-tabs :tab-list="tabList" :tab-index="tabIndex" @CHANGE="changeTab">
+      <div v-if="!tabIndex">111111111111111111111111</div>
+      <div v-else>1111111111111222211111111111</div>
+    </base-tabs>
+    <base-collapse v-for="item in collapseArr" :key="item.index" :title="item.title" :content='item.content'></base-collapse>
   </div>
 </template>
 
 <script>
-import BaseButton from '@/components/BaseButton';
-import BaseDialog from '@/components/BaseDialog';
-import BaseAlert from '@/components/BaseAlert';
-import BasePopup from '@/components/BasePopup';
-import Marquee from '@/components/Marquee';
-import FlipCard from '@/components/FlipCard';
+import BaseTabs from '../components/BaseTabs';
+import BaseButton from '../components/BaseButton';
+import BaseDialog from '../components/BaseDialog';
+import BaseAlert from '../components/BaseAlert';
+import BasePopup from '../components/BasePopup';
+import BaseCollapse from '../components/BaseCollapse';
+import Marquee from '../components/Marquee';
+import FlipCard from '../components/FlipCard';
 export default {
   name: 'Home',
   components: {
@@ -55,7 +62,9 @@ export default {
     'base-dialog': BaseDialog,
     'base-alert': BaseAlert,
     'base-popup': BasePopup,
+    'base-tabs': BaseTabs,
     'flip-card': FlipCard,
+    'base-collapse': BaseCollapse,
     Marquee
   },
   data() {
@@ -64,7 +73,24 @@ export default {
       showAlert: false,
       showPopup: false,
       arr: [],
-      flip: false
+      flip: false,
+      tabIndex: 0,
+      tabList: [
+        {
+          index: 0,
+          name: '选项一'
+        },
+        {
+          index: 1,
+          name: '选项二'
+        }
+      ],
+      collapseArr: [
+        { title: '222222', content: '2312333333333333333333333333333339231233333333333333333333333333333923123333333333333333333333333333392312333333333333333333333333333339' },
+        { title: '2222222', content: '233219' },
+        { title: '221112222', content: '13123213' },
+        { title: '22214152414222', content: '2312333333333333333333333333333339' }
+      ]
     };
   },
   mounted() {
@@ -79,6 +105,9 @@ export default {
     ];
   },
   methods: {
+    changeTab(tab) {
+      this.tabIndex = tab.index;
+    },
     clickDialogBtn() {
       console.log('click dialog btn');
       this.showDialog = true;

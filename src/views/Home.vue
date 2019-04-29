@@ -38,10 +38,16 @@
         <div class="card-back"></div>
       </template>
     </flip-card>
+    <base-tabs :tab-list="tabList" :tab-index="tabIndex" @CHANGE="changeTab">
+      <div v-if="!tabIndex">111111111111111111111111</div>
+      <div v-else>1111111111111222211111111111</div>
+    </base-tabs>
+    <video controls src="http://v2v.cc/~j/theora_testsuite/320x240.ogg"></video>
   </div>
 </template>
 
 <script>
+import BaseTabs from '@/components/BaseTabs';
 import BaseButton from '@/components/BaseButton';
 import BaseDialog from '@/components/BaseDialog';
 import BaseAlert from '@/components/BaseAlert';
@@ -55,6 +61,7 @@ export default {
     'base-dialog': BaseDialog,
     'base-alert': BaseAlert,
     'base-popup': BasePopup,
+    'base-tabs': BaseTabs,
     'flip-card': FlipCard,
     Marquee
   },
@@ -64,7 +71,18 @@ export default {
       showAlert: false,
       showPopup: false,
       arr: [],
-      flip: false
+      flip: false,
+      tabIndex: 0,
+      tabList: [
+        {
+          index: 0,
+          name: '选项一'
+        },
+        {
+          index: 1,
+          name: '选项二'
+        }
+      ]
     };
   },
   mounted() {
@@ -79,6 +97,9 @@ export default {
     ];
   },
   methods: {
+    changeTab(tab) {
+      this.tabIndex = tab.index;
+    },
     clickDialogBtn() {
       console.log('click dialog btn');
       this.showDialog = true;

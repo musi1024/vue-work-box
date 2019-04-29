@@ -10,8 +10,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
-    "mescroll.js": "^1.4.1",
+    "cross-env": "^5.2.0",
     "normalize.css": "^8.0.1",
+    "qs": "^6.7.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

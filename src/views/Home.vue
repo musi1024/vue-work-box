@@ -42,7 +42,14 @@
       <div v-if="!tabIndex">111111111111111111111111</div>
       <div v-else>1111111111111222211111111111</div>
     </base-tabs>
-    <base-collapse v-for="item in collapseArr" :key="item.index" :title="item.title" :content='item.content'></base-collapse>
+    <base-select :select-option="selectOption" @SELECT="select"></base-select>
+    <base-collapse
+      v-for="item in collapseArr"
+      :key="item.index"
+      :title="item.title"
+      :content="item.content"
+    ></base-collapse>
+    
   </div>
 </template>
 
@@ -53,6 +60,7 @@ import BaseDialog from '../components/BaseDialog';
 import BaseAlert from '../components/BaseAlert';
 import BasePopup from '../components/BasePopup';
 import BaseCollapse from '../components/BaseCollapse';
+import BaseSelect from '../components/BaseSelect';
 import Marquee from '../components/Marquee';
 import FlipCard from '../components/FlipCard';
 export default {
@@ -65,6 +73,7 @@ export default {
     'base-tabs': BaseTabs,
     'flip-card': FlipCard,
     'base-collapse': BaseCollapse,
+    'base-select': BaseSelect,
     Marquee
   },
   data() {
@@ -86,11 +95,44 @@ export default {
         }
       ],
       collapseArr: [
-        { title: '222222', content: '2312333333333333333333333333333339231233333333333333333333333333333923123333333333333333333333333333392312333333333333333333333333333339' },
+        {
+          title: '222222',
+          content:
+            '2312333333333333333333333333333339231233333333333333333333333333333923123333333333333333333333333333392312333333333333333333333333333339'
+        },
         { title: '2222222', content: '233219' },
         { title: '221112222', content: '13123213' },
-        { title: '22214152414222', content: '2312333333333333333333333333333339' }
-      ]
+        {
+          title: '22214152414222',
+          content: '2312333333333333333333333333333339'
+        }
+      ],
+      selectOption: {
+        default: 0,
+        arr: [
+          {
+            name: 'time',
+            context: '按时间排序'
+          },
+          {
+            name: 'view',
+            context: '按浏览量排序'
+          },
+          {
+            name: 'like',
+            context: '按点赞数排序'
+          },
+          {
+            name: 'reply',
+            context: '按回复数排序'
+          },
+          {
+            name: 'reward',
+            context: '按打赏数排序'
+          }
+        ]
+      },
+      selectText: ''
     };
   },
   mounted() {
@@ -105,6 +147,9 @@ export default {
     ];
   },
   methods: {
+    select(e) {
+      this.selectText = e;
+    },
     changeTab(tab) {
       this.tabIndex = tab.index;
     },

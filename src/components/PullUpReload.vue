@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="loadMoudle" @touchstart="touchStart($event)" @touchmove="touchMove($event)" :style="{transform: 'translate3d(0,' + top + 'px, 0)'}">
+  <div class="loadMoudle" @touchstart="touchStart($event)" @touchmove="touchMove($event)" @touchend="touchEnd($event)" :style="{transform: 'translate3d(0,' + top + 'px, 0)'}">
     <slot></slot>
     <footer class="load-more">
       <slot name="load-more">
@@ -37,6 +37,7 @@ export default {
       startY: 0,
       pullUpState: 0, // 1:上拉加载更多, 2:加载中……, 3:我是有底线的
       isLoading: false, // 是否正在加载
+      touchMoveEnd: false,
       pullUpStateText: {
         moreDataTxt: '上拉加载更多',
         loadingMoreDataTxt: '加载中...',
@@ -54,6 +55,11 @@ export default {
         this.judgeScrollBarToTheEnd();
       }
     },
+    touchEnd() {
+      console.log('33');
+      this.touchMoveEnd = true;
+      this.judgeScrollBarToTheEnd();
+    },
 
     // 判断滚动条是否到底
     judgeScrollBarToTheEnd() {
@@ -68,12 +74,14 @@ export default {
         document.documentElement.clientHeight || document.body.scrollHeight;
       // 滚动条到底部的条件
       if (scrollTop + scrollHeight >= innerHeight) {
-        if (this.pullUpState !== 3 && !this.isLoading) {
+        if (this.pullUpState !== 3 && !this.isLoading && !this.touchMoveEnd) {
           this.pullUpState = 1;
+        } else if (
+          this.pullUpState !== 3 &&
+          !this.isLoading &&
+          this.touchMoveEnd
+        ) {
           this.infiniteLoad();
-          // setTimeout(() => {
-          //   this.infiniteLoad()
-          // }, 200)
         }
       }
     },

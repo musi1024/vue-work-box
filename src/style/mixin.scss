@@ -37,3 +37,9 @@
   bottom: 0;
   margin: auto;
 }
+
+@mixin flex($justify: center, $align: center) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}

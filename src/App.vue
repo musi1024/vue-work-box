@@ -23,9 +23,7 @@ export default {
       percent: 0
     };
   },
-  mounted() {
-    // this.loading();
-  },
+  mounted() {},
   methods: {
     async loading() {
       let count = 0;
@@ -49,7 +47,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss">
 #app {

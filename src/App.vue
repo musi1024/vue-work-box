@@ -4,39 +4,27 @@
       <p class="loading-percent">loading... {{percent}}%</p>
     </template>
     <router-view v-else></router-view>
-    <div v-show="isOrientation" id="screen-orientation">
-      <div id="screen-orientation-img"></div>
-      <p>竖屏体验效果更佳</p>
-    </div>
+    <ScreenOrientation></ScreenOrientation>
   </div>
 </template>
 
 <script>
+import ScreenOrientation from './components/ScreenOrientation';
 const preloadImgs = [];
 
 export default {
   name: 'App',
+  components: {
+    ScreenOrientation
+  },
   data() {
     return {
       isLoading: false,
-      percent: 0,
-      isOrientation: false
+      percent: 0
     };
   },
   mounted() {
     // this.loading();
-    // 监听横屏
-    window.addEventListener(
-      'onorientationchange' in window ? 'orientationchange' : 'resize',
-      () => {
-        if (window.orientation === 90 || window.orientation === -90) {
-          this.isOrientation = true;
-        } else {
-          this.isOrientation = false;
-        }
-      },
-      false
-    );
   },
   methods: {
     async loading() {
@@ -73,31 +61,5 @@ export default {
   width: 100vw;
   height: 100vh;
   position: relative;
-
-  #screen-orientation {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 5000;
-    background: #121212;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    &-img {
-      @include img('../src/assets/images/screenOrientation.png');
-      width: px(250);
-      height: px(242);
-      animation: orientation 2s ease-out 0s infinite;
-    }
-    p {
-      width: 100%;
-      font-size: px(16);
-      color: #bbbbbb;
-      text-align: center;
-    }
-  }
 }
 </style>

@@ -24,8 +24,7 @@ export default {
     };
   },
   watch: {
-    state(e) {
-      console.log(e);
+    state() {
       this.$router.push({ name: config[this.state] });
     }
   },
@@ -43,6 +42,8 @@ export default {
 
 <style lang="scss" scoped>
 #home {
+  width: 100vw;
+  height: 100vh;
   header {
     @include flex(space-around);
     margin: px(50);

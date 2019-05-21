@@ -88,10 +88,7 @@ export default {
   width: 100%;
   position: absolute;
   bottom: 0;
-}
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.5s linear;
+  transition: all 2s linear;
 }
 .slide-enter {
   transform: translateY(100%) scale(1);
@@ -101,10 +98,7 @@ export default {
   transform: translateY(-100%) scale(1);
   opacity: 0;
 }
-.slideLeft-enter-active,
-.slideLeft-leave-active {
-  transition: all 1s linear;
-}
+
 .slideLeft-enter {
   transform: translateX(100%) scale(1);
   opacity: 1;

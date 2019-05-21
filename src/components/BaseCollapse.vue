@@ -1,35 +1,48 @@
 <template>
-  <div class="base-collapse">
-    <div class="base-collapse-title" @click="toggleContent">{{title}}</div>
-    <div class="base-collapse-content" :style="{height}">{{content}}</div>
+  <div class="base-collapse" :class="[size]" @click="toggleContent">
+    <slot name="title"></slot>
+    <div class="base-collapse-btn" v-show="!showContent"></div>
+    <div v-show="showContent">
+      <slot name="content"></slot>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'BaseCollapse',
+  props: { name: Number },
   data() {
     return {
       showContent: false
     };
   },
-  props: {
-    title: String,
-    content: String
-  },
   computed: {
-    height() {
-      return this.showContent ? this.contentHeight + 'px' : '0px';
+    size() {
+      return this.showContent ? 'big' : 'small';
     }
   },
   mounted() {
-    this.contentHeight = this.$el.querySelector(
-      '.base-collapse-content'
-    ).scrollHeight;
+    this.$bus.$on('SHOW_CONTENT', e => {
+      if (this.name != e) {
+        this.showContent = false;
+      }
+    });
+    this.$bus.$on('CLOSE_CONTENT', () => {
+      if (this.name != 0) {
+        this.showContent = false;
+      } else {
+        this.showContent = true;
+      }
+    });
+    if (this.name === 0) {
+      this.showContent = true;
+    }
   },
   methods: {
     toggleContent() {
       this.showContent = !this.showContent;
+      this.$bus.$emit('SHOW_CONTENT', this.name);
     }
   }
 };
@@ -37,18 +50,17 @@ export default {
 
 <style lang="scss" scoped>
 .base-collapse {
-  width: 100vw;
-  border: 1px solid #333;
-  margin: 10px 0;
-  overflow: hidden;
-  &-title {
-    width: 100%;
-    height: 30px;
+  position: relative;
+  margin-bottom: px(10);
+  animation: fadeIn 0.2s ease-in-out;
+  transition: all 0.2s;
+  border: 1px solid #333333;
+  &.big {
+    @include wh(577, 204);
+    margin: px(10) 0;
   }
-  &-content {
-    width: 100%;
-    transition: height 0.3s ease-in-out;
-    word-wrap: break-word;
+  &.small {
+    @include wh(577, 111);
   }
 }
 </style>

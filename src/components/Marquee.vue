@@ -46,6 +46,7 @@ export default {
     contentStyle() {
       return {
         paddingLeft: (this.isHorizontal ? this.wrapWidth : 0) + 'px',
+        paddingTop: (this.isHorizontal ? 0 : this.wrapHeight) + 'px',
         animationDelay: this.delay + 's',
         animationDuration: this.duration + 's'
       };
@@ -104,6 +105,7 @@ export default {
     animation: marquee-infinite linear infinite;
   }
   .animation-infinite {
+    animation-fill-mode: forwards;
     animation: animation-infinite linear infinite;
   }
 }

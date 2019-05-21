@@ -22,6 +22,7 @@
 
 <script>
 import Marquee from '../components/Marquee';
+import { clearTimeout } from 'timers';
 export default {
   name: 'MarqueePage',
   components: {
@@ -29,8 +30,9 @@ export default {
   },
   data() {
     return {
-      content: '',
-      number: 0
+      content: [],
+      number: 0,
+      timer: null
     };
   },
   computed: {
@@ -51,17 +53,19 @@ export default {
     ];
     this.startMove();
   },
+  beforeDestroy() {
+    clearTimeout(this.timer);
+  },
   methods: {
     startMove() {
-      // eslint-disable-next-line
-      let timer = setTimeout(() => {
-        if (this.number === 2) {
+      this.timer = setTimeout(() => {
+        if (this.number === this.content.length - 1) {
           this.number = 0;
         } else {
           this.number += 1;
         }
         this.startMove();
-      }, 5000); // 滚动不需要停顿则将2000改成动画持续时间
+      }, 2000); // 滚动不需要停顿则将2000改成动画持续时间
     }
   }
 };
@@ -99,7 +103,7 @@ export default {
 }
 .slideLeft-enter-active,
 .slideLeft-leave-active {
-  transition: all 5s linear;
+  transition: all 1s linear;
 }
 .slideLeft-enter {
   transform: translateX(100%) scale(1);

@@ -3,9 +3,14 @@
     <Marquee class="Marquee" :content="content" :isHorizontal="true">
       <span class="marquee-content" v-for="(item, index) in content" :key="index">{{item}}召唤出</span>
     </Marquee>
-    <Marquee class="Marquee" :content="content" :isHorizontal="false">
+    <Marquee class="Marquee" :content="content" :speed="20" :isHorizontal="false">
       <span class="marquee-content" v-for="(item, index) in content" :key="index">{{item}}召唤出</span>
     </Marquee>
+    <section class="test">
+      <transition name="slide">
+        <span class="test-content" :key="text.id">{{text.val}}召唤出</span>
+      </transition>
+    </section>
   </section>
 </template>
 
@@ -18,8 +23,17 @@ export default {
   },
   data() {
     return {
-      content: ''
+      content: '',
+      number: 0
     };
+  },
+  computed: {
+    text() {
+      return {
+        id: this.number,
+        val: this.content[this.number]
+      };
+    }
   },
   mounted() {
     this.content = [
@@ -29,12 +43,51 @@ export default {
       '444444444444444',
       '55555555555555'
     ];
+    this.startMove();
+  },
+  methods: {
+    startMove() {
+      // eslint-disable-next-line
+      let timer = setTimeout(() => {
+        if (this.number === 2) {
+          this.number = 0;
+        } else {
+          this.number += 1;
+        }
+        this.startMove();
+      }, 2000); // 滚动不需要停顿则将2000改成动画持续时间
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-#MarqueePage {
-  
+.test {
+  @include flex(flex-start);
+  flex-direction: column;
+  width: 100%;
+  height: 24px;
+  line-height: 24px;
+  overflow: hidden;
+  background: #000000;
+  color: #ffffff;
+  position: relative;
+}
+.test-content {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.5s linear;
+}
+.slide-enter {
+  transform: translateY(20px) scale(1);
+  opacity: 1;
+}
+.slide-leave-to {
+  transform: translateY(-20px) scale(1);
+  opacity: 0;
 }
 </style>

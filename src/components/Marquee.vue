@@ -27,7 +27,7 @@ export default {
     },
     speed: {
       type: Number,
-      default: 40
+      default: 50
     }
   },
   mounted() {},
@@ -105,7 +105,6 @@ export default {
     animation: marquee-infinite linear infinite;
   }
   .animation-infinite {
-    animation-fill-mode: forwards;
     animation: animation-infinite linear infinite;
   }
 }

@@ -1,12 +1,10 @@
 <template>
-  <div ref="wrap" class="wrap marquee">
+  <div ref="wrap" id="Marquee">
     <div
       ref="content"
-      class="content"
-      :class="animationClass"
+      id="Marquee-content"
+      :class="[animationClass, isHorizontal ? 'horizontal' : '']"
       :style="contentStyle"
-      @animationend="onAnimationEnd"
-      @webkitAnimationEnd="onAnimationEnd"
     >
       <slot></slot>
     </div>
@@ -19,13 +17,17 @@ export default {
     content: {
       default: ''
     },
+    isHorizontal: {
+      type: Boolean,
+      required: true
+    },
     delay: {
       type: Number,
       default: 0.5
     },
     speed: {
       type: Number,
-      default: 50
+      default: 40
     }
   },
   mounted() {},
@@ -34,16 +36,17 @@ export default {
       wrapWidth: 0, //父盒子宽度
       firstRound: true, //判断是否
       duration: 0, //css3一次动画需要的时间
-      offsetWidth: 0, //子盒子的宽度
+      offsetWidth: 0, //子盒子的宽度,
+      wrapHeight: 0,
+      offsetHeight: 0,
       animationClass: '' //添加animate动画
     };
   },
   computed: {
     contentStyle() {
       return {
-        paddingLeft: this.wrapWidth + 'px',
-        // 只有第一次的时候需要延迟
-        animationDelay: (this.firstRound ? this.delay : 0) + 's',
+        paddingLeft: (this.isHorizontal ? this.wrapWidth : 0) + 'px',
+        animationDelay: this.delay + 's',
         animationDuration: this.duration + 's'
       };
     }
@@ -56,24 +59,26 @@ export default {
           const { wrap, content } = this.$refs;
           const wrapWidth = wrap.getBoundingClientRect().width;
           const offsetWidth = content.getBoundingClientRect().width;
+          const wrapHeight = wrap.getBoundingClientRect().height;
+          const offsetHeight = content.getBoundingClientRect().height;
           this.wrapWidth = wrapWidth;
           this.offsetWidth = offsetWidth;
-          this.duration = offsetWidth / this.speed;
-          this.animationClass = 'animate-infinite';
+          this.wrapHeight = wrapHeight;
+          this.offsetHeight = offsetHeight;
+          this.duration =
+            (this.isHorizontal ? offsetWidth : offsetHeight) / this.speed;
+          this.animationClass = this.isHorizontal
+            ? 'horizontal-infinite'
+            : 'animation-infinite';
         });
       }
     }
   },
-  methods: {
-    onAnimationEnd() {
-      this.firstRound = false;
-      this.duration = (this.offsetWidth + this.wrapWidth) / this.speed;
-    }
-  }
+  methods: {}
 };
 </script>
 <style lang="scss" scoped>
-.wrap {
+#Marquee {
   width: 100%;
   height: 24px;
   line-height: 24px;
@@ -85,13 +90,21 @@ export default {
   position: relative;
   padding: 0;
 
-  & .content {
-    position: absolute;
-    white-space: nowrap;
+  &-content {
+    @include flex();
+    flex-direction: column;
+    &.horizontal {
+      position: absolute;
+      white-space: nowrap;
+      flex-direction: row;
+    }
   }
 
-  .animate-infinite {
+  .horizontal-infinite {
     animation: marquee-infinite linear infinite;
+  }
+  .animation-infinite {
+    animation: animation-infinite linear infinite;
   }
 }
 </style>

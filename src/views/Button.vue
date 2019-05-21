@@ -1,5 +1,5 @@
 <template>
-  <section class="_Button">
+  <section id="ButtonPage">
     <base-button></base-button>
   </section>
 </template>

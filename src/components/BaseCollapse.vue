@@ -38,7 +38,7 @@ export default {
 <style lang="scss" scoped>
 .base-collapse {
   width: 100vw;
-  border: 1px solid red;
+  border: 1px solid #333;
   margin: 10px 0;
   overflow: hidden;
   &-title {

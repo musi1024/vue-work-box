@@ -14,7 +14,7 @@
 </template>
 <script>
 export default {
-  name: 'marquee',
+  name: 'Marquee',
   props: {
     content: {
       default: ''

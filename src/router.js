@@ -14,6 +14,16 @@ export default new Router({
           path: '/button',
           name: 'button',
           component: () => import('@/views/Button.vue')
+        },
+        {
+          path: '/collapse',
+          name: 'collapse',
+          component: () => import('@/views/Collapse.vue')
+        },
+        {
+          path: '/marquee',
+          name: 'marquee',
+          component: () => import('@/views/Marquee.vue')
         }
       ]
     }

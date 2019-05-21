@@ -1,22 +1,30 @@
 <template>
   <section id="home">
     <header>
-      <button type="button" @click="change(false)"><</button>
+      <base-button @CLICK="change(false)">&lt;</base-button>
       <span>{{config[state]}}</span>
-      <button type="button" @click="change(true)">></button>
-      <button type="button" @click="state = 0">home</button>
+      <base-button @CLICK="change(true)">&gt;</base-button>
+      <base-button @CLICK="state = 0">home</base-button>
     </header>
     <main>
-      <router-view></router-view>
+      <ul v-if="state === 0">
+        <li v-for="(item, index) in config" :key="item">
+          <base-button @CLICK="state = index">{{item}}</base-button>
+        </li>
+      </ul>
+      <router-view v-else></router-view>
     </main>
   </section>
 </template>
 
 <script>
-let config = ['home', 'button'];
+import BaseButton from '../components/BaseButton';
+let config = ['home', 'button', 'collapse', 'marquee'];
 export default {
   name: 'Home',
-  components: {},
+  components: {
+    'base-button': BaseButton
+  },
   data() {
     return {
       config,
@@ -25,7 +33,7 @@ export default {
   },
   watch: {
     state() {
-      this.$router.push({ name: config[this.state] });
+      this.$router.replace({ name: config[this.state] });
     }
   },
   methods: {
@@ -45,8 +53,20 @@ export default {
   width: 100vw;
   height: 100vh;
   header {
-    @include flex(space-around);
-    margin: px(50);
+    @include flex();
+    color: #ffffff;
+    background: #000000;
+    > span {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 1;
+    }
+  }
+  main {
+    margin-top: px(20);
+    ul {
+      list-style: none;
+    }
   }
 }
 </style>

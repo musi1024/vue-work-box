@@ -22,27 +22,6 @@
   }
 }
 
-@keyframes marquee {
-  to {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-@keyframes marquee-infinite {
-  to {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-@keyframes animation-infinite {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, -100%, 0);
-  }
-}
-
 @keyframes orientation {
   0% {
     transform: rotate(0deg);

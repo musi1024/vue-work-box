@@ -3,11 +3,17 @@
     <Marquee class="Marquee" :content="content" :isHorizontal="true">
       <span class="marquee-content" v-for="(item, index) in content" :key="index">{{item}}召唤出</span>
     </Marquee>
-    <Marquee class="Marquee" :content="content" :speed="20" :isHorizontal="false">
+    <Marquee class="Marquee" :content="content" :speed="20">
       <span class="marquee-content" v-for="(item, index) in content" :key="index">{{item}}召唤出</span>
     </Marquee>
+    <Marquee class="Marquee" :content="content" :speed="20"></Marquee>
     <section class="test">
       <transition name="slide">
+        <span class="test-content" :key="text.id">{{text.val}}召唤出</span>
+      </transition>
+    </section>
+    <section class="test">
+      <transition name="slideLeft">
         <span class="test-content" :key="text.id">{{text.val}}召唤出</span>
       </transition>
     </section>
@@ -55,7 +61,7 @@ export default {
           this.number += 1;
         }
         this.startMove();
-      }, 2000); // 滚动不需要停顿则将2000改成动画持续时间
+      }, 5000); // 滚动不需要停顿则将2000改成动画持续时间
     }
   }
 };
@@ -66,8 +72,9 @@ export default {
   @include flex(flex-start);
   flex-direction: column;
   width: 100%;
-  height: 24px;
-  line-height: 24px;
+  height: px(80);
+  line-height: px(80);
+  font-size: px(30);
   overflow: hidden;
   background: #000000;
   color: #ffffff;
@@ -83,11 +90,23 @@ export default {
   transition: all 0.5s linear;
 }
 .slide-enter {
-  transform: translateY(20px) scale(1);
+  transform: translateY(100%) scale(1);
   opacity: 1;
 }
 .slide-leave-to {
-  transform: translateY(-20px) scale(1);
+  transform: translateY(-100%) scale(1);
+  opacity: 0;
+}
+.slideLeft-enter-active,
+.slideLeft-leave-active {
+  transition: all 5s linear;
+}
+.slideLeft-enter {
+  transform: translateX(100%) scale(1);
+  opacity: 1;
+}
+.slideLeft-leave-to {
+  transform: translateX(-100%) scale(1);
   opacity: 0;
 }
 </style>

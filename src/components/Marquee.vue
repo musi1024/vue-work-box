@@ -17,9 +17,13 @@ export default {
     content: {
       default: ''
     },
+    isSeamless: {
+      type: Boolean,
+      default: false
+    },
     isHorizontal: {
       type: Boolean,
-      required: true
+      default: false
     },
     delay: {
       type: Number,
@@ -70,7 +74,7 @@ export default {
             (this.isHorizontal ? offsetWidth : offsetHeight) / this.speed;
           this.animationClass = this.isHorizontal
             ? 'horizontal-infinite'
-            : 'animation-infinite';
+            : 'vertical-infinite';
         });
       }
     }
@@ -102,10 +106,22 @@ export default {
   }
 
   .horizontal-infinite {
-    animation: marquee-infinite linear infinite;
+    animation: horizontal-infinite linear infinite;
   }
-  .animation-infinite {
-    animation: animation-infinite linear infinite;
+  .vertical-infinite {
+    animation: vertical-infinite linear infinite;
+  }
+}
+
+@keyframes horizontal-infinite {
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes vertical-infinite {
+  to {
+    transform: translate3d(0, -100%, 0);
   }
 }
 </style>

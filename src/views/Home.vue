@@ -36,6 +36,9 @@ export default {
       this.$router.replace({ name: config[this.state] });
     }
   },
+  mounted() {
+    console.log(this.$utils.getUrlSearch.a, this.$utils.getUrlSearch.v);
+  },
   methods: {
     change(e) {
       if (e) {

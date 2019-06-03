@@ -5,7 +5,10 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import eventBus from './utils/eventBus';
+import utils from './utils/index';
+
 Vue.use(eventBus);
+Vue.use(utils);
 
 Vue.config.productionTip = false;
 

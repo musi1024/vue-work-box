@@ -1,14 +1,15 @@
 <template>
-  <div class="base-collapse" :class="[size]" @click="toggleContent">
+  <section class="base-collapse" @click="toggleContent">
     <slot name="title"></slot>
     <div class="base-collapse-btn" v-show="!showContent"></div>
-    <div v-show="showContent">
+    <div class="base-collapse-content" :class="[size]">
       <slot name="content"></slot>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
+import { setTimeout } from 'timers';
 export default {
   name: 'BaseCollapse',
   props: { name: Number },
@@ -20,6 +21,11 @@ export default {
   computed: {
     size() {
       return this.showContent ? 'big' : 'small';
+    }
+  },
+  watch: {
+    showContent(e) {
+      this.autoHeight(e, this.$el.querySelector('.base-collapse-content'), 100);
     }
   },
   mounted() {
@@ -43,6 +49,21 @@ export default {
     toggleContent() {
       this.showContent = !this.showContent;
       this.$bus.$emit('SHOW_CONTENT', this.name);
+    },
+    autoHeight(bool, element, time) {
+      // bool: 是否展开； element：元素； time: 动画时间
+      if (typeof window.getComputedStyle == 'undefined') return;
+      let height = window.getComputedStyle(element).height;
+      element.style.transition = 'none';
+      element.style.height = 'auto';
+      let targetHeight = bool ? window.getComputedStyle(element).height : '0';
+      element.style.height = height;
+      setTimeout(() => {
+        if (time) {
+          element.style.transition = `all ${time}ms`;
+        }
+        element.style.height = targetHeight;
+      }, 100);
     }
   }
 };
@@ -52,15 +73,22 @@ export default {
 .base-collapse {
   position: relative;
   margin-bottom: px(10);
-  animation: fadeIn 0.2s ease-in-out;
-  transition: all 0.2s;
+  transition: all 0.2s ease-in-out;
   border: 1px solid #333333;
-  &.big {
-    @include wh(577, 204);
-    margin: px(10) 0;
-  }
-  &.small {
-    @include wh(577, 111);
+  width: px(600);
+
+  &-content {
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+    transition: all 1s ease-in-out;
+
+    &.big {
+      // height: auto;
+    }
+    &.small {
+      height: px(0);
+    }
   }
 }
 </style>

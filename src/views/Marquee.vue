@@ -22,7 +22,6 @@
 
 <script>
 import Marquee from '../components/Marquee';
-import { clearTimeout } from 'timers';
 export default {
   name: 'MarqueePage',
   components: {
@@ -52,9 +51,6 @@ export default {
       '55555555555555'
     ];
     this.startMove();
-  },
-  beforeDestroy() {
-    // clearTimeout(this.timer);
   },
   methods: {
     startMove() {
@@ -91,20 +87,20 @@ export default {
   transition: all 2s linear;
 }
 .slide-enter {
-  transform: translateY(100%) scale(1);
+  transform: translateY(100%);
   opacity: 1;
 }
 .slide-leave-to {
-  transform: translateY(-100%) scale(1);
+  transform: translateY(-100%);
   opacity: 0;
 }
 
 .slideLeft-enter {
-  transform: translateX(100%) scale(1);
+  transform: translateX(100%);
   opacity: 1;
 }
 .slideLeft-leave-to {
-  transform: translateX(-100%) scale(1);
+  transform: translateX(-100%);
   opacity: 0;
 }
 </style>

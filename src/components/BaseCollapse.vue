@@ -60,10 +60,10 @@ export default {
       element.style.height = height;
       setTimeout(() => {
         if (time) {
-          element.style.transition = `all ${time}ms`;
+          element.style.transition = `all ${time}ms ease-in-out`;
         }
         element.style.height = targetHeight;
-      }, 100);
+      }, 0);
     }
   }
 };

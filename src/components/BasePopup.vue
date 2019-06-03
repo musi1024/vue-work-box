@@ -1,16 +1,25 @@
 <template>
   <transition name="popup">
-    <div class="base-popup" @click="closePopup">
-      <div class="base-popup-container" @click.stop>
-        <slot></slot>
-      </div>
-    </div>
+    <section class="base-popup" @click="closePopup">
+      <main class="base-popup-container" @click.stop>
+        <div class="base-popup-close" v-if="hasClose" @click="closePopup">x</div>
+        <div class="base-popup-content">
+          <slot></slot>
+        </div>
+      </main>
+    </section>
   </transition>
 </template>
 
 <script>
 export default {
   name: 'BasePopup',
+  props: {
+    hasClose: {
+      type: Boolean,
+      default: false
+    }
+  },
   methods: {
     closePopup() {
       this.$emit('CLOSE_POPUP');
@@ -21,24 +30,41 @@ export default {
 
 <style lang="scss">
 .base-popup {
+  @include flex();
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 99;
+  z-index: 999;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity 0.3s ease;
+  transition: all 0.2s ease-in-out;
   background-color: rgba(255, 255, 255, 0.8);
 
   &-container {
-    width: 50vw;
-    height: 50vh;
+    @include flex();
+    position: relative;
+    width: 70vw;
+    height: 60vh;
+    color: #ffffff;
     background-color: #000000;
-    animation: bounceInto 0.3s ease-in-out;
+    animation: bounceInto 0.2s ease-in-out;
+  }
+
+  &-content {
+    width: 100%;
+    height: 90%;
+    padding: px(10) px(20);
+    background-color: rgba(255, 255, 255, 0.8);
+    overflow: scroll;
+  }
+
+  &-close {
+    @include wh(40, 40);
+    position: absolute;
+    top: px(10);
+    right: px(10);
+    color: #ffffff;
   }
 }
 
@@ -48,7 +74,7 @@ export default {
 }
 .popup-enter-active,
 .popup-leave-active {
-  transition: opacity 0.8s;
+  transition: opacity 0.2s;
 }
 </style>
 

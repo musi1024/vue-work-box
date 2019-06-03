@@ -16,6 +16,11 @@ export default new Router({
           component: () => import('@/views/Button.vue')
         },
         {
+          path: '/popup',
+          name: 'popup',
+          component: () => import('@/views/Popup.vue')
+        },
+        {
           path: '/collapse',
           name: 'collapse',
           component: () => import('@/views/Collapse.vue')

@@ -54,7 +54,7 @@ export default {
     this.startMove();
   },
   beforeDestroy() {
-    clearTimeout(this.timer);
+    // clearTimeout(this.timer);
   },
   methods: {
     startMove() {

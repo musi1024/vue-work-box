@@ -19,7 +19,7 @@
 
 <script>
 import BaseButton from '../components/BaseButton';
-let config = ['home', 'button', 'collapse', 'marquee'];
+let config = ['home', 'button', 'popup', 'collapse', 'marquee'];
 export default {
   name: 'Home',
   components: {
@@ -67,6 +67,7 @@ export default {
     margin-top: px(20);
     ul {
       list-style: none;
+      padding: 0;
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <transition name="popup">
-    <section class="base-popup" @click="closePopup">
-      <main class="base-popup-container" @click.stop>
+    <section class="base-popup" @click.self="closePopup">
+      <main class="base-popup-container">
         <div class="base-popup-close" v-if="hasClose" @click="closePopup">x</div>
         <div class="base-popup-content">
           <slot></slot>
@@ -40,6 +40,9 @@ export default {
   overflow: hidden;
   transition: all 0.2s ease-in-out;
   background-color: rgba(255, 255, 255, 0.8);
+  outline: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   &-container {
     @include flex();

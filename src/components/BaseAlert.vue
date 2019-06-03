@@ -1,15 +1,9 @@
 <template>
   <transition name="alert">
-    <section role="alert" v-show="showAlert" class="base-alert">
-      <div class="base-alert-icon" v-if="hasIcon">
-        <slot name="icon"></slot>
-      </div>
-      <main class="base-alert-main">
-        <slot name="main"></slot>
-      </main>
-      <button class="base-alert-close" v-if="hasClose || !autoClose" @click="closeAlert">
-        <slot name="close"></slot>
-      </button>
+    <section v-show="showAlert" class="base-alert">
+      <span class="base-alert-main">
+        <slot></slot>
+      </span>
     </section>
   </transition>
 </template>
@@ -68,54 +62,28 @@ export default {
 
 <style lang="scss" scoped>
 .base-alert {
-  position: relative;
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  display: flex;
-  align-items: center;
-  width: 50vw;
-  padding: 15px 15px 15px 15px;
-  margin: 0;
-  border-radius: 4px;
-  background-color: #333333;
+  position: fixed;
+  @include flex();
+  width: 100%;
+  height: 100%;
   color: #ffffff;
   overflow: hidden;
-  transition: all 0.5s ease;
-  transform: translateX(-50%);
-  font-size: 16px;
-  line-height: 16px;
+  transition: all 0.5s ease-in-out;
+  font-size: px(30);
   z-index: 100;
 
   &-main {
-    display: flex;
-    padding: 0;
-  }
-  &-icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-    font-size: 16px;
-    border-radius: 100%;
-    margin-right: 10px;
-  }
-  &-close {
-    position: absolute;
-    right: 0;
-    color: #ffffff;
-    background-color: #333333;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    width: px(480);
+    border-radius: 20px;
+    background-color: rgba(0, 17, 103, 0.851);
+    padding: px(20);
+    text-align: center;
   }
 }
+
 .alert-enter,
 .alert-leave-active {
   opacity: 0;
-  transform: translate(-50%, -150%);
 }
 </style>
 

@@ -21,6 +21,11 @@ export default new Router({
           component: () => import('@/views/Popup.vue')
         },
         {
+          path: '/alert',
+          name: 'alert',
+          component: () => import('@/views/Alert.vue')
+        },
+        {
           path: '/collapse',
           name: 'collapse',
           component: () => import('@/views/Collapse.vue')

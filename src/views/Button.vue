@@ -1,6 +1,8 @@
 <template>
   <section id="ButtonPage">
-    <base-button></base-button>
+    <base-button @CLICK="clickButton">按钮</base-button>
+    <base-button :disabled="true" @CLICK="clickButton">禁用按钮</base-button>
+    <base-button :plain="true" @CLICK="clickButton">按钮</base-button>
   </section>
 </template>
 
@@ -10,7 +12,20 @@ export default {
   name: 'ButtonPage',
   components: {
     'base-button': BaseButton
+  },
+  methods: {
+    clickButton() {
+      console.log(Date.now());
+    }
   }
-}
+};
 </script>
+
+<style lang="scss" scoped>
+#ButtonPage {
+  @include flex();
+  flex-direction: column;
+}
+</style>
+
 

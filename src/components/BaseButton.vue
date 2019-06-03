@@ -36,23 +36,21 @@ export default {
 
 <style lang="scss" scoped>
 .base-button {
-  width: 120px;
-  height: 40px;
-  background-color: #333333;
-  border-radius: 4px;
-  border: none;
-  color: white;
-  font-size: 14px;
-  padding: 0;
-  margin: 0 10px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0 ;
   // 去掉 button 默认样式
   outline: none;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  width: 120px;
+  height: 40px;
+  background-color: #333333;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
 
   &:disabled {
     opacity: 0.7;

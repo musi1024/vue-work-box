@@ -10,8 +10,13 @@
     >
     <div class="base-select-btn" :class="{rotate: showOption}">^</div>
     <ul class="base-select-option" v-show="showOption">
-      <span v-show="!selectOption.length">还未有选项</span>
-      <li v-for="item in selectOption" :key="item.index" @click="select(item.value)">{{item.label}}</li>
+      <span class="base-select-empty" v-show="!selectOption.length">Empty</span>
+      <li
+        class="base-select-item"
+        v-for="item in selectOption"
+        :key="item.index"
+        @click="select(item.value)"
+      >{{item.label}}</li>
     </ul>
   </section>
 </template>
@@ -56,8 +61,9 @@ export default {
 .base-select {
   position: relative;
   width: fit-content;
-  margin: 0 auto;
+  margin: px(20) auto;
   &-input {
+    padding: px(10) px(20);
     border: 2px solid #333333;
     cursor: pointer;
     outline: none;
@@ -77,14 +83,28 @@ export default {
     }
   }
   &-option {
-    @include lt(0, 48);
+    @include flex(flex-start);
+    flex-direction: column;
+    @include lt(0, 64);
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
     color: #eeeeee;
+    background-color: rgba(0, 0, 0, 0.8);
     margin: 0;
     padding: 0;
     list-style: none;
     z-index: 2;
+  }
+  &-item {
+    width: 96%;
+    padding: px(10) 0;
+    border-bottom: 1px solid #eeeeee;
+    &:last-child {
+      border-bottom: none;
+    }
+    &:active {
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #333333;
+    }
   }
 }
 </style>

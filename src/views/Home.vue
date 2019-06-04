@@ -19,7 +19,15 @@
 
 <script>
 import BaseButton from '../components/BaseButton';
-let config = ['home', 'button', 'popup', 'alert', 'collapse', 'marquee'];
+let config = [
+  'home',
+  'button',
+  'popup',
+  'alert',
+  'select',
+  'collapse',
+  'marquee'
+];
 export default {
   name: 'Home',
   components: {

@@ -74,15 +74,7 @@ export default {
     border: none;
   }
 
-  &.base-select-btn {
-    @include img('../assets/images/up.png');
-    width: 20px;
-    height: 20px;
-    transition: all 1s;
-    &.rotate {
-      transform: rotate(180deg);
-    }
-  }
+
 }
 </style>
 

@@ -26,6 +26,11 @@ export default new Router({
           component: () => import('@/views/Alert.vue')
         },
         {
+          path: '/select',
+          name: 'select',
+          component: () => import('@/views/Select.vue')
+        },
+        {
           path: '/collapse',
           name: 'collapse',
           component: () => import('@/views/Collapse.vue')

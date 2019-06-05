@@ -65,8 +65,8 @@ export default {
   &-close {
     @include wh(40, 40);
     position: absolute;
-    top: px(10);
-    right: px(10);
+    top: px(0);
+    right: px(0);
     color: #ffffff;
   }
 }

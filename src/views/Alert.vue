@@ -29,7 +29,7 @@
       :has-close="true"
       transition-class="alert-right"
       @CLOSE_ALERT="showAlert4 = false"
-    >alert right has close btn</base-alert>
+    >alert right has close btnalert right has close btnalert right has close btnalert right has close btnalert right has close btnalert right has close btnalert right has close btnalert right has close btnalert right has close btnalert right has close btnalert right has close btnalert right has close btnalert right has close btnalert right has close btnalert right has close btn</base-alert>
     <base-button @CLICK="showAlert = true">alert fade</base-button>
     <base-button @CLICK="showAlert1 = true">alert up</base-button>
     <base-button @CLICK="showAlert2 = true">alert down not auto close</base-button>

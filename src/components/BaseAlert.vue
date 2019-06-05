@@ -77,13 +77,15 @@ export default {
   z-index: 100;
 
   &-main {
+    @include flex();
     @include center();
     min-width: px(480);
+    max-width: px(680);
     width: max-content;
     height: fit-content;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: px(20);
+    padding: px(10) px(20);
     text-align: center;
     word-wrap: break-word;
     word-break: break-all;
@@ -98,7 +100,6 @@ export default {
     margin: auto 0;
   }
 }
-
 
 .alert-fade-enter,
 .alert-fade-leave-active {

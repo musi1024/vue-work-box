@@ -99,6 +99,7 @@ export default {
   }
 }
 
+
 .alert-fade-enter,
 .alert-fade-leave-active {
   opacity: 0;

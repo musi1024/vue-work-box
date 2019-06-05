@@ -1,7 +1,7 @@
 <template>
   <section id="TabsPage">
-    <base-tabs :tab-list="tabList" v-model="value">
-      <div v-if="value === 1">
+    <base-tabs :tab-list="tabList" v-model="value" v-if="tabList.length">
+      <div class="test" v-if="value === 1" key="1">
         tabs 1
         你会注意到，如果你选择了一篇文章，切换到 Archive 标签，然后再切换回 Posts，是不会继续展示你之前选择的文章的。这是因为你每次切换新标签的时候，Vue 都创建了一个新的 currentTabComponent 实例。
         元素将其动态组件包裹起来。
@@ -16,14 +16,35 @@
         元素将其动态组件包裹起来。
         来看看修改后的结果：
       </div>
-      <div v-if="value === 2">
+      <div class="test" v-if="value === 2" key="2">
         tabs 2
-        <base-tabs :tab-list="tabList" v-model="value1">tab in tab {{value1}}</base-tabs>
+        你会注意到，如果你选择了一篇文章，切换到 Archive 标签，然后再切换回 Posts，是不会继续展示你之前选择的文章的。这是因为你每次切换新标签的时候，Vue 都创建了一个新的 currentTabComponent 实例。
+        元素将其动态组件包裹起来。
+        来看看修改后的结果：
+        你会注意到，如果你选择了一篇文章，切换到 Archive 标签，然后再切换回 Posts，是不会继续展示你之前选择的文章的。这是因为你每次切换新标签的时候，Vue 都创建了一个新的 currentTabComponent 实例。
+        元素将其动态组件包裹起来。
+        来看看修改后的结果： 你会注意到，如果你选择了一篇文章，切换到 Archive 标签，然后再切换回 Posts，是不会继续展示你之前选择的文章的。这是因为你每次切换新标签的时候，Vue 都创建了一个新的 currentTabComponent 实例。
+        元素将其动态组件包裹起来。
+        来看看修改后的结果： 你会注意到，如果你选择了一篇文章，切换到 Archive 标签，然后再切换回 Posts，是不会继续展示你之前选择的文章的。这是因为你每次切换新标签的时候，Vue 都创建了一个新的 currentTabComponent 实例。
+        元素将其动态组件包裹起来。
+        来看看修改后的结果： 你会注意到，如果你选择了一篇文章，切换到 Archive 标签，然后再切换回 Posts，是不会继续展示你之前选择的文章的。这是因为你每次切换新标签的时候，Vue 都创建了一个新的 currentTabComponent 实例。
+        元素将其动态组件包裹起来。
+        来看看修改后的结果：
       </div>
-      <div v-if="value === 3">tabs 3</div>
-      <div v-if="value === 4">tabs 4</div>
-      <div v-if="value === 5">tabs 5</div>
-      <div v-if="value > 5">tabs none</div>
+      <div class="test" v-if="value === 3" key="3">
+        tabs 3
+        你会注意到，如果你选择了一篇文章，切换到 Archive 标签，然后再切换回 Posts，是不会继续展示你之前选择的文章的。这是因为你每次切换新标签的时候，Vue 都创建了一个新的 currentTabComponent 实例。
+        元素将其动态组件包裹起来。
+        来看看修改后的结果：
+        你会注意到，如果你选择了一篇文章，切换到 Archive 标签，然后再切换回 Posts，是不会继续展示你之前选择的文章的。这是因为你每次切换新标签的时候，Vue 都创建了一个新的 currentTabComponent 实例。
+        元素将其动态组件包裹起来。
+        来看看修改后的结果： 你会注意到，如果你选择了一篇文章，切换到 Archive 标签，然后再切换回 Posts，是不会继续展示你之前选择的文章的。这是因为你每次切换新标签的时候，Vue 都创建了一个新的 currentTabComponent 实例。
+        元素将其动态组件包裹起来。
+        来看看修改后的结果： 你会注意到，如果你选择了一篇文章，切换到 Archive 标签，然后再切换回 Posts，是不会继续展示你之前选择的文章的。这是因为你每次切换新标签的时候，Vue 都创建了一个新的
+      </div>
+      <div class="test" v-if="value === 4" key="4">tabs 4</div>
+      <div class="test" v-if="value === 5" key="5">tabs 5</div>
+      <div class="test" v-if="value > 5">tabs none</div>
     </base-tabs>
   </section>
 </template>
@@ -59,6 +80,13 @@ export default {
 
 <style lang="scss" scoped>
 #TabsPage {
+  .test {
+    width: 100%;
+    @include lt(0, 0);
+    width: 100%;
+    background-color: #eeeeee;
+    padding: px(40);
+  }
 }
 </style>
 

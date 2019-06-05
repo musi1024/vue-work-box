@@ -3,7 +3,9 @@
     <template v-if="isLoading">
       <p class="loading-percent">loading... {{percent}}%</p>
     </template>
-    <router-view v-else></router-view>
+    <transition name="fade">
+      <router-view v-if="!isLoading"></router-view>
+    </transition>
     <ScreenOrientation></ScreenOrientation>
   </div>
 </template>

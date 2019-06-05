@@ -10,7 +10,9 @@
       >{{tab.label}}</div>
     </nav>
     <main class="base-tabs-content">
-      <slot></slot>
+      <transition :name="slideDirection">
+        <slot></slot>
+      </transition>
     </main>
   </section>
 </template>
@@ -27,13 +29,23 @@ export default {
     value: Number
   },
   data() {
-    return {};
+    return {
+      preTab: this.value
+    };
+  },
+  computed: {
+    slideDirection() {
+      let res;
+      res = this.preTab > this.value ? 'slide-right' : 'slide-left';
+      return res;
+    }
   },
   mounted() {
     // this.$refs.bar.scrollLeft = this.$refs.bar.scrollWidth;
   },
   methods: {
     changeTab(tab) {
+      this.preTab = this.value;
       this.$emit('CHANGE_TAB', tab);
     }
   }
@@ -42,6 +54,7 @@ export default {
 
 <style scoped lang="scss">
 .base-tabs {
+  position: relative;
   width: 100%;
   outline: none;
   -webkit-appearance: none;
@@ -53,7 +66,6 @@ export default {
   }
   &-label {
     flex-grow: 1;
-    position: relative;
     width: max-content;
     margin: px(20);
     padding: px(5) px(20);
@@ -74,9 +86,7 @@ export default {
   }
 
   &-content {
-    width: 100%;
-    background-color: #eeeeee;
-    padding: px(40);
+    position: relative;
   }
 }
 </style>

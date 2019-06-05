@@ -1,7 +1,7 @@
 <template>
   <section id="SelectPage">
     <base-select :select-option="option" v-model="value" placeholder="请选择"></base-select>
-    <base-select :select-option="option" v-model="value1" placeholder="请选择"></base-select>
+    <base-select :select-option="option1" v-model="value1" placeholder="空选项"></base-select>
     <base-select :select-option="option" v-model="value2" placeholder="请选择"></base-select>
     <base-select :select-option="option" v-model="value3" placeholder="请选择"></base-select>
   </section>
@@ -17,6 +17,7 @@ export default {
   data() {
     return {
       option: [],
+      option1: [],
       value: '',
       value1: '',
       value2: '',

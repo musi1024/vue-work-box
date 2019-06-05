@@ -10,7 +10,7 @@
     >
     <div class="base-select-btn" :class="{rotate: showOption}">^</div>
     <ul class="base-select-option" v-show="showOption">
-      <span class="base-select-empty" v-show="!selectOption.length">Empty</span>
+      <li class="base-select-item empty" v-show="!selectOption.length">Empty</li>
       <li
         class="base-select-item"
         v-for="item in selectOption"
@@ -85,7 +85,9 @@ export default {
   &-option {
     @include flex(flex-start);
     flex-direction: column;
-    @include lt(0, 64);
+    position: absolute;
+    left: 0;
+    top: 100%;
     width: 100%;
     color: #eeeeee;
     background-color: rgba(0, 0, 0, 0.8);
@@ -95,9 +97,12 @@ export default {
     z-index: 2;
   }
   &-item {
-    width: 96%;
+    width: 100%;
     padding: px(10) 0;
     border-bottom: 1px solid #eeeeee;
+    &.empty {
+      padding: px(40);
+    }
     &:last-child {
       border-bottom: none;
     }

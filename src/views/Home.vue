@@ -25,6 +25,7 @@ let config = [
   'popup',
   'alert',
   'select',
+  'tabs',
   'collapse',
   'marquee'
 ];

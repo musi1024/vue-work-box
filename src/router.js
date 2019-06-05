@@ -31,6 +31,11 @@ export default new Router({
           component: () => import('@/views/Select.vue')
         },
         {
+          path: '/tabs',
+          name: 'tabs',
+          component: () => import('@/views/Tabs.vue')
+        },
+        {
           path: '/collapse',
           name: 'collapse',
           component: () => import('@/views/Collapse.vue')

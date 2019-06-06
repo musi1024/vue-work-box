@@ -6,18 +6,23 @@
     <transition name="fade">
       <router-view v-if="!isLoading"></router-view>
     </transition>
-    <ScreenOrientation></ScreenOrientation>
+    <!-- 屏幕旋转 -->
+    <screen-orientation></screen-orientation>
+    <!-- alert -->
+    <base-alert></base-alert>
   </div>
 </template>
 
 <script>
 import ScreenOrientation from './components/ScreenOrientation';
+import BaseAlert from './components/BaseAlert';
 const preloadImgs = [];
 
 export default {
   name: 'App',
   components: {
-    ScreenOrientation
+    'screen-orientation': ScreenOrientation,
+    'base-alert': BaseAlert
   },
   data() {
     return {
@@ -25,7 +30,9 @@ export default {
       percent: 0
     };
   },
-  mounted() {},
+  mounted() {
+    console.log(this, this.$bus);
+  },
   methods: {
     async loading() {
       let count = 0;

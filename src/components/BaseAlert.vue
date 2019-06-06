@@ -1,10 +1,10 @@
 <template>
   <transition :name="transitionClass">
     <section v-show="showAlert" class="base-alert" @click.self="closeAlert">
-      <span class="base-alert-main">
-        <slot></slot>
+      <main class="base-alert-main">
+        <span v-html="content"></span>
         <div class="base-alert-close" v-if="hasClose" @click.self="closeAlert">x</div>
-      </span>
+      </main>
     </section>
   </transition>
 </template>
@@ -13,54 +13,59 @@
 import { setTimeout, clearTimeout } from 'timers';
 export default {
   name: 'BaseAlert',
-  props: {
-    showAlert: {
-      type: Boolean,
-      default: false
-    },
-    showAlertTime: {
-      type: Number,
-      default: 1500
-    },
-    hasIcon: {
-      type: Boolean,
-      default: false
-    },
-    hasClose: {
-      type: Boolean,
-      default: false
-    },
-    autoClose: {
-      type: Boolean,
-      default: true
-    },
-    transitionClass: {
-      type: String
-      // default: 'alert-fade'
-    }
-  },
   data() {
     return {
-      lockTime: null
+      /* 可接受的参数 */
+      content: '', // 内容
+      showAlert: false, // 开关
+      showAlertTime: 1500, // 展示时间
+      // hasIcon: false, // 是否有icon
+      hasClose: false, // 是否有关闭按钮
+      autoClose: true, // 是否自动关闭
+      transitionClass: 'slide-fade', // 动画class
+
+      /* 内部变量 */
+      lockTime: null // 定时器
     };
   },
   watch: {
+    /* 判断是否自动关闭，开启定时器 */
     showAlert(bool) {
       if (bool && this.autoClose) {
         this.lockTime = setTimeout(() => {
-          this.$emit('CLOSE_ALERT');
+          this.showAlert = false;
         }, this.showAlertTime);
       }
     }
+  },
+  mounted() {
+    /* 全局监听 SHOW_ALERT 事件 */
+    this.$bus.$on('SHOW_ALERT', e => {
+      // 防止参数混淆，每次先 reset 参数
+      this.reset();
+      // Object.assign 仅修改接受到的参数，保留其他默认参数
+      Object.assign(this.$data, e);
+      this.showAlert = true;
+    });
   },
   beforeDestroy() {
     clearTimeout(this.lockTime);
   },
   methods: {
+    reset() {
+      let option = {
+        showAlertTime: 1500,
+        hasIcon: false,
+        hasClose: false,
+        autoClose: true,
+        transitionClass: 'slide-fade'
+      };
+      Object.assign(this.$data, option);
+    },
     closeAlert() {
       if (!this.autoClose) {
         clearTimeout(this.lockTime);
-        this.$emit('CLOSE_ALERT');
+        this.showAlert = false;
       }
     }
   }
@@ -86,7 +91,6 @@ export default {
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.8);
     padding: px(20) px(40);
-    text-align: center;
     word-break: break-word;
   }
 
@@ -95,11 +99,12 @@ export default {
     position: absolute;
     top: 0;
     bottom: 0;
-    right: px(5);
+    right: 0;
     margin: auto 0;
   }
 }
 
+/* alert 默认动画 */
 .alert-fade-enter,
 .alert-fade-leave-active {
   opacity: 0;

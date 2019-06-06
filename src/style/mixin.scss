@@ -13,10 +13,22 @@
   top: px($top);
 }
 
+@mixin lb($left, $bottom) {
+  position: absolute;
+  left: px($left);
+  top: px($bottom);
+}
+
 @mixin rb($right, $bottom) {
   position: absolute;
   right: px($right);
   bottom: px($bottom);
+}
+
+@mixin rt($right, $top) {
+  position: absolute;
+  right: px($right);
+  top: px($top);
 }
 
 @mixin set-property($property, $x) {

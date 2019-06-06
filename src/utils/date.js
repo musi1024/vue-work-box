@@ -3,7 +3,6 @@ const DEFAULT_PATTERN = 'yyyy-MM-dd';
 
 function padding(s, len) {
   len = len - (s + '').length;
-
   for (let i = 0; i < len; i++) {
     s = '0' + s;
   }

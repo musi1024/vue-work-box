@@ -10,9 +10,7 @@
       >{{tab.label}}</div>
     </nav>
     <main class="base-tabs-content">
-      <transition :name="slideDirection">
-        <slot></slot>
-      </transition>
+      <slot></slot>
     </main>
   </section>
 </template>
@@ -33,20 +31,19 @@ export default {
       preTab: this.value
     };
   },
-  computed: {
-    slideDirection() {
-      let res;
-      res = this.preTab > this.value ? 'slide-right' : 'slide-left';
-      return res;
-    }
-  },
   mounted() {
-    // this.$refs.bar.scrollLeft = this.$refs.bar.scrollWidth;
+    this.goToActive();
+    this.$bus.$emit('SET_TAB_VALUE', this.value);
   },
   methods: {
     changeTab(tab) {
       this.preTab = this.value;
       this.$emit('CHANGE_TAB', tab);
+      this.$bus.$emit('CHANGE_TAB', tab, this.preTab);
+    },
+    goToActive() {
+      let el = document.querySelector('.base-tabs-label.active');
+      this.$refs.bar.scrollLeft = el.offsetLeft - el.offsetWidth / 2;
     }
   }
 };

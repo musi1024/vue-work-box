@@ -319,18 +319,7 @@
   }
 }
 
-.slide-left-enter-active {
-  animation: slideInRight 0.6s;
-}
-.slide-left-leave-active {
-  animation: slideOutLeft 0.6s;
-}
-.slide-right-enter-active {
-  animation: slideInLeft 0.6s;
-}
-.slide-right-leave-active {
-  animation: slideOutRight 0.6s;
-}
+
 
 .fade-enter-active,
 .fade-leave-active {

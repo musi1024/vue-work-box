@@ -2,8 +2,8 @@
   <transition :name="transitionClass">
     <section v-show="showAlert" class="base-alert" @click.self="closeAlert">
       <span class="base-alert-main">
-        <div class="base-alert-close" v-if="hasClose" @click.self="closeAlert">x</div>
         <slot></slot>
+        <div class="base-alert-close" v-if="hasClose" @click.self="closeAlert">x</div>
       </span>
     </section>
   </transition>
@@ -85,10 +85,9 @@ export default {
     height: fit-content;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: px(10) px(20);
+    padding: px(20) px(40);
     text-align: center;
-    word-wrap: break-word;
-    word-break: break-all;
+    word-break: break-word;
   }
 
   &-close {

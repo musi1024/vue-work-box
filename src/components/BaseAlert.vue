@@ -39,7 +39,11 @@ export default {
     }
   },
   mounted() {
-    /* 全局监听 SHOW_ALERT 事件 */
+    /* 
+      外部使用 this.$bus.$emit('SHOW_ALERT', { ... }); 方式触发事件和传参
+
+      内部监听 SHOW_ALERT 事件 
+    */
     this.$bus.$on('SHOW_ALERT', e => {
       // 防止参数混淆，每次先 reset 参数
       this.reset();

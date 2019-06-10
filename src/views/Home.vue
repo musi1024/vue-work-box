@@ -8,7 +8,7 @@
     </header>
     <main>
       <ul v-if="state === 0">
-        <li v-for="(item, index) in config" :key="item">
+        <li v-for="(item, index) in 99" :key="item">
           <base-button @CLICK="state = index">{{item}}</base-button>
         </li>
       </ul>

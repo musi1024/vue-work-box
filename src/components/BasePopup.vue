@@ -3,17 +3,21 @@
     <section class="base-popup" @click.self="closePopup">
       <main class="base-popup-container">
         <div class="base-popup-close" v-if="hasClose" @click="closePopup">x</div>
-        <div class="base-popup-content">
+        <Scroll class="base-popup-content">
           <slot></slot>
-        </div>
+        </Scroll>
       </main>
     </section>
   </transition>
 </template>
 
 <script>
+import Scroll from '../components/Scroll';
 export default {
   name: 'BasePopup',
+  components: {
+    Scroll
+  },
   props: {
     hasClose: {
       type: Boolean,

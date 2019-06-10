@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <Scroll id="app">
     <template v-if="isLoading">
       <p class="loading-percent">loading... {{percent}}%</p>
     </template>
@@ -10,19 +10,22 @@
     <screen-orientation></screen-orientation>
     <!-- alert -->
     <base-alert></base-alert>
-  </div>
+  </Scroll>
 </template>
 
 <script>
 import ScreenOrientation from './components/ScreenOrientation';
 import BaseAlert from './components/BaseAlert';
+import Scroll from './components/Scroll';
+
 const preloadImgs = [];
 
 export default {
   name: 'App',
   components: {
     'screen-orientation': ScreenOrientation,
-    'base-alert': BaseAlert
+    'base-alert': BaseAlert,
+    Scroll
   },
   data() {
     return {

@@ -1,5 +1,5 @@
 <template>
-  <section class="scrollable-wrapper" ref="scrollableWrapper" :is="tag">
+  <section class="scrollWrap" ref="scrollWrap" :is="tag">
     <slot></slot>
   </section>
 </template>
@@ -13,17 +13,14 @@ export default {
     }
   },
   methods: {
-    resolveWrapperHeight() {
-      setTimeout(() => {
-        const h = this.$el.clientHeight;
-        if (h) {
-          this.$el.style.height = `${h}px`;
-        }
-      }, 500);
-    },
-    enableDomOverscroll(refDom) {
-      this.enableOverscroll([refDom]);
-    },
+    // resolveWrapperHeight() {
+    //   setTimeout(() => {
+    //     const h = this.$el.clientHeight;
+    //     if (h) {
+    //       this.$el.style.height = `${h}px`;
+    //     }
+    //   }, 500);
+    // },
     enableOverscroll(els) {
       let i, el;
       for (i = 0; i < els.length; ++i) {
@@ -48,7 +45,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.enableDomOverscroll(this.$refs['scrollableWrapper']);
+      this.enableOverscroll(this.$refs['scrollableWrapper']);
       // this.resolveWrapperHeight();
     });
   }

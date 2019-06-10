@@ -4,8 +4,9 @@
       type="text"
       class="base-select-input"
       v-model="value"
-      :readonly="true"
+      readonly="readonly"
       autocomplete="off"
+      @focus="blur()"
       :placeholder="placeholder"
     >
     <div class="base-select-btn" :class="{rotate: showOption}">^</div>
@@ -52,6 +53,9 @@ export default {
       if (!this.$el.contains(e.target)) {
         this.showOption = false;
       }
+    },
+    blur() {
+      document.activeElement.blur();
     }
   }
 };

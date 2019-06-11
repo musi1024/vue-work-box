@@ -13,23 +13,21 @@ export default {
     }
   },
   methods: {
-    enableOverscroll(els) {
-      let i, el, refDom, pageX;
-      if (!els) {
+    runScroll(e) {
+      let refDom;
+      if (!e) {
         return;
       }
-      if (!els[0]) {
-        refDom = [els];
+      if (!e[0]) {
+        refDom = [e];
       }
-      for (i = 0; i < refDom.length; ++i) {
-        el = refDom[i];
-        el.addEventListener('touchstart', function(e) {
+      for (let i = 0; i < refDom.length; ++i) {
+        let el = refDom[i];
+        el.addEventListener('touchstart', function() {
           let top = this.scrollTop;
-          let totalScroll = this.scrollHeight;
-          let currentScroll = top + this.offsetHeight;
           if (top === 0) {
             this.scrollTop = 1;
-          } else if (currentScroll === totalScroll) {
+          } else if (top + this.offsetHeight === this.scrollHeight) {
             this.scrollTop = top - 1;
           }
         });
@@ -47,7 +45,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.enableOverscroll(this.$refs['scrollWrap']);
+      this.runScroll(this.$refs['scrollWrap']);
     });
   }
 };

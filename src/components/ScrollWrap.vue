@@ -13,18 +13,18 @@ export default {
     }
   },
   methods: {
-    // resolveWrapperHeight() {
-    //   setTimeout(() => {
-    //     const h = this.$el.clientHeight;
-    //     if (h) {
-    //       this.$el.style.height = `${h}px`;
-    //     }
-    //   }, 500);
-    // },
     enableOverscroll(els) {
-      let i, el;
-      for (i = 0; i < els.length; ++i) {
-        el = els[i];
+      let i, el, refDom;
+      console.log(i, el, refDom, els);
+      if (!els) {
+        return;
+      }
+      if (!els[0]) {
+        refDom = [els];
+      }
+      console.log(refDom);
+      for (i = 0; i < refDom.length; ++i) {
+        el = refDom[i];
         el.addEventListener('touchstart', function() {
           let top = this.scrollTop;
           let totalScroll = this.scrollHeight;
@@ -38,6 +38,7 @@ export default {
         el.addEventListener('touchmove', function(evt) {
           if (this.offsetHeight < this.scrollHeight) {
             evt._isScroller = true;
+            evt.stopPropagation();
           }
         });
       }
@@ -45,16 +46,15 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.enableOverscroll(this.$refs['scrollableWrapper']);
-      // this.resolveWrapperHeight();
+      this.enableOverscroll(this.$refs['scrollWrap']);
     });
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.scrollable-wrapper {
-  overflow: scroll;
+.scrollWrap {
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <section id="home">
+  <scroll-wrap id="home">
     <header>
       <base-button @CLICK="change(false)">&lt;</base-button>
       <span>{{config[state]}}</span>
@@ -14,11 +14,13 @@
       </ul>
       <router-view v-else></router-view>
     </main>
-  </section>
+  </scroll-wrap>
 </template>
 
 <script>
 import BaseButton from '../components/BaseButton';
+import ScrollWrap from '../components/ScrollWrap';
+
 let config = [
   'home',
   'button',
@@ -32,7 +34,8 @@ let config = [
 export default {
   name: 'Home',
   components: {
-    'base-button': BaseButton
+    'base-button': BaseButton,
+    'scroll-wrap': ScrollWrap
   },
   data() {
     return {

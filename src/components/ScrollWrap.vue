@@ -14,18 +14,16 @@ export default {
   },
   methods: {
     enableOverscroll(els) {
-      let i, el, refDom;
-      console.log(i, el, refDom, els);
+      let i, el, refDom, pageX;
       if (!els) {
         return;
       }
       if (!els[0]) {
         refDom = [els];
       }
-      console.log(refDom);
       for (i = 0; i < refDom.length; ++i) {
         el = refDom[i];
-        el.addEventListener('touchstart', function() {
+        el.addEventListener('touchstart', function(e) {
           let top = this.scrollTop;
           let totalScroll = this.scrollHeight;
           let currentScroll = top + this.offsetHeight;
@@ -36,7 +34,10 @@ export default {
           }
         });
         el.addEventListener('touchmove', function(evt) {
-          if (this.offsetHeight < this.scrollHeight) {
+          if (
+            this.offsetHeight < this.scrollHeight ||
+            this.offsetWidth < this.scrollWidth
+          ) {
             evt._isScroller = true;
             evt.stopPropagation();
           }

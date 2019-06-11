@@ -1,6 +1,6 @@
 <template>
   <transition name="popup">
-    <section class="base-popup" @click.self="closePopup">
+    <section class="base-popup" @click.self="closePopup" @touchmove="e">
       <main class="base-popup-container">
         <div class="base-popup-close" v-if="hasClose" @click="closePopup">x</div>
         <scroll-wrap class="base-popup-content">
@@ -26,7 +26,10 @@ export default {
   },
   methods: {
     closePopup() {
-      this.$emit('CLOSE_POPUP');
+      this.$emit('CLOSE_POPUP');         
+    },
+    e(e) {
+      e.preventDefault();
     }
   }
 };

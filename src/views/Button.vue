@@ -14,9 +14,7 @@ export default {
     'base-button': BaseButton
   },
   methods: {
-    clickButton() {
-      console.log(Date.now());
-    }
+    clickButton() {}
   }
 };
 </script>

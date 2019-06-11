@@ -1,6 +1,6 @@
 <template>
   <section class="base-tabs">
-    <nav class="base-tabs-bar" ref="bar">
+    <scroll-wrap class="base-tabs-bar" ref="bar">
       <div
         class="base-tabs-label"
         v-for="tab in tabList"
@@ -8,7 +8,7 @@
         :class="[value == tab.value ? 'active' : '']"
         @click="changeTab(tab.value)"
       >{{tab.label}}</div>
-    </nav>
+    </scroll-wrap>
     <main class="base-tabs-content">
       <slot></slot>
     </main>
@@ -16,8 +16,13 @@
 </template>
   
 <script>
+import ScrollWrap from '../components/ScrollWrap';
+
 export default {
   name: 'BaseTabs',
+  components: {
+    'scroll-wrap': ScrollWrap
+  },
   model: {
     prop: 'value',
     event: 'CHANGE_TAB'
@@ -58,7 +63,6 @@ export default {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   &-bar {
     @include flex(flex-start);
-    overflow-x: scroll;
     margin: 0 px(30);
   }
   &-label {

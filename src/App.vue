@@ -1,11 +1,17 @@
 <template>
   <section id="app">
-    <template v-if="isLoading">
-      <p class="loading-percent">loading... {{percent}}%</p>
-    </template>
     <transition name="fade">
-      <router-view v-if="!isLoading"></router-view>
+      <router-view v-if="loaded"></router-view>
     </transition>
+    <!-- 图片预加载 -->
+    <img-preload
+      v-if="!loaded"
+      @FINISH="loaded = true"
+      :imgs="preloadImgs"
+      v-slot="{loaded, total}"
+    >
+      <div>{{loaded}}/{{total}}</div>
+    </img-preload>
     <!-- 屏幕旋转 -->
     <screen-orientation></screen-orientation>
     <!-- alert -->
@@ -16,6 +22,7 @@
 <script>
 import ScreenOrientation from './components/ScreenOrientation';
 import BaseAlert from './components/BaseAlert';
+import ImgPreload from './components/ImgPreload';
 
 const preloadImgs = [];
 
@@ -23,38 +30,17 @@ export default {
   name: 'App',
   components: {
     'screen-orientation': ScreenOrientation,
-    'base-alert': BaseAlert
+    'base-alert': BaseAlert,
+    'img-preload': ImgPreload
   },
   data() {
     return {
-      isLoading: false,
-      percent: 0
+      preloadImgs,
+      loaded: false
     };
   },
-  mounted() {
-    console.log(this, this.$bus);
-  },
-  methods: {
-    async loading() {
-      let count = 0;
-      for (let i = 0; i < preloadImgs.length; i++) {
-        await this._loadImg(preloadImgs[i]);
-        count++;
-        this.percent = parseInt((count / preloadImgs.length) * 100);
-      }
-      this.isLoading = this.percent == 100 ? false : true;
-    },
-
-    _loadImg(src) {
-      return new Promise(resolve => {
-        let img = new Image();
-        img.onload = () => {
-          resolve(img);
-        };
-        img.src = src;
-      });
-    }
-  }
+  mounted() {},
+  methods: {}
 };
 </script>
 

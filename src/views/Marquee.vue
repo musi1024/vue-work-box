@@ -6,7 +6,6 @@
     <Marquee class="Marquee" :content="content" :speed="20">
       <span class="marquee-content" v-for="(item, index) in content" :key="index">{{item}}召唤出</span>
     </Marquee>
-    <Marquee class="Marquee" :content="content" :speed="20"></Marquee>
     <section class="test">
       <transition name="slide">
         <span class="test-content" :key="text.id">{{text.val}}召唤出</span>

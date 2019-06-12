@@ -95,7 +95,8 @@ export default {
   main {
     width: 100%;
     height: 94%;
-    margin-top: px(20);
+    // margin-top: px(20);
+    padding-top: px(20);
     ul {
       list-style: none;
       padding: 0;

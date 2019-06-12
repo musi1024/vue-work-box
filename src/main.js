@@ -4,11 +4,13 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import eventBus from './utils/eventBus';
-import utils from './utils/index';
 
+import eventBus from './utils/eventBus';
 Vue.use(eventBus);
+import utils from './utils/index';
 Vue.use(utils);
+import stopScroll from './utils/stopScroll';
+stopScroll();
 
 Vue.config.productionTip = false;
 

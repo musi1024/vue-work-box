@@ -1,5 +1,5 @@
 <template>
-  <scroll-wrap id="home">
+  <section id="home">
     <header>
       <base-button @CLICK="change(false)">&lt;</base-button>
       <span>{{config[state]}}</span>
@@ -14,12 +14,12 @@
       </ul>
       <router-view v-else></router-view>
     </main>
-  </scroll-wrap>
+  </section>
 </template>
 
 <script>
 import BaseButton from '../components/BaseButton';
-import ScrollWrap from '../components/ScrollWrap';
+// import ScrollWrap from '../components/ScrollWrap';
 
 let config = [
   'home',
@@ -29,13 +29,14 @@ let config = [
   'select',
   'tabs',
   'collapse',
+  'scroll',
   'marquee'
 ];
 export default {
   name: 'Home',
   components: {
     'base-button': BaseButton,
-    'scroll-wrap': ScrollWrap
+    // 'scroll-wrap': ScrollWrap
   },
   data() {
     return {
@@ -67,15 +68,21 @@ export default {
   height: 100vh;
   header {
     @include flex();
+    width: 100%;
+    height: 6%;
     color: #ffffff;
     background: #000000;
-    > span {
-      width: 100%;
+    .base-button {
       height: 100%;
-      flex-shrink: 1;
+    }
+    > span {
+      flex-grow: 1;
+      min-width: px(300);
     }
   }
   main {
+    width: 100%;
+    height: 94%;
     margin-top: px(20);
     ul {
       list-style: none;

@@ -41,6 +41,11 @@ export default new Router({
           component: () => import('@/views/Collapse.vue')
         },
         {
+          path: '/scroll',
+          name: 'scroll',
+          component: () => import('@/views/Scroll.vue')
+        },
+        {
           path: '/marquee',
           name: 'marquee',
           component: () => import('@/views/Marquee.vue')

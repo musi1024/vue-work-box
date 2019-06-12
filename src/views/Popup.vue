@@ -2,7 +2,6 @@
   <section id="popupPage">
     <base-button @CLICK="popup(1)">触发popup</base-button>
     <base-button @CLICK="popup(2)">触发popup hasclose</base-button>
-    <base-button v-for="i in 99" :key="i">{{i}}</base-button>
     <base-popup v-show="showPopup1" @CLOSE_POPUP="showPopup1 = false">
       <div v-for="i in 99" :key="i">{{i}}</div>
     </base-popup>

@@ -54,6 +54,5 @@ export default {
   width: 100vw;
   height: 100vh;
   position: relative;
-  @include flex(flex-start, flex-start);
 }
 </style>

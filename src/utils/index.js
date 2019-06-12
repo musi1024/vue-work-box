@@ -27,36 +27,11 @@ const judgeObj = obj => {
   return Object.keys(obj).length === 0;
 };
 
-const scrollSmoothTo = position => {
-  if (!window.requestAnimationFrame) {
-    window.requestAnimationFrame = callback => {
-      return setTimeout(callback, 10);
-    };
-  }
-  // 当前滚动高度
-  let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  // 滚动step方法
-  const step = () => {
-    // 距离目标滚动距离
-    let distance = position - scrollTop;
-    // 目标滚动位置
-    scrollTop = scrollTop + distance / 5;
-    if (Math.abs(distance) < 1) {
-      window.scrollTo(0, position);
-    } else {
-      window.scrollTo(0, scrollTop);
-      requestAnimationFrame(step);
-    }
-  };
-  step();
-};
-
 const utils = {
   getUrlSearch,
   isWeixin,
   remove,
   judgeObj,
-  scrollSmoothTo,
   formatDate
 };
 

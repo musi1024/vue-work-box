@@ -38,7 +38,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 #ScrollPage {
-  height: 100%;
+  height: 96%;
   .base-button {
     height: px(80);
   }

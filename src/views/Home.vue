@@ -1,52 +1,60 @@
 <template>
   <section id="home">
     <header>
-      <base-button @CLICK="change(false)">&lt;</base-button>
-      <span>{{config[state]}}</span>
-      <base-button @CLICK="change(true)">&gt;</base-button>
-      <base-button @CLICK="state = 0">home</base-button>
+      <base-button v-show="!isHome" @CLICK="change(false)">&lt;</base-button>
+      <span>{{isHome ? 'Home' : config[state]}}</span>
+      <base-button v-show="!isHome" @CLICK="change(true)">&gt;</base-button>
+      <base-button @CLICK="isHome = true">Home</base-button>
     </header>
     <main>
-      <ul v-if="state === 0">
+      <ul v-if="isHome">
         <li v-for="(item, index) in config" :key="item">
-          <base-button @CLICK="state = index">{{item}}</base-button>
+          <base-button @CLICK="goToView(index)">{{item}}</base-button>
         </li>
       </ul>
-      <router-view v-else></router-view>
+      <keep-alive v-else>
+        <components :is="views"></components>
+      </keep-alive>
     </main>
   </section>
 </template>
 
 <script>
 import BaseButton from '../components/BaseButton';
-// import ScrollWrap from '../components/ScrollWrap';
 
 let config = [
-  'home',
-  'button',
-  'popup',
-  'alert',
-  'select',
-  'tabs',
-  'collapse',
-  'scroll',
-  'marquee'
+  'Button',
+  'Popup',
+  'Alert',
+  'Select',
+  'Tabs',
+  'Collapse',
+  'Scroll',
+  'Marquee'
 ];
 export default {
   name: 'Home',
   components: {
     'base-button': BaseButton,
-    // 'scroll-wrap': ScrollWrap
+    Button: () => import('../views/Button'),
+    Popup: () => import('../views/Popup'),
+    Alert: () => import('../views/Alert'),
+    Select: () => import('../views/Select'),
+    Tabs: () => import('../views/Tabs'),
+    Collapse: () => import('../views/Collapse'),
+    Scroll: () => import('../views/Scroll'),
+    Marquee: () => import('../views/Marquee')
   },
   data() {
     return {
       config,
-      state: 0
+      state: 0,
+      isHome: false
     };
   },
-  watch: {
-    state() {
-      this.$router.replace({ name: config[this.state] });
+  computed: {
+    views() {
+      return config[this.state];
     }
   },
   mounted() {},
@@ -57,6 +65,10 @@ export default {
       } else {
         this.state = this.state === 0 ? config.length - 1 : this.state - 1;
       }
+    },
+    goToView(index) {
+      this.state = index;
+      this.isHome = false;
     }
   }
 };

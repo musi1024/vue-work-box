@@ -38,15 +38,15 @@ export default {
 .base-button {
   cursor: pointer;
   border: none;
-  padding: 0;
-  margin: 0 ;
+  padding: px(20) px(40);
+  margin: px(20);
   // 去掉 button 默认样式
   outline: none;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-  width: 120px;
-  height: 40px;
+  width: fit-content;
+  height: fit-content;
   background-color: #333333;
   border-radius: 4px;
   color: white;
@@ -73,8 +73,6 @@ export default {
     margin: 0px;
     border: none;
   }
-
-
 }
 </style>
 

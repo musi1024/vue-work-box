@@ -86,6 +86,7 @@ export default {
     background: #000000;
     .base-button {
       height: 100%;
+      margin: 0;
     }
     > span {
       flex-grow: 1;

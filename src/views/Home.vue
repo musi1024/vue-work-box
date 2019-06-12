@@ -49,7 +49,7 @@ export default {
     return {
       config,
       state: 0,
-      isHome: false
+      isHome: true
     };
   },
   computed: {

@@ -39,14 +39,14 @@ export default {
   cursor: pointer;
   border: none;
   padding: px(20) px(40);
-  margin: px(20);
+  margin: px(10);
   // 去掉 button 默认样式
   outline: none;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-  width: fit-content;
-  height: fit-content;
+  width: fill-availabl;
+  height: fill-availabl;
   background-color: #333333;
   border-radius: 4px;
   color: white;

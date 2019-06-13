@@ -45,8 +45,8 @@ export default {
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-  width: fill-availabl;
-  height: fill-availabl;
+  // width: availabl;
+  // height: availabl;
   background-color: #333333;
   border-radius: 4px;
   color: white;

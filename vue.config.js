@@ -4,7 +4,6 @@ module.exports = {
     loaderOptions: {
       sass: {
         data: `
-          @import "@/style/common.scss";
           @import "@/style/mixin.scss";
         `
       }

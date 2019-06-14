@@ -9,26 +9,33 @@ import { setTimeout, clearTimeout } from 'timers';
 export default {
   name: 'BaseButton',
   props: {
-    plain: { type: Boolean, default: false }
+    plain: { type: Boolean, default: false },
+    useLock: { type: Boolean, default: true },
+    lockTime: { type: Number, default: 500 }
   },
   data() {
     return {
       lock: false,
-      lockTime: null
+      timer: null
     };
   },
   beforeDestroy() {
-    clearTimeout(this.lockTime);
+    this.timer && clearTimeout(this.timer);
   },
   methods: {
     clickBtn() {
-      if (!this.lock) {
+      if (!this.lock || !this.useLock) {
         this.lock = true;
         this.$emit('CLICK');
-        this.lockTime = setTimeout(() => {
-          this.lock = false;
-        }, 500);
+        this.timer = this.setTimer();
       }
+    },
+    setTimer() {
+      return this.useLock
+        ? setTimeout(() => {
+            this.lock = false;
+          }, this.lockTime)
+        : null;
     }
   }
 };
@@ -40,7 +47,6 @@ export default {
   border: none;
   padding: px(20) px(40);
   margin: px(10);
-  // 去掉 button 默认样式
   outline: none;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -61,17 +67,6 @@ export default {
     color: #333333;
     background-color: white;
     border: 1px solid #333333;
-  }
-
-  &.dialog-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
-    font-size: 14px;
-    margin: 0px;
-    border: none;
   }
 }
 </style>

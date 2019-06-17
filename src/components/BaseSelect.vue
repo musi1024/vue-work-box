@@ -10,7 +10,7 @@
       :placeholder="placeholder"
     >
     <div class="base-select-btn" :class="{rotate: showOption}">^</div>
-    <ul class="base-select-option" v-show="showOption">
+    <ul class="base-select-option" v-show="showOption" :class="{none: !showOption}">
       <li class="base-select-item empty" v-show="!selectOption.length">Empty</li>
       <li
         class="base-select-item"
@@ -76,10 +76,12 @@ export default {
   }
   &-btn {
     width: 10%;
-    height: 100%;
+    height: 50%;
     position: absolute;
-    right: 0;
     top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto 0;
     transition: all 1s;
     &.rotate {
       transform: rotate(180deg);

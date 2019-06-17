@@ -1,5 +1,5 @@
 <template>
-  <transition name="popup-fade">
+  <transition name="popup">
     <div class="base-popup" v-show="visible" @click.self="closePopup" @touchmove="stopMove">
       <section class="base-popup-container">
         <slot></slot>
@@ -42,6 +42,7 @@ export default {
   outline: none;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  transition: all 0.2s ease-in-out;
 
   &-container {
     @include flex();
@@ -50,17 +51,19 @@ export default {
     padding: px(40) 0;
     color: #ffffff;
     background-color: #000000;
-    animation: bounceInUp 0.6s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
 }
 
-.popup-fade-enter,
-.popup-fade-leave-to {
+.popup-enter,
+.popup-leave-active {
   opacity: 0;
 }
-.popup-fade-enter-active,
-.popup-fade-leave-active {
-  transition: opacity 0.2s;
+.popup-enter .base-popup-container {
+  transform: translate(0, 20%);
+}
+.popup-leave-active .base-popup-container {
+  transform: translate(0, -20%);
 }
 </style>
 

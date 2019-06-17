@@ -3,22 +3,26 @@
     <base-tabs :tab-list="tabList" v-model="value" v-if="tabList.length">
       <base-tab-pane v-for="item in tabList" :name="item.value" :key="item.value">{{item.content}}</base-tab-pane>
     </base-tabs>
+    <base-button @CLICK="prev">prev</base-button>
+    <base-button @CLICK="next">next</base-button>
   </section>
 </template>
 
 <script>
-import BaseTabs from '../components/BaseTabs';
-import BaseTabPane from '../components/BaseTabPane';
+import BaseTabs from '../components/Tab/BaseTabs';
+import BaseTabPane from '../components/Tab/BaseTabPane';
+import BaseButton from '../components/BaseButton';
 
 export default {
   name: 'TabsPage',
   components: {
     'base-tabs': BaseTabs,
-    'base-tab-pane': BaseTabPane
+    'base-tab-pane': BaseTabPane,
+    'base-button': BaseButton
   },
   data() {
     return {
-      value: 2,
+      value: 11,
       tabList: [
         {
           label: '1111',
@@ -77,9 +81,16 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    prev() {
+      this.value != 1 ? (this.value -= 1) : (this.value = this.tabList.length);
+    },
+    next() {
+      this.value != this.tabList.length ? (this.value += 1) : (this.value = 1);
+    }
   }
 };
-
 </script>
 
 <style lang="scss" scoped>

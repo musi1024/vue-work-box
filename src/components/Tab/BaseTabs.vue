@@ -1,6 +1,6 @@
 <template>
   <section class="base-tabs">
-    <scroll-wrap class="base-tabs-bar" ref="bar">
+    <scroll-wrap class="base-tabs-bar">
       <div
         class="base-tabs-label"
         v-for="tab in tabList"
@@ -9,14 +9,14 @@
         @click="changeTab(tab.value)"
       >{{tab.label}}</div>
     </scroll-wrap>
-    <main class="base-tabs-content">
+    <div class="base-tabs-content">
       <slot></slot>
-    </main>
+    </div>
   </section>
 </template>
   
 <script>
-import ScrollWrap from '../components/ScrollWrap';
+import ScrollWrap from '../ScrollWrap';
 
 export default {
   name: 'BaseTabs',
@@ -36,6 +36,14 @@ export default {
       preTab: this.value
     };
   },
+  watch: {
+    value(e) {
+      this.changeTab(e);
+      this.$nextTick(() => {
+        this.goToActive();
+      });
+    }
+  },
   mounted() {
     this.goToActive();
     this.$bus.$emit('SET_TAB_VALUE', this.value);
@@ -47,8 +55,10 @@ export default {
       this.$bus.$emit('CHANGE_TAB', tab, this.preTab);
     },
     goToActive() {
-      let el = document.querySelector('.base-tabs-label.active');
-      this.$refs.bar.scrollLeft = el.offsetLeft - el.offsetWidth / 2;
+      let active = document.querySelector('.base-tabs-label.active');
+      let bar = document.querySelector('.base-tabs-bar');
+      bar.scrollLeft =
+        active.offsetLeft - this.$el.offsetWidth / 2 + active.offsetWidth / 2;
     }
   }
 };
@@ -74,7 +84,7 @@ export default {
     color: #eeeeee;
     border: 1px solid #eeeeee;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.6s;
     &:first-child {
       margin-left: 0;
     }
@@ -88,6 +98,7 @@ export default {
 
   &-content {
     position: relative;
+    min-height: px(300);
   }
 }
 </style>

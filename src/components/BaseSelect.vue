@@ -3,14 +3,15 @@
     <input
       type="text"
       class="base-select-input"
+      ref="input"
       v-model="value"
+      :placeholder="placeholder"
       readonly="readonly"
       autocomplete="off"
       @focus="blur()"
-      :placeholder="placeholder"
     >
     <div class="base-select-btn" :class="{rotate: showOption}">^</div>
-    <ul class="base-select-option" v-show="showOption" :class="{none: !showOption}">
+    <ul class="base-select-option" v-show="showOption">
       <li class="base-select-item empty" v-show="!selectOption.length">Empty</li>
       <li
         class="base-select-item"
@@ -55,7 +56,7 @@ export default {
       }
     },
     blur() {
-      document.activeElement.blur();
+      this.$refs.input.blur();
     }
   }
 };

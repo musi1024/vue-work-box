@@ -24,6 +24,7 @@ import BaseButton from '../components/BaseButton';
 
 let config = [
   'Button',
+  'Input',
   'Popup',
   'Alert',
   'Select',
@@ -37,6 +38,7 @@ export default {
   components: {
     'base-button': BaseButton,
     Button: () => import('../views/Button'),
+    Input: () => import('../views/Input'),
     Popup: () => import('../views/Popup'),
     Alert: () => import('../views/Alert'),
     Select: () => import('../views/Select'),

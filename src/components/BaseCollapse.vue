@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers';
 export default {
   name: 'BaseCollapse',
   props: { name: Number },

@@ -1,15 +1,12 @@
 * {
   box-sizing: border-box;
-
-  /* 禁止移动端长按选择 */
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
   outline: none;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+
+input {
+  -webkit-user-select: auto !important;
 }

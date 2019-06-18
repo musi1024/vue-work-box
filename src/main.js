@@ -10,8 +10,8 @@ import eventBus from './utils/eventBus';
 Vue.use(eventBus);
 import utils from './utils/index';
 Vue.use(utils);
-import stopScroll from './utils/stopScroll';
-stopScroll();
+import stopTouchMove from './utils/stopTouchMove';
+stopTouchMove();
 
 Vue.config.productionTip = false;
 

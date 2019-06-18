@@ -1,10 +1,8 @@
 /**
- *
  * @param {*} [el=window]
  * 滚动对象
  * @param {number} [position=0]
  * 滚动终点位置
- *
  */
 function scrollSmoothTo(el = window, position = 0) {
   if (!window.requestAnimationFrame) {

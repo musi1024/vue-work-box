@@ -1,4 +1,5 @@
-function stopScroll() {
+/* 禁止 touchmove，需要滚动的元素使用 ScrollWrap 组件包裹 */
+function stopTouchMove() {
   document.body.addEventListener(
     'touchmove',
     function(evt) {
@@ -12,4 +13,4 @@ function stopScroll() {
   );
 }
 
-export default stopScroll;
+export default stopTouchMove;

@@ -21,8 +21,6 @@
 
 <script>
 import BaseButton from '../components/BaseButton';
-import bifurcateBy from '../utils/Array/bifurcateBy';
-import countBy from '../utils/Array/countBy';
 
 let config = [
   'Button',
@@ -62,8 +60,7 @@ export default {
     }
   },
   mounted() {
-    console.log(bifurcateBy());
-    console.log(countBy());
+
   },
   methods: {
     change(e) {

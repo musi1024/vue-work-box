@@ -8,8 +8,6 @@ import store from './store';
 
 import eventBus from './utils/eventBus';
 Vue.use(eventBus);
-import utils from './utils/index';
-Vue.use(utils);
 import stopTouchMove from './utils/stopTouchMove';
 stopTouchMove();
 

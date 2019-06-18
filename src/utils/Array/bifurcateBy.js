@@ -1,12 +1,12 @@
 /**
  *
  *
- * @param {*} arr
+ * @param {*} arr 
  * @param {*} fn
  * @returns
  */
 
-function bifurcateBy(arr, fn) {
+function bifurcateBy(arr = [], fn) {
   let res = arr.reduce(
     (acc, val, i) => {
       acc[fn(val, i) ? 0 : 1].push(val);

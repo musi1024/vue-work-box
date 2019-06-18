@@ -21,6 +21,7 @@
 
 <script>
 import BaseButton from '../components/BaseButton';
+import bifurcateBy from '../utils/Array/bifurcateBy';
 
 let config = [
   'Button',
@@ -59,7 +60,9 @@ export default {
       return config[this.state];
     }
   },
-  mounted() {},
+  mounted() {
+    console.log(bifurcateBy(['beep', 'boop', 'foo', 'bar'], x => x[0] === 'b'));
+  },
   methods: {
     change(e) {
       if (e) {

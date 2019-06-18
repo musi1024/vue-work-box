@@ -50,7 +50,9 @@ export default {
 </script>
 <style lang='scss' scoped>
 .base-input {
-  border-color: #000000;
+  // border:none;
+  border: 1px solid #000000;
+  padding: px(10) px(20);
   &.error {
     border-color: red;
   }

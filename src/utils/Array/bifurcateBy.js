@@ -1,11 +1,10 @@
 /**
  *
  *
- * @param {*} arr
- * @param {*} fn
+ * @param {*} [arr=[]]
+ * @param {*} [fn=x => x]
  * @returns
  */
-
 function bifurcateBy(arr = [], fn = x => x) {
   let res = arr.reduce(
     (acc, val, i) => {

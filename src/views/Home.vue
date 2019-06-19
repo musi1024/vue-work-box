@@ -59,9 +59,7 @@ export default {
       return config[this.state];
     }
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     change(e) {
       if (e) {

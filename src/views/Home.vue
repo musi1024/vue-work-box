@@ -33,6 +33,7 @@ let config = [
   'Scroll',
   'Marquee'
 ];
+
 export default {
   name: 'Home',
   components: {

@@ -21,8 +21,6 @@
 
 <script>
 import BaseButton from '../components/BaseButton';
-import merge from '../utils/Object/merge';
-import bifurcateBy from '../utils/Array/bifurcateBy';
 
 let config = [
   'Button',
@@ -62,19 +60,7 @@ export default {
       return config[this.state];
     }
   },
-  mounted() {
-    const object = {
-      a: [{ x: 2 }, { y: 4 }, { z: 3 }],
-      b: 1
-    };
-    const other = {
-      a: { z: 3 },
-      b: [1, 2, 3],
-      c: 'foo'
-    };
-    console.log(merge(object, other));
-    console.log(bifurcateBy([1, 2, 33, 4]));
-  },
+  mounted() {},
   methods: {
     change(e) {
       if (e) {

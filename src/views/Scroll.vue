@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import scrollSmoothTo from '../utils/scrollSmoothTo';
+import scrollSmoothTo from '../utils/Browser/scrollSmoothTo';
 import ScrollWrap from '../components/ScrollWrap';
 import BaseButton from '../components/BaseButton';
 

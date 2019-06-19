@@ -8,7 +8,7 @@ import store from './store';
 
 import eventBus from './utils/eventBus';
 Vue.use(eventBus);
-import stopTouchMove from './utils/stopTouchMove';
+import stopTouchMove from './utils/Browser/stopTouchMove';
 stopTouchMove();
 
 Vue.config.productionTip = false;

@@ -8,22 +8,19 @@
     </header>
     <main>
       <ul v-if="isHome">
-        <li v-for="(item, index) in 99" :key="item">
+        <li v-for="(item, index) in config" :key="item">
           <base-button @CLICK="goToView(index)">{{item}}</base-button>
         </li>
       </ul>
       <keep-alive v-else>
         <components :is="views"></components>
       </keep-alive>
-      <div class="test-btn" @click="test">click</div>
-      <div class="test"></div>
     </main>
   </section>
 </template>
 
 <script>
 import BaseButton from '../components/BaseButton';
-import isInViewport from '../utils/Browser/isInViewport';
 
 let config = [
   'Button',
@@ -75,9 +72,6 @@ export default {
     goToView(index) {
       this.state = index;
       this.isHome = false;
-    },
-    test() {
-      console.log(isInViewport(document.querySelector('.test'), true));
     }
   }
 };

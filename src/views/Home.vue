@@ -21,7 +21,6 @@
 
 <script>
 import BaseButton from '../components/BaseButton';
-import pad from '../utils/String/pad.js';
 
 let config = [
   'Button',

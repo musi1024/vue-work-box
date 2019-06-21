@@ -2,7 +2,6 @@ import './loading.css';
 import Vue from 'vue';
 
 Vue.directive('loading', function(el, binding) {
-  console.log(el.load, binding);
   if (binding.value) {
     let div = document.createElement('div');
     div.className = 'loading-wrapper';

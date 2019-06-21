@@ -8,9 +8,7 @@
     </header>
     <main>
       <span id="test"></span>
-      <div @click="load = false">false</div>
-      <div @click="load = true">true</div>
-      <ul v-if="isHome" v-loading="load">
+      <ul v-if="isHome">
         <li v-for="(item, index) in config" :key="item">
           <base-button @CLICK="goToView(index)">{{item}}</base-button>
         </li>

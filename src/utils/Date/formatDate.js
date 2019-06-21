@@ -1,34 +1,31 @@
-const SIGN_REGEXP = /([yMdhsm])(\1*)/g;
+const SIGN_REGEXP = /([yMdhsmw])(\1*)/g;
 const DEFAULT_PATTERN = 'yyyy-MM-dd';
 
-function padding(s, len) {
-  len = len - (s + '').length;
-  for (let i = 0; i < len; i++) {
-    s = '0' + s;
-  }
-
-  return s;
+function padding(s) {
+  return String(s).padStart(2, '0');
 }
 
-export const formatDate = (dateObj, pattern) => {
+function formatDate(dateObj, pattern) {
   pattern = pattern || DEFAULT_PATTERN;
 
-  return pattern.replace(SIGN_REGEXP, $0 => {
-    switch ($0.charAt(0)) {
+  return pattern.replace(SIGN_REGEXP, e => {
+    switch (e[0]) {
       case 'y':
-        return padding(dateObj.getFullYear(), $0.length);
+        return padding(dateObj.getFullYear());
       case 'M':
-        return padding(dateObj.getMonth() + 1, $0.length);
+        return padding(dateObj.getMonth() + 1);
       case 'd':
-        return padding(dateObj.getDate(), $0.length);
+        return padding(dateObj.getDate());
       case 'w':
-        return dateObj.getDay() + 1;
+        return dateObj.getDay();
       case 'h':
-        return padding(dateObj.getHours(), $0.length);
+        return padding(dateObj.getHours());
       case 'm':
-        return padding(dateObj.getMinutes(), $0.length);
+        return padding(dateObj.getMinutes());
       case 's':
-        return padding(dateObj.getSeconds(), $0.length);
+        return padding(dateObj.getSeconds());
     }
   });
-};
+}
+
+export default formatDate;

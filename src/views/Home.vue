@@ -21,6 +21,9 @@
 
 <script>
 import BaseButton from '../components/BaseButton';
+import mask from '../utils/String/mask';
+
+console.log(mask('12345678900', 2, 4, '-+*&'));
 
 let config = [
   'Button',

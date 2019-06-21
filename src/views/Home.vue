@@ -7,6 +7,7 @@
       <base-button @CLICK="isHome = true">Home</base-button>
     </header>
     <main>
+      <span id="test"></span>
       <ul v-if="isHome">
         <li v-for="(item, index) in config" :key="item">
           <base-button @CLICK="goToView(index)">{{item}}</base-button>
@@ -21,9 +22,6 @@
 
 <script>
 import BaseButton from '../components/BaseButton';
-import mask from '../utils/String/mask';
-
-console.log(mask('12345678900', 2, 4, '-+*&'));
 
 let config = [
   'Button',
@@ -81,6 +79,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#test {
+}
 #home {
   width: 100vw;
   height: 100vh;
@@ -107,16 +107,6 @@ export default {
       list-style: none;
       padding: 0;
     }
-  }
-}
-.test {
-  @include wh(100, 100);
-  border: 1px solid red;
-  &-btn {
-    position: fixed;
-    top: 50%;
-    @include wh(100, 100);
-    border: 1px solid red;
   }
 }
 </style>

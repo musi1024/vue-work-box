@@ -8,7 +8,9 @@
     </header>
     <main>
       <span id="test"></span>
-      <ul v-if="isHome">
+      <div @click="load = false">false</div>
+      <div @click="load = true">true</div>
+      <ul v-if="isHome" v-loading="load">
         <li v-for="(item, index) in config" :key="item">
           <base-button @CLICK="goToView(index)">{{item}}</base-button>
         </li>
@@ -53,7 +55,8 @@ export default {
     return {
       config,
       state: 0,
-      isHome: true
+      isHome: true,
+      load: false
     };
   },
   computed: {

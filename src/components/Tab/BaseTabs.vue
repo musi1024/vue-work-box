@@ -25,7 +25,7 @@ export default {
   },
   model: {
     prop: 'value',
-    event: 'CHANGE_TAB'
+    event: 'change-tab'
   },
   props: {
     tabList: Array,
@@ -51,7 +51,7 @@ export default {
   methods: {
     changeTab(tab) {
       this.preTab = this.value;
-      this.$emit('CHANGE_TAB', tab);
+      this.$emit('change-tab', tab);
       this.$bus.$emit('CHANGE_TAB', tab, this.preTab);
     },
     goToActive() {

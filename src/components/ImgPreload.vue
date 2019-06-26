@@ -27,26 +27,26 @@ export default {
   },
   mounted() {
     if (!this.total) {
-      this.$emit('FINISH');
+      this.$emit('finish');
       return;
     }
     for (let i = 0; i < this.total; i++) {
-      this.loadImg(this.imgs[i])
+      this._loadImg(this.imgs[i])
         .then(() => {
           this.loaded++;
           this.$nextTick(() => {
             if (this.loaded >= this.total) {
-              this.$emit('FINISH');
+              this.$emit('finish');
             }
           });
         })
         .catch(err => {
-          this.$emit('ERROR', err);
+          this.$emit('error', err);
         });
     }
   },
   methods: {
-    loadImg(src) {
+    _loadImg(src) {
       return new Promise((resolve, reject) => {
         let img = new Image();
         img.onload = resolve;

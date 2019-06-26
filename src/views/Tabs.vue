@@ -3,8 +3,8 @@
     <base-tabs :tab-list="tabList" v-model="value" v-if="tabList.length">
       <base-tab-pane v-for="item in tabList" :name="item.value" :key="item.value">{{item.content}}</base-tab-pane>
     </base-tabs>
-    <base-button @CLICK="prev">prev</base-button>
-    <base-button @CLICK="next">next</base-button>
+    <base-button @click="prev">prev</base-button>
+    <base-button @click="next">next</base-button>
   </section>
 </template>
 

@@ -1,16 +1,16 @@
 <template>
   <section id="home">
     <header>
-      <base-button v-show="!isHome" @CLICK="change(false)">&lt;</base-button>
+      <base-button v-show="!isHome" @click="change(false)">&lt;</base-button>
       <span>{{isHome ? 'Home' : config[state]}}</span>
-      <base-button v-show="!isHome" @CLICK="change(true)">&gt;</base-button>
-      <base-button @CLICK="isHome = true">Home</base-button>
+      <base-button v-show="!isHome" @click="change(true)">&gt;</base-button>
+      <base-button @click="isHome = true">Home</base-button>
     </header>
     <main>
       <span id="test"></span>
       <ul v-if="isHome">
         <li v-for="(item, index) in config" :key="item">
-          <base-button @CLICK="goToView(index)">{{item}}</base-button>
+          <base-button @click="goToView(index)">{{item}}</base-button>
         </li>
       </ul>
       <keep-alive v-else>

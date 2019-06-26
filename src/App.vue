@@ -6,8 +6,8 @@
     <!-- 图片预加载 -->
     <img-preload
       v-if="!loaded"
-      @FINISH="loaded = true"
       :imgs="preloadImgs"
+      @finish="loaded = true"
       v-slot="{loaded, total}"
     >
       <div>{{loaded}}/{{total}}</div>
@@ -24,7 +24,10 @@ import ScreenOrientation from './components/ScreenOrientation';
 import BaseAlert from './components/BaseAlert';
 import ImgPreload from './components/ImgPreload';
 
-const preloadImgs = [];
+const preloadImgs = [
+  require('./assets/images/screenOrientation.png'),
+  require('./assets/images/up.png')
+];
 
 export default {
   name: 'App',
@@ -40,7 +43,11 @@ export default {
     };
   },
   mounted() {},
-  methods: {}
+  methods: {
+    test() {
+      console.log('1');
+    }
+  }
 };
 </script>
 

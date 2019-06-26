@@ -1,8 +1,8 @@
 <template>
   <scroll-wrap id="ScrollPage">
-    <base-button @CLICK="goToBottom">goToBottom</base-button>
+    <base-button @click="goToBottom">goToBottom</base-button>
     <div class="scroll-item" v-for="i in 99" :key="i">{{i}}</div>
-    <base-button @CLICK="goToTop">goToTop</base-button>
+    <base-button @click="goToTop">goToTop</base-button>
   </scroll-wrap>
 </template>
 

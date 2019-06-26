@@ -28,7 +28,7 @@ export default {
   name: 'BaseSelect',
   model: {
     prop: 'value',
-    event: 'SELECT'
+    event: 'select'
   },
   props: {
     selectOption: Array,
@@ -48,7 +48,7 @@ export default {
       this.showOption = !this.showOption;
     },
     select(item) {
-      this.$emit('SELECT', item);
+      this.$emit('select', item);
     },
     closeOption(e) {
       if (!this.$el.contains(e.target)) {

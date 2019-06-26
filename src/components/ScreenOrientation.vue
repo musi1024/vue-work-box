@@ -1,5 +1,5 @@
 <template>
-  <section v-show="isOrientation" id="ScreenOrientation">
+  <section v-if="isOrientation" id="ScreenOrientation">
     <div></div>
     <p>竖屏体验效果更佳</p>
   </section>
@@ -25,7 +25,7 @@ export default {
       },
       false
     );
-  },
+  }
 };
 </script>
 

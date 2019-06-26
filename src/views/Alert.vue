@@ -3,13 +3,12 @@
     <base-button
       v-for="(item, index) in config"
       :key="item.index"
-      @CLICK="showAlert(index)"
+      @click="showAlert(index)"
     >{{item.content}}</base-button>
   </section>
 </template>
 
 <script>
-
 import BaseButton from '../components/BaseButton';
 
 let config = [

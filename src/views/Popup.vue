@@ -1,25 +1,25 @@
 <template>
   <section id="popupPage">
-    <base-button @CLICK="popup(1)">触发 popup 1</base-button>
+    <base-button @click="popup(1)">触发 popup 1</base-button>
     <base-popup :visible.sync="showPopup1" animation-name="bounceInUp">
       <main class="popup-content">
-        <base-button class="popup-btn" @CLICK="showPopup1 = false">close popup 1</base-button>
+        <base-button class="popup-btn" @click="showPopup1 = false">close popup 1</base-button>
         <div v-for="i in 99" :key="i">{{i}}</div>
       </main>
     </base-popup>
 
-    <base-button @CLICK="popup(2)">触发 popup 2</base-button>
+    <base-button @click="popup(2)">触发 popup 2</base-button>
     <base-popup :visible.sync="showPopup2">
       <main class="popup-content">
-        <base-button class="popup-btn" @CLICK="showPopup2 = false">close popup 2</base-button>
+        <base-button class="popup-btn" @click="showPopup2 = false">close popup 2</base-button>
         <div v-for="i in 99" :key="i">{{i}}</div>
       </main>
     </base-popup>
 
-    <base-button @CLICK="popup(3)">触发 popup 3</base-button>
+    <base-button @click="popup(3)">触发 popup 3</base-button>
     <base-popup :visible.sync="showPopup3">
       <main class="popup-content">
-        <base-button class="popup-btn" @CLICK="showPopup3 = false">close popup 3</base-button>
+        <base-button class="popup-btn" @click="showPopup3 = false">close popup 3</base-button>
         <div v-for="i in 99" :key="i">{{i}}</div>
       </main>
     </base-popup>

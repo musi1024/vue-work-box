@@ -6,9 +6,11 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import './directive/loading';
 import eventBus from './utils/eventBus';
 Vue.use(eventBus);
+import './directive/loading';
+import alert from './components/Alert/createAlert';
+Vue.use(alert);
 import stopTouchMove from './utils/Browser/stopTouchMove';
 stopTouchMove();
 

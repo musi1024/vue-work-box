@@ -15,13 +15,13 @@
     <!-- 屏幕旋转 -->
     <screen-orientation></screen-orientation>
     <!-- alert -->
-    <base-alert></base-alert>
+    <!-- <base-alert></base-alert> -->
   </section>
 </template>
 
 <script>
 import ScreenOrientation from './components/ScreenOrientation';
-import BaseAlert from './components/BaseAlert';
+// import BaseAlert from './components/BaseAlert';
 import ImgPreload from './components/ImgPreload';
 
 const preloadImgs = [
@@ -33,7 +33,7 @@ export default {
   name: 'App',
   components: {
     'screen-orientation': ScreenOrientation,
-    'base-alert': BaseAlert,
+    // 'base-alert': BaseAlert,
     'img-preload': ImgPreload
   },
   data() {

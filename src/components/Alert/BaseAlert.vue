@@ -1,9 +1,9 @@
 <template>
-  <transition :name="transitionClass">
+  <transition :name="transitionName">
     <section v-show="showAlert" class="base-alert" @click.self="closeAlert">
       <main class="base-alert-main">
         <span v-html="content"></span>
-        <div class="base-alert-close" v-if="hasClose" @click.self="closeAlert">x</div>
+        <div class="base-alert-close" v-if="hasCloseBtn" @click.self="closeAlert">x</div>
       </main>
     </section>
   </transition>
@@ -13,63 +13,58 @@
 import { setTimeout, clearTimeout } from 'timers';
 export default {
   name: 'BaseAlert',
+  props: {
+    /* 内容 */
+    content: {
+      type: String,
+      default: 'alert'
+    },
+    /* 定时 */
+    showTime: {
+      type: Number,
+      default: 1500
+    },
+    /* 是否有关闭按钮 */
+    hasCloseBtn: {
+      type: Boolean,
+      default: false
+    },
+    /* 是否自动关闭 */
+    autoClose: {
+      type: Boolean,
+      default: true
+    },
+    /* 过度动画名 */
+    transitionName: {
+      type: String,
+      default: 'alert-fade'
+    }
+    // hasIcon: false, // 是否有icon
+  },
   data() {
     return {
-      /* 可接受的参数 */
-      content: '', // 内容
       showAlert: false, // 开关
-      showAlertTime: 1500, // 展示时间
-      // hasIcon: false, // 是否有icon
-      hasClose: false, // 是否有关闭按钮
-      autoClose: true, // 是否自动关闭
-      transitionClass: 'slide-fade', // 动画class
-
-      /* 内部变量 */
       lockTime: null // 定时器
     };
   },
-  watch: {
-    /* 判断是否自动关闭，开启定时器 */
-    showAlert(bool) {
-      if (bool && this.autoClose) {
-        this.lockTime = setTimeout(() => {
-          this.showAlert = false;
-        }, this.showAlertTime);
-      }
-    }
-  },
   mounted() {
-    /* 
-      外部使用 this.$bus.$emit('SHOW_ALERT', { ... }); 方式触发事件和传参
-
-      内部监听 SHOW_ALERT 事件 
-    */
-    this.$bus.$on('SHOW_ALERT', e => {
-      // 防止参数混淆，每次先 reset 参数
-      this.reset();
-      // Object.assign 仅修改接受到的参数，保留其他默认参数
-      Object.assign(this.$data, e);
-      this.showAlert = true;
-    });
+    this.showAlert = true;
+    if (this.autoClose) {
+      this.lockTime = setTimeout(() => {
+        this.showAlert = false;
+      }, this.showTime);
+    }
   },
   beforeDestroy() {
     clearTimeout(this.lockTime);
   },
   methods: {
-    reset() {
-      let option = {
-        showAlertTime: 1500,
-        hasIcon: false,
-        hasClose: false,
-        autoClose: true,
-        transitionClass: 'slide-fade'
-      };
-      Object.assign(this.$data, option);
-    },
     closeAlert() {
       if (!this.autoClose) {
-        clearTimeout(this.lockTime);
         this.showAlert = false;
+        setTimeout(() => {
+          this.remove();
+        }, 1500);
       }
     }
   }
@@ -94,7 +89,7 @@ export default {
     height: fit-content;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: px(20) px(40);
+    padding: px(20) px(45);
     word-break: break-word;
   }
 

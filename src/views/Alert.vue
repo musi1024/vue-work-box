@@ -14,23 +14,24 @@ import BaseButton from '../components/BaseButton';
 let config = [
   {
     content: 'alert fade',
-    transitionClass: 'alert-fade'
+    transitionName: 'alert-fade'
   },
-  { content: 'alert up', transitionClass: 'alert-up' },
+  { content: 'alert up', transitionName: 'alert-up' },
   {
     content: 'alert down not auto close',
-    transitionClass: 'alert-down',
+    transitionName: 'alert-down',
     autoClose: false
   },
   {
     content: 'alert left has close btn',
-    transitionClass: 'alert-left',
-    hasClose: true
+    transitionName: 'alert-left',
+    hasCloseBtn: true,
+    autoClose: false
   },
   {
     content: `alert right has close btn & auto close`,
-    transitionClass: 'alert-right',
-    hasClose: true,
+    transitionName: 'alert-right',
+    hasCloseBtn: true,
     autoClose: false
   }
 ];
@@ -47,7 +48,8 @@ export default {
   },
   methods: {
     showAlert(e) {
-      this.$bus.$emit('SHOW_ALERT', { ...config[e] });
+      this.$alert({ ...config[e] });
+      console.log(this.$alert);
     }
   }
 };

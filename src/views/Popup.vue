@@ -10,10 +10,10 @@
 
     <base-button @click="popup(2)">触发 popup 2</base-button>
     <base-popup :visible.sync="showPopup2">
-      <main class="popup-content">
+      <scroll-wrap class="popup-content">
         <base-button class="popup-btn" @click="showPopup2 = false">close popup 2</base-button>
         <div v-for="i in 99" :key="i">{{i}}</div>
-      </main>
+      </scroll-wrap>
     </base-popup>
 
     <base-button @click="popup(3)">触发 popup 3</base-button>
@@ -29,11 +29,13 @@
 <script>
 import BaseButton from '../components/BaseButton';
 import BasePopup from '../components/Popup/BasePopup';
+import ScrollWrap from '../components/ScrollWrap';
 export default {
   name: 'popupPage',
   components: {
     'base-popup': BasePopup,
-    'base-button': BaseButton
+    'base-button': BaseButton,
+    'scroll-wrap': ScrollWrap
   },
   data() {
     return {

@@ -22,7 +22,6 @@ export default {
       this.$emit('update:visible', false);
     },
     stopMove(e) {
-      console.log('eeeee');
       e.preventDefault();
       e.stopPropagation();
     }

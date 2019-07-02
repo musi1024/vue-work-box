@@ -1,6 +1,5 @@
 <template>
   <section id="app">
-    <div class="test"></div>
     <transition name="fade">
       <router-view v-if="loaded"></router-view>
     </transition>
@@ -21,7 +20,6 @@
 <script>
 import ScreenOrientation from './components/ScreenOrientation';
 import ImgPreload from './components/ImgPreload';
-import move from './utils/move';
 
 const preloadImgs = [
   require('./assets/images/screenOrientation.png'),
@@ -40,11 +38,8 @@ export default {
       loaded: false
     };
   },
-  computed: {
-  },
-  mounted() {
-    move(this.$el.querySelector('.test'));
-  },
+  computed: {},
+  mounted() {},
   methods: {}
 };
 </script>
@@ -57,14 +52,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   position: relative;
-}
-.test {
-  width: 400vw;
-  height: 200vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #2c3e50;
-  border: 20px solid red;
 }
 </style>

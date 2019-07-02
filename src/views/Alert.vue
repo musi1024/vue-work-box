@@ -49,7 +49,6 @@ export default {
   methods: {
     showAlert(e) {
       this.$alert({ ...config[e] });
-      console.log(this.$alert);
     }
   }
 };

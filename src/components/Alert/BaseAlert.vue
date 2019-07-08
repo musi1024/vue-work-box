@@ -51,7 +51,7 @@ export default {
     this.showAlert = true;
     if (this.autoClose) {
       this.lockTime = setTimeout(() => {
-        this.showAlert = false;
+        this.removeAlert();
       }, this.showTime);
     }
   },
@@ -61,11 +61,14 @@ export default {
   methods: {
     closeAlert() {
       if (!this.autoClose) {
-        this.showAlert = false;
-        setTimeout(() => {
-          this.remove();
-        }, 1500);
+        this.removeAlert();
       }
+    },
+    removeAlert() {
+      this.showAlert = false;
+      setTimeout(() => {
+        this.remove();
+      }, 1500);
     }
   }
 };

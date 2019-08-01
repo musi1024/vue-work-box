@@ -1,7 +1,6 @@
 import './loading.css';
-import Vue from 'vue';
 
-Vue.directive('loading', function(el, binding) {
+export default function loading(el, binding) {
   if (binding.value) {
     let div = document.createElement('div');
     div.className = 'loading-wrapper';
@@ -18,4 +17,4 @@ Vue.directive('loading', function(el, binding) {
   } else {
     el.load && el.load.parentNode && el.load.parentNode.removeChild(el.load);
   }
-});
+}

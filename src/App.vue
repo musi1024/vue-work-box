@@ -4,16 +4,9 @@
       <router-view v-if="loaded"></router-view>
     </transition>
     <!-- 图片预加载 -->
-    <img-preload
-      v-if="!loaded"
-      :imgs="preloadImgs"
-      @finish="loaded = true"
-      v-slot="{loaded, total}"
-    >
-      <div>{{loaded}}/{{total}}</div>
-    </img-preload>
+    <ImgPreload />
     <!-- 屏幕旋转 -->
-    <screen-orientation></screen-orientation>
+    <ScreenOrientation />
   </section>
 </template>
 
@@ -29,8 +22,8 @@ const preloadImgs = [
 export default {
   name: 'App',
   components: {
-    'screen-orientation': ScreenOrientation,
-    'img-preload': ImgPreload
+    ScreenOrientation,
+    ImgPreload
   },
   data() {
     return {

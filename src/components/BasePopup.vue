@@ -1,6 +1,6 @@
 <template>
   <transition name="popup">
-    <div class="base-popup" v-show="visible" @click.self="closePopup" @touchmove="stopMove">
+    <div class="base-popup" v-show="visible" @click.self="closePopup">
       <section class="base-popup-container">
         <slot></slot>
       </section>
@@ -20,10 +20,6 @@ export default {
   methods: {
     closePopup() {
       this.$emit('update:visible', false);
-    },
-    stopMove(e) {
-      e.preventDefault();
-      e.stopPropagation();
     }
   }
 };
@@ -31,13 +27,13 @@ export default {
 
 <style lang="scss">
 .base-popup {
-  @include flex();
-  width: 100vw;
-  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
+  @include flex();
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.8);
   outline: none;

@@ -1,9 +1,11 @@
 import Vue from 'vue';
-import BaseAlert from './BaseAlert.vue';
 
-function createAlert(props) {
+function create(component, props) {
   const vm = new Vue({
-    render: h => h(BaseAlert, { props })
+    render(h) {
+      const a = h(component, { props });
+      return a;
+    }
   }).$mount();
 
   document.body.appendChild(vm.$el);
@@ -17,6 +19,10 @@ function createAlert(props) {
 
 export default {
   install() {
-    Vue.prototype.$alert = createAlert;
+    Object.defineProperty(Vue.prototype, '$create', {
+      get: function get() {
+        return create;
+      }
+    });
   }
 };

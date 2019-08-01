@@ -1,4 +1,4 @@
-function getUrlSearch() {
+function query() {
   let search = window.location.search.slice(1);
   let qs = search.split('&');
   let res = {};
@@ -9,4 +9,4 @@ function getUrlSearch() {
   return res;
 }
 
-export default getUrlSearch;
+export default query();

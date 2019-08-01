@@ -14,6 +14,9 @@ import { setTimeout, clearTimeout } from 'timers';
 export default {
   name: 'BaseAlert',
   props: {
+    cb: {
+      type: Function
+    },
     /* 内容 */
     content: {
       type: String,
@@ -43,8 +46,8 @@ export default {
   },
   data() {
     return {
-      showAlert: false, // 开关
-      lockTime: null // 定时器
+      showAlert: false,
+      lockTime: null
     };
   },
   mounted() {
@@ -67,6 +70,7 @@ export default {
     removeAlert() {
       this.showAlert = false;
       setTimeout(() => {
+        this.cb(this);
         this.remove();
       }, 1500);
     }

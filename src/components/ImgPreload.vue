@@ -1,7 +1,5 @@
 <template>
-  <section id="imgPreload">
-    <slot :loaded="loaded" :total="total"></slot>
-  </section>
+  <section id="imgPreload"></section>
 </template>
 
 <script>
@@ -12,6 +10,10 @@ export default {
       type: Array,
       required: true,
       default: () => []
+    },
+    startLoad: {
+      tyep: Boolean,
+      default: false
     }
   },
   data() {
@@ -25,26 +27,31 @@ export default {
       return imgs.length;
     }
   },
-  mounted() {
-    if (!this.total) {
-      this.$emit('finish');
-      return;
-    }
-    for (let i = 0; i < this.total; i++) {
-      this._loadImg(this.imgs[i])
-        .then(() => {
-          this.loaded++;
-          this.$nextTick(() => {
-            if (this.loaded >= this.total) {
-              this.$emit('finish');
-            }
-          });
-        })
-        .catch(err => {
-          this.$emit('error', err);
-        });
+  watch: {
+    startLoad(e) {
+      if (e) {
+        if (!this.total) {
+          this.$emit('finish');
+          return;
+        }
+        for (let i = 0; i < this.total; i++) {
+          this._loadImg(this.imgs[i])
+            .then(() => {
+              this.loaded++;
+              this.$nextTick(() => {
+                if (this.loaded >= this.total) {
+                  this.$emit('finish');
+                }
+              });
+            })
+            .catch(err => {
+              this.$emit('error', err);
+            });
+        }
+      }
     }
   },
+  mounted() {},
   methods: {
     _loadImg(src) {
       return new Promise((resolve, reject) => {
@@ -57,3 +64,6 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+</style>

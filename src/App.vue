@@ -5,10 +5,7 @@
 <script>
 export default {
   name: 'App',
-  components: {
-    ScreenOrientation,
-    ImgPreload
-  },
+  components: {},
   data() {
     return {};
   },

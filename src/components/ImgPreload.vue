@@ -1,5 +1,7 @@
 <template>
-  <section id="imgPreload"></section>
+  <section id="imgPreload">
+    <slot v-bind:loaded="loaded" v-bind:total="total">{{ loaded }}/{{ total }}</slot>
+  </section>
 </template>
 
 <script>
@@ -11,7 +13,7 @@ export default {
       required: true,
       default: () => []
     },
-    startLoad: {
+    start: {
       tyep: Boolean,
       default: false
     }
@@ -28,31 +30,35 @@ export default {
     }
   },
   watch: {
-    startLoad(e) {
+    start(e) {
+      console.log(e);
       if (e) {
-        if (!this.total) {
-          this.$emit('finish');
-          return;
-        }
-        for (let i = 0; i < this.total; i++) {
-          this._loadImg(this.imgs[i])
-            .then(() => {
-              this.loaded++;
-              this.$nextTick(() => {
-                if (this.loaded >= this.total) {
-                  this.$emit('finish');
-                }
-              });
-            })
-            .catch(err => {
-              this.$emit('error', err);
-            });
-        }
+        this.load();
       }
     }
   },
   mounted() {},
   methods: {
+    load() {
+      if (!this.total) {
+        this.$emit('finish');
+        return;
+      }
+      for (let i = 0; i < this.total; i++) {
+        this._loadImg(this.imgs[i])
+          .then(() => {
+            this.loaded++;
+            this.$nextTick(() => {
+              if (this.loaded >= this.total) {
+                this.$emit('finish');
+              }
+            });
+          })
+          .catch(err => {
+            this.$emit('error', err);
+          });
+      }
+    },
     _loadImg(src) {
       return new Promise((resolve, reject) => {
         let img = new Image();

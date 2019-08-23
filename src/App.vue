@@ -1,5 +1,7 @@
 <template>
-  <section id="app"></section>
+  <section id="app">
+    <button @click="click">按钮</button>
+  </section>
 </template>
 
 <script>
@@ -11,7 +13,9 @@ export default {
   },
   computed: {},
   mounted() {},
-  methods: {}
+  methods: {
+    click() {}
+  }
 };
 </script>
 

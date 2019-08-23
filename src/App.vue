@@ -1,21 +1,23 @@
 <template>
   <section id="app">
-    <button @click="click">按钮</button>
+    <Marquee>
+      <MarqueeItem v-for="i in number" :key="i">marquee marqueemarqueemarquee{{i}}</MarqueeItem>
+    </Marquee>
   </section>
 </template>
 
 <script>
+import Marquee from './components/Marquee/Marquee';
+import MarqueeItem from './components/Marquee/MarqueeItem';
 export default {
   name: 'App',
-  components: {},
+  components: { Marquee, MarqueeItem },
   data() {
-    return {};
+    return { number: 10 };
   },
   computed: {},
   mounted() {},
-  methods: {
-    click() {}
-  }
+  methods: {}
 };
 </script>
 

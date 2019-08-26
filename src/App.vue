@@ -1,17 +1,10 @@
 <template>
-  <section id="app">
-    <Marquee>
-      <MarqueeItem v-for="i in number" :key="i">marquee marqueemarqueemarquee{{i}}</MarqueeItem>
-    </Marquee>
-  </section>
+  <section id="app"></section>
 </template>
 
 <script>
-import Marquee from './components/Marquee/Marquee';
-import MarqueeItem from './components/Marquee/MarqueeItem';
 export default {
   name: 'App',
-  components: { Marquee, MarqueeItem },
   data() {
     return { number: 10 };
   },

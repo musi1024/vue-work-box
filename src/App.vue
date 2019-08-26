@@ -1,16 +1,28 @@
 <template>
-  <section id="app"></section>
+  <section id="app">
+    <BaseButton @click="click(1)">按钮1</BaseButton>
+    <BaseButton @click="click(2)">按钮2</BaseButton>
+    <BaseButton @click="click(3)">按钮3</BaseButton>
+  </section>
 </template>
 
 <script>
+import BaseButton from './components/BaseButton';
 export default {
   name: 'App',
+  components: {
+    BaseButton
+  },
   data() {
-    return { number: 10 };
+    return {};
   },
   computed: {},
   mounted() {},
-  methods: {}
+  methods: {
+    click(e) {
+      console.log('click', e);
+    }
+  }
 };
 </script>
 

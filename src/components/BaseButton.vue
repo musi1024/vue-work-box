@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { setTimeout, clearTimeout } from 'timers';
 export default {
   name: 'BaseButton',
   props: {
@@ -24,18 +23,16 @@ export default {
   },
   methods: {
     clickBtn() {
-      if (!this.lock || !this.useLock) {
-        this.lock = true;
+      if (!this.useLock) {
         this.$emit('click');
-        this.timer = this.setTimer();
+        return;
       }
-    },
-    setTimer() {
-      return this.useLock
-        ? setTimeout(() => {
-            this.lock = false;
-          }, this.lockTime)
-        : null;
+      if (this.lock) return;
+      this.lock = true;
+      this.$emit('click');
+      this.timer = setTimeout(() => {
+        this.lock = false;
+      }, this.lockTime);
     }
   }
 };

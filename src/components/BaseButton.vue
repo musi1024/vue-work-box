@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="base-button" :class="{plain}" @click="clickBtn">
+  <button type="button" class="base-button" @click="clickBtn">
     <slot></slot>
   </button>
 </template>
@@ -8,14 +8,13 @@
 export default {
   name: 'BaseButton',
   props: {
-    plain: { type: Boolean, default: false },
-    useLock: { type: Boolean, default: true },
-    lockTime: { type: Number, default: 500 }
+    debounce: { type: Number },
+    gate: { type: Number }
   },
   data() {
     return {
-      lock: false,
-      timer: null
+      timer: null,
+      lastTime: null
     };
   },
   beforeDestroy() {
@@ -23,16 +22,29 @@ export default {
   },
   methods: {
     clickBtn() {
-      if (!this.useLock) {
+      if (!this.debounce && !this.gate) {
         this.$emit('click');
         return;
       }
-      if (this.lock) return;
-      this.lock = true;
-      this.$emit('click');
-      this.timer = setTimeout(() => {
-        this.lock = false;
-      }, this.lockTime);
+      if (this.debounce) {
+        this.timer && clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+          this.checkGate();
+        }, this.debounce);
+        return;
+      }
+      this.checkGate();
+    },
+    checkGate() {
+      if (!this.gate) {
+        this.$emit('click');
+        return;
+      }
+      let now = new Date();
+      if (!this.lastTime || now - this.lastTime > this.gate) {
+        this.$emit('click');
+        this.lastTime = new Date();
+      }
     }
   }
 };
@@ -42,26 +54,13 @@ export default {
 .base-button {
   cursor: pointer;
   border: none;
-  padding: px(20) px(40);
-  margin: px(10);
   outline: none;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-  background-color: #333333;
-  border-radius: 4px;
-  color: white;
-  font-size: 14px;
-
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
-  }
-
-  &.plain {
-    color: #333333;
-    background-color: white;
-    border: 1px solid #333333;
   }
 }
 </style>

@@ -13,6 +13,8 @@ Vue.use(eventBus);
 
 /* 自定义指令 */
 import './directive/index';
+// import vPreventRepeat from './directive/preventRepeat';
+// Vue.use(vPreventRepeat);
 
 /* 动态创建组件 */
 import create from './plugins/create';

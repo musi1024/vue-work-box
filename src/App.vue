@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers';
 export default {
   name: 'App',
   components: {},
@@ -12,13 +11,7 @@ export default {
   },
   computed: {},
   mounted() {},
-  methods: {
-    click(e) {
-      setTimeout(() => {
-        console.log('click btn', e);
-      }, 1000);
-    }
-  }
+  methods: {}
 };
 </script>
 

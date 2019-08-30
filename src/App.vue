@@ -1,12 +1,8 @@
 <template>
-  <section id="app">
-    <button @click="show">1111</button>
-    <button @click="show2">1111</button>
-  </section>
+  <section id="app"></section>
 </template>
 
 <script>
-import { setTimeout } from 'timers';
 export default {
   name: 'App',
   components: {},
@@ -17,31 +13,7 @@ export default {
   },
   computed: {},
   mounted() {},
-  methods: {
-    show() {
-      this.$alert('eeoeeo', {
-        autoClose: false,
-        transitionName: 'alert-left',
-        onShow: e => {
-          console.log('show');
-        },
-        onClose: e => {
-          console.log('close');
-        }
-      });
-    },
-    show2() {
-      this.$alert('jiejfiejif', {
-        transitionName: 'alert-up',
-        onShow: e => {
-          console.log(e);
-        },
-        onClose: e => {
-          console.log(e);
-        }
-      });
-    }
-  }
+  methods: {}
 };
 </script>
 

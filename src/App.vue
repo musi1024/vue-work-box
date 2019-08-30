@@ -1,17 +1,35 @@
 <template>
-  <section id="app"></section>
+  <section id="app">
+    <Marquee :content="arr"></Marquee>
+    <button @click="test1">jjdj</button>
+    <button @click="test2">222</button>
+  </section>
 </template>
 
 <script>
+import Marquee from './components/Marquee';
 export default {
   name: 'App',
-  components: {},
+  components: { Marquee },
   data() {
-    return {};
+    return {
+      arr: []
+    };
   },
   computed: {},
-  mounted() {},
-  methods: {}
+  mounted() {
+    setTimeout(() => {
+      this.arr = ['1111', '2222', '3333'];
+    }, 500);
+  },
+  methods: {
+    test1() {
+      this.arr.push('eee');
+    },
+    test2() {
+      this.arr = ['8338839', '0djdj', '0djdj', '0djdj', '0djdj'];
+    }
+  }
 };
 </script>
 
@@ -23,10 +41,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   position: relative;
-
-  .btn {
-    @include wh(120, 60);
-    margin: px(40);
-  }
 }
 </style>

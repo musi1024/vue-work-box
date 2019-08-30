@@ -1,10 +1,11 @@
 import Vue from 'vue';
+import BaseAlert from '../components/BaseAlert';
 
-function create(component, props) {
+function alert(content, config) {
+  let props = { content, ...config };
   const vm = new Vue({
     render(h) {
-      const a = h(component, { props });
-      return a;
+      return h(BaseAlert, { props });
     }
   }).$mount();
 
@@ -15,13 +16,14 @@ function create(component, props) {
     document.body.removeChild(vm.$el);
     vm.$destroy();
   };
+  return comp.removeAlert;
 }
 
 export default {
   install() {
-    Object.defineProperty(Vue.prototype, '$create', {
+    Object.defineProperty(Vue.prototype, '$alert', {
       get: function get() {
-        return create;
+        return alert;
       }
     });
   }

@@ -17,8 +17,8 @@ import vPreventRepeat from './directive/preventRepeat';
 Vue.use(vPreventRepeat);
 
 /* 动态创建组件 */
-import create from './plugins/create';
-Vue.use(create);
+import alert from './plugins/alert';
+Vue.use(alert);
 
 /* 禁止 touchmove */
 import preventScroll from './utils/Browser/preventScroll';

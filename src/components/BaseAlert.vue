@@ -1,5 +1,5 @@
 <template>
-  <transition :name="transitionName">
+  <transition :name="transitionName" @after-leave="leave">
     <section v-show="showAlert" class="base-alert" @click.self="closeAlert">
       <main class="base-alert-main">
         <span v-html="content"></span>
@@ -13,15 +13,20 @@
 export default {
   name: 'BaseAlert',
   props: {
-    cb: {
-      type: Function
+    onShow: {
+      type: Function,
+      default: () => {}
+    },
+    onClose: {
+      type: Function,
+      default: () => {}
     },
     /* 内容 */
     content: {
       type: String,
       default: 'alert'
     },
-    /* 定时 */
+    /* 持续时间 */
     showTime: {
       type: Number,
       default: 1500
@@ -41,7 +46,6 @@ export default {
       type: String,
       default: 'alert-fade'
     }
-    // hasIcon: false, // 是否有icon
   },
   data() {
     return {
@@ -51,6 +55,7 @@ export default {
   },
   mounted() {
     this.showAlert = true;
+    this.onShow(this);
     if (this.autoClose) {
       this.lockTime = setTimeout(() => {
         this.removeAlert();
@@ -58,7 +63,7 @@ export default {
     }
   },
   beforeDestroy() {
-    clearTimeout(this.lockTime);
+    this.lockTime && clearTimeout(this.lockTime);
   },
   methods: {
     closeAlert() {
@@ -67,11 +72,12 @@ export default {
       }
     },
     removeAlert() {
+      this.lockTime && clearTimeout(this.lockTime);
       this.showAlert = false;
-      setTimeout(() => {
-        this.cb(this);
-        this.remove();
-      }, 1500);
+      this.onClose(this);
+    },
+    leave() {
+      this.remove();
     }
   }
 };
@@ -119,28 +125,28 @@ export default {
   animation: bounceInDown 1.2s;
 }
 .alert-down-leave-active {
-  animation: bounceOutUp 1.2s;
+  animation: bounceOutDown 1.2s;
 }
 
 .alert-up-enter-active {
   animation: bounceInUp 1.2s;
 }
 .alert-up-leave-active {
-  animation: bounceOutDown 1.2s;
+  animation: bounceOutUp 1.2s;
 }
 
 .alert-left-enter-active {
   animation: bounceInLeft 0.8s;
 }
 .alert-left-leave-active {
-  animation: bounceOutLeft 0.8s;
+  animation: bounceOutRight 0.8s;
 }
 
 .alert-right-enter-active {
   animation: bounceInRight 0.8s;
 }
 .alert-right-leave-active {
-  animation: bounceOutRight 0.8s;
+  animation: bounceOutLeft 0.8s;
 }
 </style>
 

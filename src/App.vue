@@ -1,6 +1,6 @@
 <template>
   <section id="app">
-    <Marquee :content="arr"></Marquee>
+    <Marquee class="marquee" :content="arr"></Marquee>
     <button @click="test1">jjdj</button>
     <button @click="test2">222</button>
   </section>
@@ -24,7 +24,9 @@ export default {
   },
   methods: {
     test1() {
-      this.arr.push('eee');
+      setTimeout(() => {
+        this.arr.push('eee');
+      }, 500);
     },
     test2() {
       this.arr = ['8338839', '0djdj', '0djdj', '0djdj', '0djdj'];
@@ -41,5 +43,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   position: relative;
+  .marquee {
+    height: px(40);
+    background-color: #2c3e50;
+    color: aliceblue;
+  }
 }
 </style>

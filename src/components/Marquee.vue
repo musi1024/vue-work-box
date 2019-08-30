@@ -1,17 +1,18 @@
 <template>
-  <div ref="wrap" class="wrap">
+  <section ref="wrap" id="Marquee">
     <div
       ref="content"
-      class="content"
+      class="marquee-content"
       :class="[animationClass]"
       :style="contentStyle"
       @animationiteration="onAnimationIteration"
       @webkitAnimationIteration="onAnimationIteration"
     >
-      <span v-for="(i, index) in oldContent" :key="index">{{i}}</span>
+      <span v-for="(i, index) in runningContent" :key="index">{{i}}</span>
     </div>
-  </div>
+  </section>
 </template>
+
 <script>
 export default {
   props: {
@@ -30,12 +31,12 @@ export default {
   mounted() {},
   data() {
     return {
-      oldContent: null,
-      wrapWidth: 0, //父盒子宽度
-      duration: 0, //css3一次动画需要的时间
-      offsetWidth: 0, //子盒子的宽度
+      wrapWidth: 0,
+      contentWidth: 0,
+      duration: 0,
       animationClass: '',
-      update: false
+      runningContent: null,
+      isUpdate: false
     };
   },
   computed: {
@@ -50,62 +51,52 @@ export default {
     content: {
       deep: true,
       handler() {
-        if (!this.oldContent) {
-          this.tt();
+        if (!this.runningContent) {
+          this.setAnimation();
         } else {
-          this.update = true;
+          this.isUpdate = true;
         }
       }
     }
   },
   methods: {
-    tt() {
+    setAnimation() {
       this.animationClass = '';
-      this.oldContent = [].concat(this.content);
+      this.runningContent = [].concat(this.content);
       this.$nextTick(() => {
         const { wrap, content } = this.$refs;
-        const wrapWidth = wrap.getBoundingClientRect().width;
-        const offsetWidth = content.getBoundingClientRect().width;
-        this.wrapWidth = wrapWidth;
-        this.offsetWidth = offsetWidth;
-        this.duration = (this.offsetWidth + this.wrapWidth) / this.speed;
+        this.wrapWidth = wrap.getBoundingClientRect().width;
+        this.contentWidth = content.getBoundingClientRect().width;
+        this.duration = (this.contentWidth + this.wrapWidth) / this.speed;
         this.animationClass = 'animate-infinite';
-        this.update = false;
+        this.isUpdate = false;
       });
     },
     onAnimationIteration() {
-      if (!this.update) return;
-      this.tt();
+      if (!this.isUpdate) return;
+      this.setAnimation();
     }
   }
 };
 </script>
 
 <style lang='scss' scoped>
-.wrap {
-  width: 100%;
+#Marquee {
+  width: 100vw;
   height: 24px;
   overflow: hidden;
   position: relative;
-  background: rgba(211, 125, 066, 1);
-  position: relative;
   padding: 0;
-  span {
-    margin-left: px(20);
+
+  .marquee-content {
+    position: absolute;
+    white-space: nowrap;
+    padding-left: 100vw;
   }
-}
 
-.wrap .content {
-  position: absolute;
-  white-space: nowrap;
-}
-
-.content {
-  padding-left: 100vw;
-}
-
-.animate-infinite {
-  animation: paomadeng-infinite linear infinite;
+  .animate-infinite {
+    animation: paomadeng-infinite linear infinite;
+  }
 }
 
 @keyframes paomadeng {

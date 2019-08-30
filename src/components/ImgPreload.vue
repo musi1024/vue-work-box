@@ -1,6 +1,6 @@
 <template>
   <section id="imgPreload">
-    <slot v-bind:loaded="loaded" v-bind:total="total">{{ loaded }}/{{ total }}</slot>
+    <slot v-bind:loaded="loaded" v-bind:total="total"></slot>
   </section>
 </template>
 
@@ -31,10 +31,7 @@ export default {
   },
   watch: {
     start(e) {
-      console.log(e);
-      if (e) {
-        this.load();
-      }
+      e && this.load();
     }
   },
   mounted() {},

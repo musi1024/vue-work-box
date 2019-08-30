@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { setTimeout, clearTimeout } from 'timers';
 export default {
   name: 'BaseAlert',
   props: {

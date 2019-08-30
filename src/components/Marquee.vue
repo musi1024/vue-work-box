@@ -8,15 +8,20 @@
       @animationiteration="onAnimationIteration"
       @webkitAnimationIteration="onAnimationIteration"
     >
-      <span v-for="(i, index) in runningContent" :key="index">{{i}}</span>
+      <slot :content="runningContent"></slot>
     </div>
   </section>
 </template>
 
 <script>
+function getType(obj) {
+  return Object.prototype.toString.call(obj).slice(8, -1);
+}
 export default {
+  name: 'Marquee',
   props: {
     content: {
+      type: [Number, Object, String, Array],
       default: ''
     },
     delay: {
@@ -28,7 +33,6 @@ export default {
       default: 200
     }
   },
-  mounted() {},
   data() {
     return {
       wrapWidth: 0,
@@ -60,9 +64,27 @@ export default {
     }
   },
   methods: {
+    setContent() {
+      switch (getType(this.content)) {
+        case 'Array':
+          this.runningContent = [].concat(this.content);
+          break;
+        case 'Object':
+          this.runningContent = { ...this.content };
+          break;
+        case 'String':
+          this.runningContent = this.content;
+          break;
+        case 'Number':
+          this.runningContent = this.content;
+          break;
+        default:
+          break;
+      }
+    },
     setAnimation() {
       this.animationClass = '';
-      this.runningContent = [].concat(this.content);
+      this.setContent();
       this.$nextTick(() => {
         const { wrap, content } = this.$refs;
         this.wrapWidth = wrap.getBoundingClientRect().width;
@@ -82,11 +104,12 @@ export default {
 
 <style lang='scss' scoped>
 #Marquee {
+  position: relative;
   width: 100vw;
   height: 24px;
-  overflow: hidden;
-  position: relative;
+  line-height: 24px;
   padding: 0;
+  overflow: hidden;
 
   .marquee-content {
     position: absolute;
@@ -95,17 +118,11 @@ export default {
   }
 
   .animate-infinite {
-    animation: paomadeng-infinite linear infinite;
+    animation: marquee-infinite linear infinite;
   }
 }
 
-@keyframes paomadeng {
-  to {
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-@keyframes paomadeng-infinite {
+@keyframes marquee-infinite {
   to {
     transform: translate3d(-100%, 0, 0);
   }

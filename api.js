@@ -3,7 +3,8 @@ import axios from 'axios';
 const api = {
   instance: axios.create({
     baseURL: ``,
-    withCredentials: true // 根据需要设置
+    withCredentials: true,
+    timeout: 5000
   })
 };
 

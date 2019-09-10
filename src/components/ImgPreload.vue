@@ -24,38 +24,31 @@ export default {
     };
   },
   computed: {
-    total() {
-      const imgs = this.imgs.filter(item => !/^data/.test(item));
-      return imgs.length;
+    loadImgs() {
+      return this.imgs.filter(item => !/^data/.test(item));
     }
   },
-  watch: {
-    start(e) {
-      e && this.load();
+  mounted() {
+    if (!this.loadImgs.length) {
+      this.$emit('finish');
+      return;
     }
-  },
-  mounted() {},
-  methods: {
-    load() {
-      if (!this.total) {
-        this.$emit('finish');
-        return;
-      }
-      for (let i = 0; i < this.total; i++) {
-        this._loadImg(this.imgs[i])
-          .then(() => {
-            this.loaded++;
-            this.$nextTick(() => {
-              if (this.loaded >= this.total) {
-                this.$emit('finish');
-              }
-            });
-          })
-          .catch(err => {
-            this.$emit('error', err);
+    for (let i = 0; i < this.this.loadImgs.length; i++) {
+      this._loadImg(this.imgs[i])
+        .then(() => {
+          this.loaded++;
+          this.$nextTick(() => {
+            if (this.loaded >= this.this.loadImgs.length) {
+              this.$emit('finish');
+            }
           });
-      }
-    },
+        })
+        .catch(err => {
+          this.$emit('error', err);
+        });
+    }
+  },
+  methods: {
     _loadImg(src) {
       return new Promise((resolve, reject) => {
         let img = new Image();

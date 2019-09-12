@@ -90,7 +90,7 @@ export default {
   color: #ffffff;
   transition: all 0.5s ease-in-out;
   font-size: px(30);
-  z-index: 100;
+  z-index: 1000;
 
   &-main {
     @include flex();
@@ -121,6 +121,7 @@ export default {
   opacity: 0;
 }
 
+/* 可选动画 */
 .alert-down-enter-active {
   animation: bounceInDown 1.2s;
 }

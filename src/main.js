@@ -14,9 +14,12 @@ if (process.env.VUE_APP_VCONSOLE === 'true') {
   }
 }
 
-/* 动态创建组件 */
-import alert from './plugins/alert';
-Vue.use(alert);
+/* 自定义指令 */
+import './directive';
+
+/* 动态创建全局组件 */
+import create from './plugins/create';
+Vue.use(create);
 
 Vue.config.productionTip = false;
 

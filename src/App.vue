@@ -5,11 +5,8 @@
 <script>
 export default {
   name: 'App',
-  components: {},
   data() {
-    return {
-      arr: null
-    };
+    return {};
   },
   computed: {},
   mounted() {},
@@ -25,5 +22,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 </style>

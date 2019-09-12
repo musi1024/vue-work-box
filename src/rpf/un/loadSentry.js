@@ -1,19 +1,31 @@
 function noop(name) {
-  console.log('Sentry in non-production env', name);
+  console.info('Sentry in non-production env', name);
 }
 
+/**
+ * @HELP
+ * iOS 9.x.x will still receive this error
+ * undefined is not an object (evaluating 'window.pageView.pageViewId')
+ */
+
 const ignoreErrors = [
-  "'pageViewId' of undefined",
+  'Aplus4UT is not defined',
   'bonreeJsBridge.',
-  "evaluating 'window.pageView.pageViewId'",
-  "has no method 'onJsError'",
   'ignoreError is not defined',
   'Java exception was raised during method invocation',
   'Java object is gone',
   'java_obj.onJsError',
   'nativeJs.checkEncode',
   'nativeJs.onException',
-  'window.androidJsBridgeKit.responseNative'
+  'ToutiaoJSBridge is not defined',
+  'vivoNewsDetailPage.getNewsReadStatus4Vivo',
+  'window.androidJsBridgeKit.responseNative',
+  'x5onSkinSwitch is not defined',
+  "'pageViewId' of undefined",
+  "Cannot read property 'execWebFn' of undefined",
+  "evaluating 'window.pageView.pageViewId'",
+  "has no method 'onJsError'",
+  "Identifier 'qbSniffJsVersion'"
 ];
 
 function getIsIgnoreError(message) {
@@ -28,7 +40,7 @@ function getIsIgnoreError(message) {
   return isIgnoreError;
 }
 
-function loadSentry(dsn, userBeforeSend) {
+function loadSentry(dsn, userBeforeSend, autoAdjustError = true) {
   if (!dsn || typeof dsn !== 'string') {
     throw new Error('dsn is required and should be string');
   }
@@ -42,6 +54,23 @@ function loadSentry(dsn, userBeforeSend) {
           dsn,
           beforeSend: (event, hint) => {
             const error = hint.originalException;
+            if (
+              autoAdjustError &&
+              event.level === 'error' &&
+              !(error instanceof Error) &&
+              typeof error === 'object'
+            ) {
+              event.exception.values = event.exception.values.map(item => {
+                // put in try in case of circular structure
+                try {
+                  return item.value === 'Custom Object'
+                    ? { ...item, value: JSON.stringify(error) }
+                    : item;
+                } catch (e) {
+                  return item;
+                }
+              });
+            }
             if (error && error.message && getIsIgnoreError(error.message)) {
               return null;
             }
@@ -59,7 +88,8 @@ function loadSentry(dsn, userBeforeSend) {
         FAKE_SDK: true,
         captureEvent: noop.bind(null, 'captureEvent'),
         captureException: noop.bind(null, 'captureException'),
-        captureMessage: noop.bind(null, 'captureMessage')
+        captureMessage: noop.bind(null, 'captureMessage'),
+        withScope: noop.bind(null, 'withScope')
       };
       resolve(false);
     }

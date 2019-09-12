@@ -10,7 +10,6 @@ const errorHandler = (error, vm, info) => {
   console.error(vm);
   console.error(error);
   console.error(info);
-
   const Extra = `${vm.$el.id || vm.$el.className}__${info}`;
   Sentry.configureScope(scope => {
     scope.setExtra('id/className__Lifecycle-Hooks', Extra);

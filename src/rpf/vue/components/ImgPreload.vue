@@ -26,23 +26,29 @@ export default {
     }
   },
   data() {
-    const imgs = this.imgs.filter(item => !/^data/.test(item));
     return {
-      loaded: 0,
-      total: imgs.length
+      loaded: 0
     };
   },
+  computed: {
+    preloadImgs() {
+      return this.imgs.filter(item => !/^data/.test(item));
+    },
+    total() {
+      return this.preloadImgs.length;
+    }
+  },
   mounted() {
-    if (!this.total) {
+    if (!this.preloadImgs.length) {
       this.$emit('finish');
       return;
     }
-    for (let i = 0; i < this.total; i++) {
-      loadImg(this.imgs[i])
+    for (let i = 0; i < this.preloadImgs.length; i++) {
+      loadImg(this.preloadImgs[i])
         .then(() => {
           this.loaded++;
           this.$nextTick(() => {
-            if (this.loaded >= this.total) {
+            if (this.loaded >= this.preloadImgs.length) {
               this.$emit('finish');
             }
           });

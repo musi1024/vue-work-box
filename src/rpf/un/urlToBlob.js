@@ -3,7 +3,7 @@ import isCrossOrigin from './isCrossOrigin';
 function urlToBlob({
   url,
   maxWidth,
-  crossOriginValue = 'anonymous', // use-credentials	
+  crossOriginValue = 'anonymous', // use-credentials
   appendToDOM
 } = {}) {
   return new Promise((resolve, reject) => {

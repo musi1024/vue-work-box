@@ -16,7 +16,7 @@
 @mixin lb($left, $bottom) {
   position: absolute;
   left: px($left);
-  top: px($bottom);
+  bottom: px($bottom);
 }
 
 @mixin rb($right, $bottom) {
@@ -46,10 +46,11 @@
   margin: auto;
 }
 
-@mixin flex($justify: center, $align: center) {
+@mixin flex($justify: center, $align: center, $direction: column) {
   display: flex;
   align-items: $align;
   justify-content: $justify;
+  flex-direction: $direction;
 }
 
 @mixin truncate-text() {

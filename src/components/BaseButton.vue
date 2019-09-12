@@ -55,8 +55,6 @@ export default {
   cursor: pointer;
   border: none;
   outline: none;
-  -webkit-appearance: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   &:disabled {
     opacity: 0.7;

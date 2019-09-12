@@ -11,11 +11,6 @@ import store from './store';
 import eventBus from './plugins/eventBus';
 Vue.use(eventBus);
 
-/* 自定义指令 */
-import './directive/index';
-import vPreventRepeat from './directive/preventRepeat';
-Vue.use(vPreventRepeat);
-
 /* 动态创建组件 */
 import alert from './plugins/alert';
 Vue.use(alert);

@@ -7,10 +7,6 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-/* event bus 全局事件监听 */
-import eventBus from './plugins/eventBus';
-Vue.use(eventBus);
-
 /* 动态创建组件 */
 import alert from './plugins/alert';
 Vue.use(alert);

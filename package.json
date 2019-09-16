@@ -44,6 +44,10 @@
     },
     "parserOptions": {
       "parser": "babel-eslint"
+    },
+    "globals": {
+      "wx": true,
+      "WeixinJSBridge": true
     }
   },
   "postcss": {

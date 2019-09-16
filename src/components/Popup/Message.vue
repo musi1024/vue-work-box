@@ -24,6 +24,18 @@ export default {
       type: String,
       default: '800'
     },
+    color: {
+      type: String,
+      default: 'black'
+    },
+    fontSize: {
+      type: String,
+      default: '50'
+    },
+    textAlign: {
+      type: String,
+      default: 'center'
+    },
     backgroundColor: {
       type: String,
       default: 'white'
@@ -50,6 +62,9 @@ export default {
       return {
         width: this.width / 7.5 + 'vw',
         height: this.height / 7.5 + 'vw',
+        color: this.color,
+        fontSize: this.fontSize / 7.5 + 'vw',
+        textAlign: this.textAlign,
         backgroundColor: this.backgroundColor
       };
     }

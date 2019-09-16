@@ -1,5 +1,6 @@
 function query() {
   let search = window.location.search.slice(1);
+  if (!search) return;
   let qs = search.split('&');
   let res = {};
   qs.forEach(i => {

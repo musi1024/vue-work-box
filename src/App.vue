@@ -24,5 +24,8 @@ export default {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  .switch {
+    margin-top: px(40);
+  }
 }
 </style>

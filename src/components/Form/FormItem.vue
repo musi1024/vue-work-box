@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <label v-if="label">{{label}}</label>
+  <div :class="['form-item', `label-${form.labelPosition}` ]">
+    <label class="form-item-label" :style="labelStyle" v-if="label">{{label}}</label>
     <slot></slot>
-    <p v-if="errorMessage">{{errorMessage}}</p>
+    <div class="form-item-error" v-if="errorMessage">{{errorMessage}}</div>
   </div>
 </template>
 
@@ -24,6 +24,14 @@ export default {
     return {
       errorMessage: ''
     };
+  },
+  computed: {
+    labelStyle() {
+      return {
+        width: this.form.labelWidth / 7.5 + 'vw',
+        textAlign: this.form.labelPosition === 'right' ? 'right' : 'left'
+      };
+    }
   },
   mounted() {
     this.$on('validate', () =>
@@ -49,3 +57,28 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.form-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+
+  &.label-top {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  &-error {
+    position: absolute;
+    top: 100%;
+    left: 0%;
+    font-size: 14px;
+    color: red;
+  }
+}
+</style>

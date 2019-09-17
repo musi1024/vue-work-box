@@ -55,6 +55,8 @@ export default {
   cursor: pointer;
   border: none;
   outline: none;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
 
   &:disabled {
     opacity: 0.7;

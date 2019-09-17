@@ -19,6 +19,14 @@ export default {
     },
     rules: {
       type: Object
+    },
+    labelPosition: {
+      type: String,
+      default: 'right'
+    },
+    labelWidth: {
+      type: String,
+      default: '80'
     }
   },
   methods: {
@@ -27,8 +35,10 @@ export default {
         .filter(item => item.prop)
         .map(item => item.validate());
       Promise.all(tasks)
-        .then(() => cb(true))
-        .catch(() => cb(false));
+        .then(() => cb(false))
+        .catch(error => {
+          cb(error.errors[0].message);
+        });
     }
   }
 };

@@ -15,7 +15,10 @@ if (process.env.VUE_APP_VCONSOLE === 'true') {
 }
 
 /* 自定义指令 */
-import './directive';
+import longPress from '../directive/longPress/longPress';
+import loading from '../directive/loading/loading';
+Vue.directive('longPress', longPress);
+Vue.directive('loading', loading);
 
 /* 动态创建全局组件 */
 import create from './plugins/create';

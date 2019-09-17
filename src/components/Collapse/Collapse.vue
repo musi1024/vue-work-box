@@ -43,10 +43,8 @@ export default {
         activeNames = this.actives.slice(0);
         let index = activeNames.indexOf(name);
         index > -1 ? activeNames.splice(index, 1) : activeNames.push(name);
-        console.log('**debug** array', activeNames, name, this.actives);
       } else {
         activeNames = name === this.actives ? '' : name;
-        console.log('**debug**', activeNames, name, this.actives);
       }
       this.$emit('change', activeNames);
     }

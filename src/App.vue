@@ -1,53 +1,35 @@
 <template>
   <section id="app">
-    <k-form :model="model" :rules="rules" ref="loginForm">
-      <k-form-item label="用户名" prop="username">
-        <k-input v-model="model.username" autocomplete="off" placeholder="输入用户名"></k-input>
-      </k-form-item>
-      <k-form-item label="确认密码" prop="password">
-        <k-input type="password" v-model="model.password" autocomplete="off"></k-input>
-      </k-form-item>
-      <k-form-item>
-        <button @click="submitForm('loginForm')">提交</button>
-      </k-form-item>
-    </k-form>
-    {{model}}
+    <Form :model="model" :rules="rules" ref="loginForm">
+      <FormItem label="用户名" prop="username">
+        <Input v-model="model.username" autocomplete="off" placeholder="输入用户名" />
+      </FormItem>
+      <button type="submit" @click="submitForm('loginForm')">submit</button>
+    </Form>
   </section>
 </template>
 
 <script>
-import KForm from './components/Form/Form';
-import KFormItem from './components/Form/FormItem';
-import KInput from './components/Form/Input';
+import Form from './components/Form/Form';
+import FormItem from './components/Form/FormItem';
+import Input from './components/Form/Input';
 export default {
   name: 'App',
   components: {
-    KForm,
-    KFormItem,
-    KInput
+    Form,
+    FormItem,
+    Input
   },
   data() {
     return {
-      model: { username: '', password: '' },
+      model: {
+        username: ''
+      },
       rules: {
-        username: [
-          {
-            required: true,
-            message: '请输入用户名'
-          },
-          {
-            validator(rule, value) {
-              return value === 'musi';
-            },
-            message: 'Value is not equal to "musi".'
-          }
-        ],
-        password: [{ required: true, message: '请输入密码' }]
+        username: { required: true, message: '请输入用户名' }
       }
     };
   },
-  computed: {},
-  mounted() {},
   methods: {
     submitForm(form) {
       this.$refs[form].validate(valid => {

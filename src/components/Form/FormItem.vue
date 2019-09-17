@@ -9,6 +9,7 @@
 <script>
 import Schema from 'async-validator';
 export default {
+  name: 'FormItem',
   inject: ['form'],
   props: {
     label: {

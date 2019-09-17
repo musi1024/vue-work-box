@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <form>
     <slot></slot>
-  </div>
+  </form>
 </template>
 
 <script>
 export default {
+  name: 'Form',
   provide() {
     return {
       form: this

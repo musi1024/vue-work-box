@@ -46,11 +46,10 @@
   margin: auto;
 }
 
-@mixin flex($justify: center, $align: center, $direction: column) {
+@mixin flex($justify: center, $align: center) {
   display: flex;
   align-items: $align;
   justify-content: $justify;
-  flex-direction: $direction;
 }
 
 @mixin truncate-text() {

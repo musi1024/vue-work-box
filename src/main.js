@@ -15,14 +15,19 @@ if (process.env.VUE_APP_VCONSOLE === 'true') {
 }
 
 /* 自定义指令 */
-import longPress from './directive/longPress/longPress';
+import longPress from './directive/longPress';
 import loading from './directive/loading/loading';
 Vue.directive('longPress', longPress);
 Vue.directive('loading', loading);
+import infiniteScroll from './directive/infiniteScroll';
+Vue.directive('infinite-scroll', infiniteScroll);
 
 /* 动态创建全局组件 */
 import create from './plugins/create';
 Vue.use(create);
+
+import preventScroll from './rpf/un/preventScroll';
+preventScroll();
 
 Vue.config.productionTip = false;
 

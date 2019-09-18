@@ -1,36 +1,25 @@
+// utils
 const isFunction = func => {
   return func && Object.prototype.toString.call(func) === '[object Function]';
-};
-
-const getPositionSize = (el, prop) => {
-  return el === window || el === document
-    ? document.documentElement[prop]
-    : el[prop];
-};
-
-const getClientHeight = el => {
-  return getPositionSize(el, 'clientHeight');
 };
 
 const scope = 'InfiniteScroll';
 
 const handleScroll = function(cb) {
-  const { vm } = this[scope];
   let shouldTrigger = false;
-  const scrollBottom = this.scrollTop + getClientHeight(this);
+  const scrollBottom = this.scrollTop + this.clientHeight;
   shouldTrigger = this.scrollHeight - scrollBottom <= 0;
   if (shouldTrigger && isFunction(cb)) {
-    cb.call(vm);
+    cb.call();
   }
 };
 
 export default {
   name: 'InfiniteScroll',
-  inserted(el, binding, vnode) {
+  inserted(el, binding) {
     const cb = binding.value;
-    const vm = vnode.context;
     const onScroll = handleScroll.bind(el, cb);
-    el[scope] = { vm, onScroll };
+    el[scope] = { onScroll };
     if (el) {
       el.addEventListener('scroll', onScroll);
     }

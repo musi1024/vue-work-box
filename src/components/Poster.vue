@@ -53,6 +53,7 @@ export default {
         }, 100);
       }
     },
+    // 是否跨域
     isCrossOrigin(url) {
       let isCrossOrigin = false;
       if (/^http/.test(url)) {
@@ -63,7 +64,7 @@ export default {
       }
       return isCrossOrigin;
     },
-    //加载图片
+    // 加载图片
     loadImage(url) {
       return new Promise((resolve, reject) => {
         const img = new Image();
@@ -110,9 +111,7 @@ export default {
       let imageBase64 = this.canvas.toDataURL('image/png');
       this.$emit('success', imageBase64);
     },
-    /**
-     * 根据 radius 进行裁减
-     */
+    // 根据 radius 进行裁减
     _doClip(left, top, width, height, radius) {
       this.ctx.beginPath();
       // 左上角
@@ -154,10 +153,12 @@ export default {
       this.ctx.fill();
       this.ctx.closePath();
     },
+    // 处理旋转
     _doRoate(left, top, height, width, deg) {
       this.ctx.translate(left + width / 2, top + height / 2);
       this.ctx.rotate((deg * Math.PI) / 180);
     },
+    // 图片
     drawImage(params) {
       this.ctx.save();
       const {
@@ -173,17 +174,15 @@ export default {
         this._doClip(left, top, width, height, radius);
         this.ctx.clip();
         this.ctx.drawImage(img, left, top, width, height);
+      } else if (deg !== 0) {
+        this._doRoate(left, top, height, width, deg);
+        this.ctx.drawImage(img, -width / 2, -height / 2, width, height);
       } else {
-        if (deg !== 0) {
-          this._doRoate(left, top, height, width, deg);
-          this.ctx.drawImage(img, -width / 2, -height / 2, width, height);
-        } else {
-          this.ctx.drawImage(img, left, top, width, height);
-        }
+        this.ctx.drawImage(img, left, top, width, height);
       }
       this.ctx.restore();
     },
-    // 写字
+    // 字
     drawText(params) {
       this.ctx.save();
       const {
@@ -263,7 +262,7 @@ export default {
       }
       this.ctx.restore();
     },
-    // 画直线
+    // 直线
     drawTextLine(left, top, textDecoration, color, fontSize, content) {
       if (textDecoration === 'underline') {
         this.drawRect({
@@ -283,7 +282,7 @@ export default {
         });
       }
     },
-    // 画矩形
+    // 矩形
     drawRect(params) {
       this.ctx.save();
       const {

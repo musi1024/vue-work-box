@@ -1,12 +1,5 @@
 <template>
-  <textarea
-    class="base-input"
-    v-if="type === 'textarea'"
-    :value="value"
-    @input="onInput"
-    v-bind="$attrs"
-  ></textarea>
-  <input v-else class="base-input" :value="value" @input="onInput" v-bind="$attrs" />
+  <input class="base-input" :value="value" @input="onInput" v-bind="$attrs" />
 </template>
 
 <script>
@@ -17,8 +10,7 @@ export default {
     value: {
       type: String,
       default: ''
-    },
-    type: { type: String, default: 'text' }
+    }
   },
   methods: {
     onInput(e) {

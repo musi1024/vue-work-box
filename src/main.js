@@ -1,13 +1,15 @@
 import 'normalize.css';
 import './style/animation.css';
-import './style/common.css';
 
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 
-if (process.env.VUE_APP_VCONSOLE === 'true') {
+import 'core-js/fn/object/assign';
+import 'core-js/fn/string/includes';
+
+if (process.env.VUE_APP_VCONSOLE !== 'false') {
   if (!/localhost/.test(window.location.origin)) {
     const VConsole = require('vconsole');
     new VConsole();
@@ -16,8 +18,8 @@ if (process.env.VUE_APP_VCONSOLE === 'true') {
 
 /* 自定义指令 */
 import longPress from './directive/longPress';
-import loading from './directive/loading/loading';
 Vue.directive('longPress', longPress);
+import loading from './directive/loading/loading';
 Vue.directive('loading', loading);
 import infiniteScroll from './directive/infiniteScroll';
 Vue.directive('infinite-scroll', infiniteScroll);

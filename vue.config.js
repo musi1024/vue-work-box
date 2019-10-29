@@ -5,6 +5,7 @@ module.exports = {
       sass: {
         data: `
           @import "@/style/mixin.scss";
+          @import "@/style/common.scss";
         `
       }
     }

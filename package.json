@@ -46,10 +46,7 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "globals": {
-      "wx": true,
-      "WeixinJSBridge": true
-    }
+    "globals": {}
   },
   "postcss": {
     "plugins": {
@@ -58,8 +55,9 @@
   },
   "browserslist": [
     "> 1%",
-    "ios >= 9",
+    "ios >= 8",
     "android >= 5",
+    "chrome >= 36",
     "not dead",
     "not op_mini all"
   ]

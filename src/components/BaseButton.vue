@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="base-button" @click="clickBtn">
+  <button :type="type" class="base-button" @click="clickBtn">
     <slot></slot>
   </button>
 </template>
@@ -9,7 +9,8 @@ export default {
   name: 'BaseButton',
   props: {
     debounce: { type: Number },
-    gate: { type: Number }
+    gate: { type: Number },
+    type: { type: String, default: 'buttom' }
   },
   data() {
     return {

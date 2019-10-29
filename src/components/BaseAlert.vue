@@ -2,7 +2,7 @@
   <transition :name="transitionName" @after-leave="leave">
     <section v-show="showAlert" class="base-alert" @click.self="closeAlert">
       <main class="base-alert-main">
-        <span v-html="content"></span>
+        <span class="base-alert-text">{{ content }}</span>
         <div class="base-alert-close" v-if="hasCloseBtn" @click.self="closeAlert">x</div>
       </main>
     </section>
@@ -85,23 +85,23 @@ export default {
 
 <style lang="scss" scoped>
 .base-alert {
-  position: fixed;
   @include center();
+  position: fixed;
   color: #ffffff;
   transition: all 0.5s ease-in-out;
-  font-size: px(30);
+  font-size: vw(30);
   z-index: 1000;
 
   &-main {
     @include flex();
     @include center();
-    min-width: px(480);
-    max-width: px(680);
+    min-width: vw(480);
+    max-width: vw(680);
     width: max-content;
     height: fit-content;
-    border-radius: 20px;
+    border-radius: 20vw;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: px(20) px(45);
+    padding: vw(20) vw(45);
     word-break: break-word;
   }
 

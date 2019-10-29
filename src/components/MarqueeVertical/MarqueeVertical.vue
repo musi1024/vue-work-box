@@ -1,7 +1,7 @@
 <template>
-  <div class="vux-marquee" :style="{height: height + 'px'}">
+  <div class="base-marquee-vertical" :style="{height: height + 'px'}">
     <ul
-      class="vux-marquee-box"
+      class="base-marquee-vertical-box"
       ref="box"
       :style="{transform: `translate3d(0,${currenTranslateY}px,0)`, transition: `transform ${noAnimate ? 0 : duration}ms`}"
     >
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'Marquee',
+  name: 'MarqueeVertical',
   props: {
     interval: {
       type: Number,
@@ -102,11 +102,11 @@ export default {
 };
 </script>
 <style lang="scss">
-.vux-marquee {
+.base-marquee-vertical {
   width: 100%;
   overflow: hidden;
 }
-.vux-marquee-box {
+.base-marquee-vertical-box {
   padding: 0;
   margin: 0;
   width: 100%;

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'MarqueeItem',
+  name: 'MarqueeVerticalItem',
   mounted() {
     this.$nextTick(() => {
       this.$parent.destroy();
@@ -16,3 +16,4 @@ export default {
   }
 };
 </script>
+

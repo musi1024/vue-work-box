@@ -1,34 +1,34 @@
-@function px($x, $designWidth: 750) {
+@function vw($x, $designWidth: 750) {
   @return $x / $designWidth * 100 + vw;
 }
 
 @mixin wh($w, $h) {
-  width: px($w);
-  height: px($h);
+  width: vw($w);
+  height: vw($h);
 }
 
 @mixin lt($left, $top) {
   position: absolute;
-  left: px($left);
-  top: px($top);
+  left: vw($left);
+  top: vw($top);
 }
 
 @mixin lb($left, $bottom) {
   position: absolute;
-  left: px($left);
-  bottom: px($bottom);
+  left: vw($left);
+  bottom: vw($bottom);
 }
 
 @mixin rb($right, $bottom) {
   position: absolute;
-  right: px($right);
-  bottom: px($bottom);
+  right: vw($right);
+  bottom: vw($bottom);
 }
 
 @mixin rt($right, $top) {
   position: absolute;
-  right: px($right);
-  top: px($top);
+  right: vw($right);
+  top: vw($top);
 }
 
 @mixin img($url) {
@@ -69,7 +69,7 @@
   width: 0;
   border-color: transparent;
   border-style: solid;
-  border-width: px($size);
+  border-width: vw($size);
 
   @if $direction == up {
     border-bottom-color: $color;

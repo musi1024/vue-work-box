@@ -1,12 +1,12 @@
 <template>
-  <section ref="wrap" id="Marquee">
+  <section ref="wrap" class="base-marquee">
     <div
       ref="content"
-      class="marquee-content"
+      class="base-marquee-content"
       :class="[animationClass]"
       :style="contentStyle"
-      @animationiteration="onAnimationIteration"
       @webkitAnimationIteration="onAnimationIteration"
+      @animationiteration="onAnimationIteration"
     >
       <slot :content="runningContent"></slot>
     </div>
@@ -103,7 +103,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-#Marquee {
+.base-marquee {
   position: relative;
   width: 100vw;
   height: 24px;
@@ -111,7 +111,7 @@ export default {
   padding: 0;
   overflow: hidden;
 
-  .marquee-content {
+  .base-marquee-content {
     position: absolute;
     white-space: nowrap;
     padding-left: 100vw;

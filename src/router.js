@@ -6,9 +6,9 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: () => import('@/views/Home.vue')
+      path: '/marquee',
+      name: 'marquee',
+      component: () => import('@/views/Marquee.vue')
     }
   ]
 });

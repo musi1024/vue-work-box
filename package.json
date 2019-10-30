@@ -46,7 +46,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "globals": {}
+    "globals": {
+      "WeixinJSBridge": true,
+      "wx": true
+    }
   },
   "postcss": {
     "plugins": {

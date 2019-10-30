@@ -9,9 +9,11 @@
  */
 
 function mask(str = '', start = 0, num = 4, mask = '*') {
-  let target = str.slice(start, start + num);
-  let replace = mask.repeat(num / mask.length);
-  return str.replace(target, replace);
+  const ss = String(str);
+  const s = ss.slice(0, start);
+  const c = mask.repeat(num / mask.length);
+  const e = ss.slice(start + num, ss.length);
+  return s + c + e;
 }
 
 export default mask;

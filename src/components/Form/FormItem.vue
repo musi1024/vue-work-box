@@ -2,7 +2,7 @@
   <div :class="['form-item', `label-${form.labelPosition}` ]">
     <label class="form-item-label" :style="labelStyle" v-if="label">{{label}}</label>
     <slot></slot>
-    <div class="form-item-error" v-if="errorMessage">{{errorMessage}}</div>
+    <div class="form-item-error" v-if="form.useErrorMessage && errorMessage">{{errorMessage}}</div>
   </div>
 </template>
 

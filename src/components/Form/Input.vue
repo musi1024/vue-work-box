@@ -5,6 +5,7 @@
 <script>
 export default {
   name: 'Input',
+  inject: ['form'],
   inheritAttrs: false,
   props: {
     value: {
@@ -15,7 +16,7 @@ export default {
   methods: {
     onInput(e) {
       this.$emit('input', e.target.value);
-      this.$parent.$emit('validate');
+      this.form.valudateOnInput && this.$parent.$emit('validate');
     }
   }
 };

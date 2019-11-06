@@ -9,6 +9,11 @@ export default new Router({
       path: '/marquee',
       name: 'marquee',
       component: () => import('@/views/Marquee.vue')
+    },
+    {
+      path: '/form',
+      name: 'form',
+      component: () => import('@/views/Form.vue')
     }
   ]
 });

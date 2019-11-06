@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent>
     <slot></slot>
   </form>
 </template>
@@ -20,6 +20,14 @@ export default {
     rules: {
       type: Object
     },
+    valudateOnInput: {
+      type: Boolean,
+      default: false
+    },
+    useErrorMessage: {
+      type: Boolean,
+      default: true
+    },
     labelPosition: {
       type: String,
       default: 'right'
@@ -30,9 +38,9 @@ export default {
     }
   },
   methods: {
-    validate(cb) {
+    validate(cb, props) {
       const tasks = this.$children
-        .filter(item => item.prop)
+        .filter(item => props.includes(item.prop))
         .map(item => item.validate());
       Promise.all(tasks)
         .then(() => cb(false))

@@ -1,7 +1,6 @@
 <template>
   <section id="app">
-    <!-- <router-view></router-view> -->
-    <div class="test" @click="test">11111</div>
+    <router-view></router-view>
   </section>
 </template>
 
@@ -13,11 +12,7 @@ export default {
     return {};
   },
   mounted() {},
-  methods: {
-    test() {
-      this.$alert('sjssjs');
-    }
-  }
+  methods: {}
 };
 </script>
 
@@ -32,10 +27,5 @@ export default {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  .test {
-    @include wh(400, 200);
-    @include bc(100);
-    background-color: #2c3e50;
-  }
 }
 </style>

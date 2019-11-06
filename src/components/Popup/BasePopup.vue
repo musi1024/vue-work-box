@@ -24,16 +24,14 @@ export default {
 
 <style lang="scss">
 .base-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
+  @include lt(0, 0, fixed);
   @include flex();
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.8);
   transition: all 0.2s ease-in-out;
+  z-index: 999;
 
   &-main {
     @include flex();

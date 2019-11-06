@@ -56,6 +56,22 @@
   margin: 0 auto;
 }
 
+@mixin lc($left, $position: absolute) {
+  position: $position;
+  top: 0;
+  bottom: 0;
+  left: vw($left);
+  margin: auto 0;
+}
+
+@mixin rc($right, $position: absolute) {
+  position: $position;
+  top: 0;
+  bottom: 0;
+  right: vw($right);
+  margin: auto 0;
+}
+
 @mixin img($url) {
   background-image: url($url);
   background-size: 100%;

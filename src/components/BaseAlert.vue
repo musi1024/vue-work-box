@@ -85,8 +85,7 @@ export default {
 
 <style lang="scss" scoped>
 .base-alert {
-  @include center();
-  position: fixed;
+  @include center(fixed);
   color: #ffffff;
   transition: all 0.5s ease-in-out;
   font-size: vw(30);
@@ -107,11 +106,7 @@ export default {
 
   &-close {
     @include wh(40, 40);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto 0;
+    @include rc(0);
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <section id="app">
     <!-- <router-view></router-view> -->
-    <div class="test">11111</div>
+    <div class="test" @click="test">11111</div>
   </section>
 </template>
 
@@ -13,7 +13,11 @@ export default {
     return {};
   },
   mounted() {},
-  methods: {}
+  methods: {
+    test() {
+      this.$alert('sjssjs');
+    }
+  }
 };
 </script>
 

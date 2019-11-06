@@ -7,43 +7,59 @@
   height: vw($h);
 }
 
-@mixin lt($left, $top) {
-  position: absolute;
+@mixin lt($left, $top, $position: absolute) {
+  position: $position;
   left: vw($left);
   top: vw($top);
 }
 
-@mixin lb($left, $bottom) {
-  position: absolute;
+@mixin lb($left, $bottom, $position: absolute) {
+  position: $position;
   left: vw($left);
   bottom: vw($bottom);
 }
 
-@mixin rb($right, $bottom) {
-  position: absolute;
+@mixin rb($right, $bottom, $position: absolute) {
+  position: $position;
   right: vw($right);
   bottom: vw($bottom);
 }
 
-@mixin rt($right, $top) {
-  position: absolute;
+@mixin rt($right, $top, $position: absolute) {
+  position: $position;
   right: vw($right);
   top: vw($top);
+}
+
+@mixin center($position: absolute) {
+  position: $position;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+@mixin tc($top, $position: absolute) {
+  position: $position;
+  left: 0;
+  right: 0;
+  top: vw($top);
+  margin: 0 auto;
+}
+
+@mixin bc($bottom, $position: absolute) {
+  position: $position;
+  left: 0;
+  right: 0;
+  bottom: vw($bottom);
+  margin: 0 auto;
 }
 
 @mixin img($url) {
   background-image: url($url);
   background-size: 100%;
   background-repeat: no-repeat;
-}
-
-@mixin center {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
 }
 
 @mixin flex($justify: center, $align: center) {

@@ -38,19 +38,17 @@ export default {
   left: 0;
   z-index: 5000;
   background: #121212;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex();
   flex-direction: column;
   > div {
     @include img('../assets/images/screenOrientation.png');
-    width: px(250);
-    height: px(242);
+    width: vw(250);
+    height: vw(242);
     animation: orientation 2s ease-out 0s infinite;
   }
   > p {
     width: 100%;
-    font-size: px(16);
+    font-size: vw(16);
     color: #bbbbbb;
     text-align: center;
   }

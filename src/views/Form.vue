@@ -1,18 +1,23 @@
 <template>
   <section id="Form">
-    <!-- <PhoneForm></PhoneForm> -->
+    <PhoneForm></PhoneForm>
     <AddressForm></AddressForm>
   </section>
 </template>
 
 <script>
-// import PhoneForm from '../components/Form/PhoneForm';
+import PhoneForm from '../components/Form/PhoneForm';
 import AddressForm from '../components/Form/AddressForm';
 export default {
   name: 'FormPage',
-  components: { AddressForm },
-  methods: {}
+  components: { PhoneForm, AddressForm }
 };
 </script>
 <style lang='scss' scoped>
+#Form {
+  width: 100vw;
+  height: 100vh;
+  @include flex();
+  flex-direction: column;
+}
 </style>

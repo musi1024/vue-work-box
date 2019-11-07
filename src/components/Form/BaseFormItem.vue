@@ -1,15 +1,20 @@
 <template>
-  <div :class="['form-item', `label-${form.labelPosition}` ]">
-    <label class="form-item-label" :style="labelStyle" v-if="label">{{label}}</label>
+  <div :class="['base-form-item', `base-label-${form.labelPosition}` ]">
+    <label :class="form.labelClass" v-if="label">
+      <template v-if="!form.labelFullWidth">{{label}}</template>
+      <template v-else>
+        <span v-for="i in label" :key="i.index">{{ i }}</span>
+      </template>
+    </label>
     <slot></slot>
-    <div class="form-item-error" v-if="form.useErrorMessage && errorMessage">{{errorMessage}}</div>
+    <div :class="form.errorClass" v-if="form.useErrorMessage && errorMessage">{{errorMessage}}</div>
   </div>
 </template>
 
 <script>
 import Schema from 'async-validator';
 export default {
-  name: 'FormItem',
+  name: 'BaseFormItem',
   inject: ['form'],
   props: {
     label: {
@@ -24,14 +29,6 @@ export default {
     return {
       errorMessage: ''
     };
-  },
-  computed: {
-    labelStyle() {
-      return {
-        width: this.form.labelWidth / 7.5 + 'vw',
-        textAlign: this.form.labelPosition === 'right' ? 'right' : 'left'
-      };
-    }
   },
   mounted() {
     this.$on('validate', () =>
@@ -59,17 +56,17 @@ export default {
 </script>
 
 <style lang="scss">
-.form-item {
+.base-form-item {
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: fit-content;
-  margin: 0 auto;
-
-  &.label-top {
-    justify-content: flex-start;
-    align-items: flex-start;
+  width: 100%;
+  &-label-right {
+    flex-direction: row-reverse;
+  }
+  &-label-bottom {
+    flex-direction: column-reverse;
+  }
+  &-label-top {
     flex-direction: column;
   }
 
@@ -77,7 +74,7 @@ export default {
     position: absolute;
     top: 100%;
     left: 0%;
-    font-size: 14px;
+    font-size: vw(18);
     color: red;
   }
 }

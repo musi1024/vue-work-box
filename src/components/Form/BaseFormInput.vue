@@ -1,10 +1,10 @@
 <template>
-  <input class="base-input" :value="value" @input="onInput" v-bind="$attrs" />
+  <input class="base-form-input" :value="value" @input="onInput" v-bind="$attrs" />
 </template>
 
 <script>
 export default {
-  name: 'Input',
+  name: 'BaseFormInput',
   inject: ['form'],
   inheritAttrs: false,
   props: {
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style lang="scss">
-.base-input {
+.base-form-input {
   border: none;
   background-color: rgba(0, 0, 0, 0);
 }

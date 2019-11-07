@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'Form',
+  name: 'BaseForm',
   provide() {
     return {
       form: this
@@ -30,11 +30,15 @@ export default {
     },
     labelPosition: {
       type: String,
-      default: 'right'
+      default: 'left'
     },
-    labelWidth: {
+    labelClass: {
       type: String,
-      default: '80'
+      default: 'base-form-item-label'
+    },
+    errorClass: {
+      type: String,
+      default: 'base-form-item-error'
     }
   },
   methods: {

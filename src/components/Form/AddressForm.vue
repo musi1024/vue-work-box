@@ -1,5 +1,11 @@
 <template>
-  <Form class="form-wrap" :model="form" ref="form" :rules="rules">
+  <Form
+    class="form-wrap-address"
+    ref="form"
+    :model="form"
+    :rules="rules"
+    label-class="form-item-label"
+  >
     <FormItem class="form-item-address" prop="name" label="收货人">
       <Input class="form-name form-input" v-model="form.name" placeholder="请使用真实姓名" />
     </FormItem>
@@ -11,7 +17,7 @@
         maxlength="11"
       />
     </FormItem>
-    <FormItem prop="address" label="收货市/区">
+    <FormItem class="form-item-address" prop="address" label="收货市/区">
       <Input class="form-input form-province" v-model="form.address.province" placeholder="省份" />
       <Input class="form-input form-city" v-model="form.address.city" placeholder="城市" />
       <Input class="form-input form-area" v-model="form.address.area" placeholder="地区" />
@@ -19,16 +25,14 @@
     <FormItem class="form-item-address" prop="addr" label="详细地址">
       <Input class="form-addr form-input" v-model="form.addr" placeholder="详细地址" />
     </FormItem>
-    <div class="form-btn-group">
-      <BaseButton class="form-btn form-submit" type="submit" @click="submit">确定</BaseButton>
-    </div>
+    <BaseButton class="form-btn form-submit" type="submit" @click="submit">确定</BaseButton>
   </Form>
 </template>
 
 <script>
-import Form from './Form';
-import FormItem from './FormItem';
-import Input from './Input';
+import Form from './BaseForm';
+import FormItem from './BaseFormItem';
+import Input from './BaseFormInput';
 import BaseButton from '../BaseButton';
 export default {
   name: 'AddressForm',
@@ -49,13 +53,9 @@ export default {
         name: [{ required: true, message: '请输入收货人', trigger: 'blur' }],
         send_phone: [
           {
-            validator: (rule, value, callback) => {
-              if (/^(?:(?:\+|00)86)?1[3-9]\d{9}$/.test(value)) {
-                callback();
-              } else {
-                callback('请输入正确的手机号');
-              }
-            },
+            required: true,
+            pattern: /^(?:(?:\+|00)86)?1[3-9]\d{9}$/,
+            message: '请输入正确的手机号',
             trigger: 'blur'
           }
         ],
@@ -89,20 +89,17 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-.form-wrap {
-  @include wh(670, 610);
-  @include center();
+<style lang="scss">
+.form-wrap-address {
+  @include wh(670, 430);
   padding: vw(45) vw(40) 0 vw(27);
   background-color: silver;
   .form-item-address {
     width: 100%;
     margin-bottom: vw(35);
   }
-  .form-item-merge {
-    @include flex(flex-start);
-  }
   .form-input {
+    margin-left: vw(18);
     padding-left: vw(15);
     font-size: vw(28);
     color: rgb(255, 255, 255);
@@ -114,18 +111,12 @@ export default {
   }
   .form-province {
     width: vw(107);
-    margin-right: vw(22);
   }
   .form-city {
     width: vw(112);
-    margin-right: vw(18);
   }
   .form-area {
     width: vw(176);
-  }
-  .form-btn-group {
-    margin-top: vw(33);
-    @include flex();
   }
   .form-btn {
     @include wh(164, 53);
@@ -135,13 +126,15 @@ export default {
     line-height: 1.2;
     text-align: center;
     margin: 0 vw(55);
-  }
-  .form-cancel {
-    color: rgb(237, 212, 150);
-  }
-  .form-submit {
     color: rgb(135, 30, 23);
     background-color: rgb(237, 212, 150);
+  }
+  .form-item-label {
+    @include wh(128, 32);
+    font-size: vw(28);
+    margin-right: vw(19);
+    margin-top: vw(10);
+    text-align-last: justify;
   }
 }
 </style>

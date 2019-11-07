@@ -1,13 +1,13 @@
 <template>
   <Form
-    class="form-wrap"
+    class="form-wrap-phone"
     ref="form"
     :model="form"
     :rules="rules"
     :valudateOnInput="false"
     :useErrorMessage="false"
   >
-    <FormItem prop="phone">
+    <FormItem class="form-item-phone" prop="phone">
       <Input
         class="form-phone form-input"
         v-model="form.phone"
@@ -16,7 +16,7 @@
         type="tel"
       />
     </FormItem>
-    <FormItem prop="picCode">
+    <FormItem class="form-item-phone" prop="picCode">
       <Input
         class="form-pic form-input"
         v-model="form.picCode"
@@ -26,7 +26,7 @@
       />
       <div class="form-pic-code" />
     </FormItem>
-    <FormItem prop="smsCode">
+    <FormItem class="form-item-phone" prop="smsCode">
       <Input
         class="form-sms form-input"
         v-model="form.smsCode"
@@ -41,9 +41,9 @@
 </template>
 
 <script>
-import Form from './Form';
-import FormItem from './FormItem';
-import Input from './Input';
+import Form from './BaseForm';
+import FormItem from './BaseFormItem';
+import Input from './BaseFormInput';
 import BaseButton from '../BaseButton';
 export default {
   name: 'PhoneForm',
@@ -62,13 +62,9 @@ export default {
       rules: {
         phone: [
           {
-            validator: (rule, value, callback) => {
-              if (/^(?:(?:\+|00)86)?1[3-9]\d{9}$/.test(value)) {
-                callback();
-              } else {
-                callback('手机号不正确');
-              }
-            },
+            message: '手机号不正确',
+            required: true,
+            pattern: /^(?:(?:\+|00)86)?1[3-9]\d{9}$/,
             trigger: 'blur'
           }
         ],
@@ -101,18 +97,15 @@ export default {
   },
   methods: {
     validate(type) {
-      this.$refs.form.validate(
-        valid => {
-          if (valid) {
-            this.$alert(valid);
-          } else if (type !== 'sms') {
-            this.$emit('aaa');
-          } else {
-            this.getSmsCode();
-          }
-        },
-        ['phone', 'picCode', type !== 'sms' && 'smsCode']
-      );
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.$alert(valid);
+        } else if (type !== 'sms') {
+          this.$emit('aaa');
+        } else {
+          this.getSmsCode();
+        }
+      }, type === 'sms' && ['phone', 'picCode']);
     },
     async getSmsCode() {
       if (!this.gettingSms) {
@@ -136,19 +129,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-wrap {
+.form-wrap-phone {
   @include wh(467, 380);
-  @include center();
   @include flex(flex-start, flex-start);
   flex-direction: column;
 }
-
-.form-item {
+.form-item-phone {
   @include flex(space-between);
   width: 100%;
   margin-bottom: vw(21);
 }
-
 .form-input {
   padding: 0 vw(18);
   border-radius: vw(10);
@@ -163,7 +153,6 @@ export default {
     padding: vw(4) 0;
   }
 }
-
 .form-phone {
   @include wh(464, 56);
 }
@@ -195,6 +184,7 @@ export default {
   box-shadow: 0px 2px 0px 0px rgb(255, 87, 7);
   font-size: vw(21.88);
   color: rgb(255, 255, 255);
+  line-height: 3;
   text-shadow: 0px 3px 1px rgba(187, 74, 20, 0.35);
 }
 .form-submit {
@@ -202,7 +192,7 @@ export default {
   background-color: rgb(255, 126, 22);
   font-size: vw(30);
   color: rgb(255, 255, 255);
-  text-shadow: 0px 3px 1px rgba(187, 74, 20, 0.35);
+  text-shadow: 0px 1px 1px rgba(187, 74, 20, 0.35);
 }
 .form-tips {
   margin: vw(20) auto 0;

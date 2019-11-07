@@ -2,9 +2,10 @@
   <Form
     class="form-wrap-address"
     ref="form"
+    label-class="form-item-label"
     :model="form"
     :rules="rules"
-    label-class="form-item-label"
+    :labelFullWidth="true"
   >
     <FormItem class="form-item-address" prop="name" label="收货人">
       <Input class="form-name form-input" v-model="form.name" placeholder="请使用真实姓名" />
@@ -91,7 +92,7 @@ export default {
 </script>
 <style lang="scss">
 .form-wrap-address {
-  @include wh(670, 430);
+  @include wh(670, 500);
   padding: vw(45) vw(40) 0 vw(27);
   background-color: silver;
   .form-item-address {
@@ -105,8 +106,10 @@ export default {
     color: rgb(255, 255, 255);
     flex-grow: 1;
     border-bottom: 1px solid white;
+    border-radius: 0;
     &::placeholder {
       color: rgba(251, 234, 218, 0.8);
+      line-height: 2;
     }
   }
   .form-province {
@@ -130,11 +133,10 @@ export default {
     background-color: rgb(237, 212, 150);
   }
   .form-item-label {
-    @include wh(128, 32);
+    width: vw(128);
     font-size: vw(28);
     margin-right: vw(19);
-    margin-top: vw(10);
-    text-align-last: justify;
+    align-items: flex-end;
   }
 }
 </style>

@@ -32,9 +32,13 @@ export default {
       type: String,
       default: 'left'
     },
+    labelFullWidth: {
+      type: Boolean,
+      default: false
+    },
     labelClass: {
       type: String,
-      default: 'base-form-item-label'
+      default: 'base-form-label'
     },
     errorClass: {
       type: String,

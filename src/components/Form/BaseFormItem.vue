@@ -1,6 +1,9 @@
 <template>
-  <div :class="['base-form-item', `base-label-${form.labelPosition}` ]">
-    <label :class="form.labelClass" v-if="label">
+  <div :class="['base-form-item', `base-form-label_${form.labelPosition}` ]">
+    <label
+      :class="[form.labelClass, form.labelFullWidth && 'base-form-label_full_width']"
+      v-if="label"
+    >
       <template v-if="!form.labelFullWidth">{{label}}</template>
       <template v-else>
         <span v-for="i in label" :key="i.index">{{ i }}</span>
@@ -60,16 +63,21 @@ export default {
   position: relative;
   display: flex;
   width: 100%;
-  &-label-right {
-    flex-direction: row-reverse;
-  }
-  &-label-bottom {
-    flex-direction: column-reverse;
-  }
-  &-label-top {
-    flex-direction: column;
-  }
 
+  .base-form-label {
+    &_full_width {
+      @include flex(space-between);
+    }
+    &-right {
+      flex-direction: row-reverse;
+    }
+    &-bottom {
+      flex-direction: column-reverse;
+    }
+    &-top {
+      flex-direction: column;
+    }
+  }
   &-error {
     position: absolute;
     top: 100%;

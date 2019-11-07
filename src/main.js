@@ -16,15 +16,18 @@ if (process.env.VUE_APP_VCONSOLE !== 'false') {
   }
 }
 
-import vPreventRepeat from './rpf/vue/directives/v-prevent-repeat';
-Vue.use(vPreventRepeat);
-
 /* 动态创建全局组件 */
 import create from './plugins/create';
 Vue.use(create);
 
+import vPreventRepeat from './rpf/vue/directives/v-prevent-repeat';
+Vue.use(vPreventRepeat);
+
 import preventScroll from './rpf/un/preventScroll';
 preventScroll();
+
+import fixWeChatForm from './rpf/un/fixWeChatForm';
+fixWeChatForm();
 
 Vue.config.productionTip = false;
 

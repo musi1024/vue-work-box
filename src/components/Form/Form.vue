@@ -40,7 +40,9 @@ export default {
   methods: {
     validate(cb, props) {
       const tasks = this.$children
-        .filter(item => props.includes(item.prop))
+        .filter(item => {
+          return props ? props.includes(item.prop) : item.prop;
+        })
         .map(item => item.validate());
       Promise.all(tasks)
         .then(() => cb(false))

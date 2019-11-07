@@ -11,7 +11,7 @@
       <Input
         class="form-phone form-input"
         v-model="form.phone"
-        placeholder="输入本人预留银行手机号"
+        placeholder="输入手机号"
         maxlength="11"
         type="tel"
       />

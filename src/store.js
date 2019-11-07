@@ -21,7 +21,7 @@ const store = new Vuex.Store({
 });
 
 function showPopup(type, props) {
-  return store.commit('showPopup', { type, props });
+  store.commit('showPopup', { type, props });
 }
 const popup = {
   install() {

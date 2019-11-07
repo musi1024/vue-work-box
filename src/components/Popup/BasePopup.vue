@@ -1,5 +1,5 @@
 <template>
-  <transition name="popup">
+  <transition name="popup" @leave="leave">
     <section class="base-popup">
       <main class="base-popup-main">
         <div class="base-popup-container">
@@ -15,8 +15,8 @@ export default {
   name: 'BasePopup',
   props: {},
   methods: {
-    closePopup() {
-      this.$emit('close');
+    leave() {
+      this.$emit('leave');
     }
   }
 };

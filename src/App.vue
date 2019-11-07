@@ -8,9 +8,7 @@
 export default {
   name: 'App',
   components: {},
-  data() {
-    return {};
-  },
+  computed: {},
   mounted() {},
   methods: {}
 };

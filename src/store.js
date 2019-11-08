@@ -5,13 +5,16 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    popup: {}
+    popup: { test: { show: false } }
   },
   getters: {},
   mutations: {
     showPopup(state, payload) {
       if (Object.prototype.toString.call(payload.props) === '[object Object]') {
-        Object.assign(state.popup[payload.type], payload.props);
+        state.popup[payload.type] = {
+          ...state.popup[payload.type],
+          ...payload.props
+        };
       } else {
         state.popup[payload.type] = payload.props;
       }
@@ -19,6 +22,8 @@ const store = new Vuex.Store({
   },
   actions: {}
 });
+
+store.getters = { ...store.getters, ...store.state.popup };
 
 function showPopup(type, props) {
   store.commit('showPopup', { type, props });

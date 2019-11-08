@@ -6,11 +6,7 @@
 
 <script>
 export default {
-  name: 'App',
-  components: {},
-  computed: {},
-  mounted() {},
-  methods: {}
+  name: 'App'
 };
 </script>
 

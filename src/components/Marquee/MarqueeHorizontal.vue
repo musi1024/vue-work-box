@@ -1,14 +1,14 @@
 <template>
-  <section ref="wrap" class="base-marquee">
+  <section ref="wrap" class="base-marquee-horizontal">
     <div
       ref="content"
-      class="base-marquee-content"
+      class="base-marquee-horizontal-content"
       :class="[animationClass]"
       :style="contentStyle"
       @webkitAnimationIteration="onAnimationIteration"
       @animationiteration="onAnimationIteration"
     >
-      <slot :content="runningContent"></slot>
+      <slot :runningContent="runningContent"></slot>
     </div>
   </section>
 </template>
@@ -18,7 +18,7 @@ function getType(obj) {
   return Object.prototype.toString.call(obj).slice(8, -1);
 }
 export default {
-  name: 'Marquee',
+  name: 'MarqueeHorizontal',
   props: {
     content: {
       type: [Number, Object, String, Array],
@@ -30,7 +30,7 @@ export default {
     },
     speed: {
       type: Number,
-      default: 200
+      default: 80
     }
   },
   data() {
@@ -47,7 +47,8 @@ export default {
     contentStyle() {
       return {
         animationDelay: this.delay + 's',
-        animationDuration: this.duration + 's'
+        animationDuration: this.duration + 's',
+        paddingLeft: this.wrapWidth + 'px'
       };
     }
   },
@@ -62,6 +63,9 @@ export default {
         }
       }
     }
+  },
+  mounted() {
+    this.wrapWidth = this.$refs.wrap.getBoundingClientRect().width;
   },
   methods: {
     setContent() {
@@ -86,11 +90,9 @@ export default {
       this.animationClass = '';
       this.setContent();
       this.$nextTick(() => {
-        const { wrap, content } = this.$refs;
-        this.wrapWidth = wrap.getBoundingClientRect().width;
-        this.contentWidth = content.getBoundingClientRect().width;
+        this.contentWidth = this.$refs.content.getBoundingClientRect().width;
         this.duration = (this.contentWidth + this.wrapWidth) / this.speed;
-        this.animationClass = 'animate-infinite';
+        this.animationClass = 'marquee-infinite';
         this.isUpdate = false;
       });
     },
@@ -103,28 +105,26 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.base-marquee {
+.base-marquee-horizontal {
   position: relative;
   width: 100vw;
-  height: 24px;
-  line-height: 24px;
-  padding: 0;
   overflow: hidden;
 
-  .base-marquee-content {
-    position: absolute;
+  &-content {
+    @include lt(0, 0);
+    display: flex;
+    height: 100%;
     white-space: nowrap;
-    padding-left: 100vw;
   }
 
-  .animate-infinite {
+  .marquee-infinite {
     animation: marquee-infinite linear infinite;
   }
 }
 
 @keyframes marquee-infinite {
   to {
-    transform: translate3d(-100%, 0, 0);
+    transform: translateX(-100%);
   }
 }
 </style>

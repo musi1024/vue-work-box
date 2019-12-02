@@ -16,6 +16,7 @@ function vconsoleReloadPlugin(VConsole) {
   const reloadPlugin = new VConsole.VConsolePlugin('reload', 'Reload');
   const inputId = '__vc_reload_url';
   const goBtnId = '__vc_reload_go_btn';
+  const sizeId = '__vc_reload_size';
 
   injectCSS(`
 #__vconsole .vc-tabbar {
@@ -48,6 +49,10 @@ function vconsoleReloadPlugin(VConsole) {
 #__vconsole .vc-reload-go-btn:active {
   background-color: #ddd;
 }
+#__vconsole .vc-reload-size {
+  padding: 0.5em;
+  margin-top: 1em;
+}
   `);
 
   reloadPlugin.on('renderTab', callback => {
@@ -56,6 +61,7 @@ function vconsoleReloadPlugin(VConsole) {
       <textarea rows="8" class="vc-reload-url" id="${inputId}">
       </textarea>
       <button type="button" class="vc-reload-go-btn" id="${goBtnId}">前往</button>
+      <div class="vc-reload-size" id="${sizeId}"></div>
     </div>`;
     callback(html);
   });
@@ -80,6 +86,10 @@ function vconsoleReloadPlugin(VConsole) {
   reloadPlugin.on('show', () => {
     const $input = document.getElementById(inputId);
     $input.value = window.location.href;
+    const $size = document.getElementById(sizeId);
+    $size.innerText = `innerWidth: ${window.innerWidth}\ninnerHeight: ${
+      window.innerHeight
+    }\n@ ${new Date()}`;
   });
   reloadPlugin.on('addTool', callback => {
     callback([

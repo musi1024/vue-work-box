@@ -1,7 +1,7 @@
 <template>
   <div
     class="base-switch"
-    :class="{'base-switch-on' : self_checked}"
+    :class="{ 'base-switch-on': self_checked }"
     :style="switchStyle"
     :value="value"
     @click="toggle"
@@ -56,7 +56,7 @@ export default {
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 .base-switch {
   position: relative;
   display: inline-block;

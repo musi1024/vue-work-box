@@ -2,7 +2,11 @@
   <transition name="message" @after-leave="afterLeave">
     <section class="message" v-show="showMessage" @click.self="closeMessage">
       <main class="message-container">
-        <div :class="['message-content', contentClass]" v-html="content" :style="contentStyle"></div>
+        <div
+          :class="['message-content', contentClass]"
+          v-html="content"
+          :style="contentStyle"
+        ></div>
       </main>
     </section>
   </transition>

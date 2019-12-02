@@ -1,5 +1,10 @@
 <template>
-  <input class="base-form-input" :value="value" @input="onInput" v-bind="$attrs" />
+  <input
+    class="base-form-input"
+    :value="value"
+    @input="onInput"
+    v-bind="$attrs"
+  />
 </template>
 
 <script>

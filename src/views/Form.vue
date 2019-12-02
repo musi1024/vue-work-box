@@ -13,7 +13,7 @@ export default {
   components: { PhoneForm, AddressForm }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 #Form {
   width: 100vw;
   height: 100vh;

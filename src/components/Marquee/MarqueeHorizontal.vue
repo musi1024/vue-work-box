@@ -104,7 +104,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .base-marquee-horizontal {
   position: relative;
   width: 100vw;

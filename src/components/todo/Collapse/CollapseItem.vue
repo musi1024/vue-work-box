@@ -1,9 +1,13 @@
 <template>
   <section class="base-collapse-item" @click="clickItem">
     <div class="base-collapse-item-title">
-      <slot name="title">{{title}}</slot>
+      <slot name="title">{{ title }}</slot>
     </div>
-    <div class="base-collapse-item-content" ref="content" :class="[this.isActive ? '' : 'close']">
+    <div
+      class="base-collapse-item-content"
+      ref="content"
+      :class="[this.isActive ? '' : 'close']"
+    >
       <slot></slot>
     </div>
   </section>

@@ -6,6 +6,7 @@
 <script>
 // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 import isIOS from '../../un/isIOS';
+const envIOS = isIOS();
 export default {
   name: 'ClickOutside',
   props: {
@@ -14,24 +15,29 @@ export default {
       default: 'div'
     }
   },
+  created() {
+    this.isTouch = false;
+  },
   mounted() {
-    if (isIOS()) {
+    if (envIOS) {
       document.addEventListener('touchend', this.docClick, true);
-    } else {
-      document.addEventListener('click', this.docClick, true);
     }
+    document.addEventListener('click', this.docClick, true);
   },
   destroyed() {
-    if (isIOS()) {
+    if (envIOS) {
       document.removeEventListener('touchend', this.docClick, true);
-    } else {
-      document.removeEventListener('click', this.docClick, true);
     }
+    document.removeEventListener('click', this.docClick, true);
   },
   methods: {
     docClick(e) {
+      if (e.type === 'touchend') this.isTouch = true;
+      if (e.type === 'click' && this.isTouch) return;
       if (!this.$refs.container.contains(e.target)) {
-        this.$emit('click-outside');
+        setTimeout(() => {
+          this.$emit('click-outside');
+        }, 360);
       }
     }
   }

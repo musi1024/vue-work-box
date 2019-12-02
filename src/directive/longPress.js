@@ -30,14 +30,14 @@ function bind(el, binding, vNode) {
     startY = touch.clientY;
     r = setTimeout(() => {
       r = null;
-      if (typeof value === "function") {
+      if (typeof value === 'function') {
         value(event, el, vNode);
         event.preventDefault();
         return;
       } else if (
         value &&
         value.handler &&
-        typeof value.handler === "function"
+        typeof value.handler === 'function'
       ) {
         value.handler(event, el, vNode);
         event.preventDefault();
@@ -71,16 +71,16 @@ function bind(el, binding, vNode) {
   handlerContextmenu = function(event) {
     event.preventDefault();
   };
-  el.addEventListener("touchstart", handlerTouchstart, false);
-  el.addEventListener("touchmove", handlerTouchmove, false);
-  el.addEventListener("touchend", handlerTouchend, false);
-  el.addEventListener("contextmenu", handlerContextmenu);
+  el.addEventListener('touchstart', handlerTouchstart, false);
+  el.addEventListener('touchmove', handlerTouchmove, false);
+  el.addEventListener('touchend', handlerTouchend, false);
+  el.addEventListener('contextmenu', handlerContextmenu);
 }
 function unbind(el) {
-  el.removeEventListener("touchstart", handlerTouchstart);
-  el.removeEventListener("touchmove", handlerTouchmove);
-  el.removeEventListener("touchend", handlerTouchend);
-  el.removeEventListener("contextmenu", handlerContextmenu);
+  el.removeEventListener('touchstart', handlerTouchstart);
+  el.removeEventListener('touchmove', handlerTouchmove);
+  el.removeEventListener('touchend', handlerTouchend);
+  el.removeEventListener('contextmenu', handlerContextmenu);
 }
 
 export default {

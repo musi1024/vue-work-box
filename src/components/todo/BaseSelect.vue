@@ -9,16 +9,20 @@
       readonly="readonly"
       autocomplete="off"
       @focus="blur()"
-    >
-    <div class="base-select-btn" :class="{rotate: showOption}">^</div>
+    />
+    <div class="base-select-btn" :class="{ rotate: showOption }">^</div>
     <ul class="base-select-option" v-show="showOption">
-      <li class="base-select-item empty" v-show="!selectOption.length">Empty</li>
+      <li class="base-select-item empty" v-show="!selectOption.length">
+        Empty
+      </li>
       <li
         class="base-select-item"
         v-for="item in selectOption"
         :key="item.index"
         @click="select(item.value)"
-      >{{item.label}}</li>
+      >
+        {{ item.label }}
+      </li>
     </ul>
   </section>
 </template>
@@ -120,5 +124,3 @@ export default {
   }
 }
 </style>
-
-

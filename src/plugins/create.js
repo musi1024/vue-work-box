@@ -2,7 +2,10 @@ import Vue from 'vue';
 import BaseAlert from '../components/BaseAlert';
 import Message from '../components/Popup/Message';
 
-const list = [['$alert', BaseAlert], ['$message', Message]];
+const list = [
+  ['$alert', BaseAlert],
+  ['$message', Message]
+];
 
 function create(component) {
   return (content, config) => {

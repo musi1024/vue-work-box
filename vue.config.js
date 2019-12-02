@@ -3,7 +3,7 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        data: `
+        prependData: `
           @import "@/style/mixin.scss";
           @import "@/style/common.scss";
         `

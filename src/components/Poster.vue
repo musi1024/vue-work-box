@@ -1,6 +1,11 @@
 <template>
   <div>
-    <canvas ref="canvas" :width="width" :height="height" class="canvas"></canvas>
+    <canvas
+      ref="canvas"
+      :width="width"
+      :height="height"
+      class="canvas"
+    ></canvas>
   </div>
 </template>
 <script>
@@ -318,7 +323,7 @@ export default {
   }
 };
 </script>
-<style  scoped>
+<style scoped>
 .canvas {
   display: none;
 }

@@ -1,15 +1,25 @@
 <template>
   <section>
     <MarqueeHorizontal class="marquee-horizontal" :content="content">
-      <template v-slot="{runningContent}">
-        <div class="marquee-horizontal-item" v-for="i in runningContent" :key="i.index">{{i}}</div>
+      <template v-slot="{ runningContent }">
+        <div
+          class="marquee-horizontal-item"
+          v-for="i in runningContent"
+          :key="i.index"
+        >
+          {{ i }}
+        </div>
       </template>
     </MarqueeHorizontal>
     <MarqueeVertical class="marquee-1">
-      <MarqueeVerticalItem v-for="i in 10" :key="i">{{i}}</MarqueeVerticalItem>
+      <MarqueeVerticalItem v-for="i in 10" :key="i">
+        {{ i }}
+      </MarqueeVerticalItem>
     </MarqueeVertical>
     <MarqueeVertical class="marquee-2" direction="down">
-      <MarqueeVerticalItem v-for="i in 10" :key="i">{{i}}</MarqueeVerticalItem>
+      <MarqueeVerticalItem v-for="i in 10" :key="i">
+        {{ i }}
+      </MarqueeVerticalItem>
     </MarqueeVertical>
   </section>
 </template>
@@ -35,7 +45,7 @@ export default {
   }
 };
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .marquee-1 {
   background-color: antiquewhite;
   width: vw(200);

@@ -6,8 +6,8 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-import 'core-js/fn/object/assign';
-import 'core-js/fn/string/includes';
+import 'core-js/features/object/assign';
+import 'core-js/features/string/includes';
 
 import './rpf/vue/vconsole';
 

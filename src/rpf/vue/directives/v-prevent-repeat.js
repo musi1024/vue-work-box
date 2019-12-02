@@ -22,12 +22,10 @@ export default {
           flag = false;
           el.classList.remove(RUNNING_CLASS);
         };
-        // el.addEventListener(arg, aFun);
-        vnode.componentInstance.$on(arg, aFun);
+        el.addEventListener(arg, aFun);
       },
-      unbind(el, { arg }, vnode) {
-        // el.removeEventListener(arg, aFun);
-        vnode.componentInstance.$off(arg, aFun);
+      unbind(el, { arg }) {
+        el.removeEventListener(arg, aFun);
         aFun = undefined;
       }
     });

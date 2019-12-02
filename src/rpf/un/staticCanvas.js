@@ -72,9 +72,11 @@ function text(ctx, attrs) {
     fill: '#000',
     x: 0,
     y: 0,
+    textBaseline: 'top',
     ...attrs
   };
   ctx.save();
+  ctx.textBaseline = dd.textBaseline;
   ctx.fillStyle = dd.fill;
   ctx.font = dd.font;
   ctx.fillText(dd.text, dd.x, dd.y);

@@ -1,16 +1,21 @@
 <template>
-  <div :class="['base-form-item', `base-form-label_${form.labelPosition}` ]">
+  <div :class="['base-form-item', `base-form-label_${form.labelPosition}`]">
     <label
-      :class="[form.labelClass, form.labelFullWidth && 'base-form-label_full_width']"
+      :class="[
+        form.labelClass,
+        form.labelFullWidth && 'base-form-label_full_width'
+      ]"
       v-if="label"
     >
-      <template v-if="!form.labelFullWidth">{{label}}</template>
+      <template v-if="!form.labelFullWidth">{{ label }}</template>
       <template v-else>
         <span v-for="i in label" :key="i.index">{{ i }}</span>
       </template>
     </label>
     <slot></slot>
-    <div :class="form.errorClass" v-if="form.useErrorMessage && errorMessage">{{errorMessage}}</div>
+    <div :class="form.errorClass" v-if="form.useErrorMessage && errorMessage">
+      {{ errorMessage }}
+    </div>
   </div>
 </template>
 

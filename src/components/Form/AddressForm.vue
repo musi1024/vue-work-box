@@ -8,7 +8,11 @@
     :labelFullWidth="true"
   >
     <FormItem class="form-item-address" prop="name" label="收货人">
-      <Input class="form-name form-input" v-model="form.name" placeholder="请使用真实姓名" />
+      <Input
+        class="form-name form-input"
+        v-model="form.name"
+        placeholder="请使用真实姓名"
+      />
     </FormItem>
     <FormItem class="form-item-address" prop="send_phone" label="联系电话">
       <Input
@@ -19,14 +23,32 @@
       />
     </FormItem>
     <FormItem class="form-item-address" prop="address" label="收货市/区">
-      <Input class="form-input form-province" v-model="form.address.province" placeholder="省份" />
-      <Input class="form-input form-city" v-model="form.address.city" placeholder="城市" />
-      <Input class="form-input form-area" v-model="form.address.area" placeholder="地区" />
+      <Input
+        class="form-input form-province"
+        v-model="form.address.province"
+        placeholder="省份"
+      />
+      <Input
+        class="form-input form-city"
+        v-model="form.address.city"
+        placeholder="城市"
+      />
+      <Input
+        class="form-input form-area"
+        v-model="form.address.area"
+        placeholder="地区"
+      />
     </FormItem>
     <FormItem class="form-item-address" prop="addr" label="详细地址">
-      <Input class="form-addr form-input" v-model="form.addr" placeholder="详细地址" />
+      <Input
+        class="form-addr form-input"
+        v-model="form.addr"
+        placeholder="详细地址"
+      />
     </FormItem>
-    <BaseButton class="form-btn form-submit" type="submit" @click="submit">确定</BaseButton>
+    <BaseButton class="form-btn form-submit" type="submit" @click="submit">
+      确定
+    </BaseButton>
   </Form>
 </template>
 

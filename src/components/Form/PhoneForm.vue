@@ -34,9 +34,13 @@
         maxlength="6"
         type="tel"
       />
-      <BaseButton class="form-get-sms" type="submit" @click="validate('sms')">{{ getSmsText }}</BaseButton>
+      <BaseButton class="form-get-sms" type="submit" @click="validate('sms')">
+        {{ getSmsText }}
+      </BaseButton>
     </FormItem>
-    <BaseButton class="form-submit" type="submit" @click="validate()">submit</BaseButton>
+    <BaseButton class="form-submit" type="submit" @click="validate()">
+      submit
+    </BaseButton>
   </Form>
 </template>
 

@@ -1,9 +1,12 @@
 <template>
-  <div class="base-marquee-vertical" :style="{height: height + 'px'}">
+  <div class="base-marquee-vertical" :style="{ height: height + 'px' }">
     <ul
       class="base-marquee-vertical-box"
       ref="box"
-      :style="{transform: `translate3d(0,${currenTranslateY}px,0)`, transition: `transform ${noAnimate ? 0 : duration}ms`}"
+      :style="{
+        transform: `translate3d(0,${currenTranslateY}px,0)`,
+        transition: `transform ${noAnimate ? 0 : duration}ms`
+      }"
     >
       <slot></slot>
     </ul>

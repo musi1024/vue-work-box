@@ -91,7 +91,7 @@ function injectCSS(selector) {
   var $style = document.createElement('style');
   $style.type = 'text/css';
   $style.setAttribute('data-prevent-scroll', 'true');
-  $style.innerText = `${selector} { -webkit-overflow-scrolling: touch; }`;
+  $style.textContent = `${selector} { -webkit-overflow-scrolling: touch; }`;
   document.head.appendChild($style);
 }
 

@@ -7,14 +7,16 @@
         :key="tab.index"
         :class="[value == tab.value ? 'active' : '']"
         @click="changeTab(tab.value)"
-      >{{tab.label}}</div>
+      >
+        {{ tab.label }}
+      </div>
     </scroll-wrap>
     <div class="base-tabs-content">
       <slot></slot>
     </div>
   </section>
 </template>
-  
+
 <script>
 import ScrollWrap from '../ScrollWrap';
 

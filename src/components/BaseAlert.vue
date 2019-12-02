@@ -3,7 +3,13 @@
     <section v-show="showAlert" class="base-alert" @click.self="closeAlert">
       <main class="base-alert-main">
         <span class="base-alert-text">{{ content }}</span>
-        <div class="base-alert-close" v-if="hasCloseBtn" @click.self="closeAlert">x</div>
+        <div
+          class="base-alert-close"
+          v-if="hasCloseBtn"
+          @click.self="closeAlert"
+        >
+          x
+        </div>
       </main>
     </section>
   </transition>
@@ -145,4 +151,3 @@ export default {
   animation: bounceOutLeft 0.8s;
 }
 </style>
-

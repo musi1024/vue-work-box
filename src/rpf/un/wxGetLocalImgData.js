@@ -1,6 +1,6 @@
 function wxGetLocalImgData({ localId }) {
   return new Promise(resolve => {
-    wx.getLocalImgData({
+    window.wx.getLocalImgData({
       localId,
       success: function(res) {
         if (!/^data:image/.test(res.localData)) {

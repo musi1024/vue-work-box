@@ -1,6 +1,15 @@
 <template>
-  <label class="base-radio" :class="{ checked: model == value, disabled: disabled }">
-    <input type="radio" ref="radio" :value="value" @click="updateVal" :disabled="disabled" />
+  <label
+    class="base-radio"
+    :class="{ checked: model == value, disabled: disabled }"
+  >
+    <input
+      type="radio"
+      ref="radio"
+      :value="value"
+      @click="updateVal"
+      :disabled="disabled"
+    />
   </label>
 </template>
 <script>

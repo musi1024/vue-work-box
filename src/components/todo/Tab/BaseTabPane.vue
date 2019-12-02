@@ -5,7 +5,7 @@
     </section>
   </transition>
 </template>
-  
+
 <script>
 export default {
   name: 'BaseTabPane',

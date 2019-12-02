@@ -1,5 +1,7 @@
+const { CDN_PATH } = require('./src/custom/configs');
+
 module.exports = {
-  publicPath: './',
+  publicPath: process.env.VUE_APP_CDN ? CDN_PATH : './',
   css: {
     loaderOptions: {
       sass: {

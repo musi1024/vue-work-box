@@ -5,11 +5,15 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "temp": "yarn build && charon publish temp",
+    "test": "yarn build && charon publish test",
+    "prod": "cross-env VUE_APP_CDN=true VUE_APP_VCONSOLE=false yarn build && charon publish prod"
   },
   "dependencies": {
     "async-validator": "^3.2.2",
     "core-js": "^3.4.3",
+    "cross-env": "^6.0.3",
     "normalize.css": "^8.0.1",
     "vconsole": "^3.3.4",
     "vue": "^2.6.10",

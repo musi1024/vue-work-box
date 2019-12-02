@@ -55,14 +55,14 @@ export default {
     },
     // 是否跨域
     isCrossOrigin(url) {
-      let isCrossOrigin = false;
-      if (/^http/.test(url)) {
-        let parsedUrl = new Url(url);
-        if (parsedUrl.origin !== window.location.origin) {
-          isCrossOrigin = true;
-        }
+      if (!url || typeof url !== 'string') {
+        throw new Error('url is required and should be string');
       }
-      return isCrossOrigin;
+      if (!/^data:/.test(url)) {
+        let parsedUrl = new Url(url);
+        return parsedUrl.origin !== window.location.origin;
+      }
+      return false;
     },
     // 加载图片
     loadImage(url) {
@@ -72,7 +72,7 @@ export default {
           img.crossOrigin = 'anonymous';
         }
         img.onload = () => resolve(img);
-        img.onerror = () => reject(`下载图片失败 ${url}`);
+        img.onerror = () => reject(Error(`fail to load image from ${url}`));
         img.src = url;
       });
     },

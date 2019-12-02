@@ -1,5 +1,4 @@
 import 'normalize.css';
-import './style/animation.css';
 
 import Vue from 'vue';
 import App from './App.vue';

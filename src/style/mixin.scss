@@ -72,10 +72,10 @@
   margin: auto 0;
 }
 
-@mixin img($url) {
+@mixin img($url, $size: 100%, $repeat: no-repeat) {
   background-image: url($url);
-  background-size: 100%;
-  background-repeat: no-repeat;
+  background-size: $size;
+  background-repeat: $repeat;
 }
 
 @mixin flex($justify: center, $align: center) {
@@ -84,16 +84,10 @@
   justify-content: $justify;
 }
 
-@mixin truncate-text() {
+@mixin ellipsis() {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-@mixin gradient-text($p...) {
-  background: linear-gradient($p);
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 @mixin triangle($size, $color, $direction) {

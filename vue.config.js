@@ -7,7 +7,8 @@ module.exports = {
       sass: {
         prependData: `
           @import "@/style/mixin.scss";
-          @import "@/style/common.scss";
+          @import "@/style/global.scss";
+          @import "@/style/animation.scss";
         `
       }
     }

@@ -11,7 +11,6 @@ import 'core-js/features/string/includes';
 
 import './rpf/vue/vconsole';
 
-/* 动态创建全局组件 */
 import create from './plugins/create';
 Vue.use(create);
 

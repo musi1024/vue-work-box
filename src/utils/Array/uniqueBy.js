@@ -1,6 +1,7 @@
 /**
- *
- *
+ * @description
+ * @author musi
+ * @date 2019-12-02
  * @param {*} [arr=[]]
  * @param {*} [fn=(x, y) => x === y]
  * @returns

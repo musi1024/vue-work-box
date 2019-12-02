@@ -1,10 +1,12 @@
 /**
- *
- *
+ * @description
+ * @author musi
+ * @date 2019-12-02
  * @param {*} [arr=[]]
  * @param {*} [fn=x => x]
  * @returns
  */
+
 function bifurcateBy(arr = [], fn = x => x) {
   let res = arr.reduce(
     (acc, val, i) => {

@@ -5,10 +5,14 @@
 </template>
 
 <script>
+import bifurcateBy from '@/utils/Array/bifurcateBy';
 export default {
   name: 'App',
   mounted() {
-    this.$popup('test', { show: true });
+    const arr1 = [1, 2, 3, 4];
+    // const arr2 = [1, 2, 3, 4];
+    const res = bifurcateBy(arr1, x => x >= 2);
+    console.log('**debug**', res);
   }
 };
 </script>

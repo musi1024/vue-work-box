@@ -1,6 +1,7 @@
 /**
- *
- *
+ * @description
+ * @author musi
+ * @date 2019-12-04
  * @param {string} [str='']
  * @param {number} [start=0]
  * @param {number} [num=4]

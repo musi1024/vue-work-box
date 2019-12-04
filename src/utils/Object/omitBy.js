@@ -1,8 +1,10 @@
 /**
- *
- *
+ * @description
+ * @author musi
+ * @date 2019-12-04
  * @param {*} obj
- * @param {*} fn (key, value)
+ * @param {*} fn
+ * @returns
  */
 
 function omitBy(obj, fn) {

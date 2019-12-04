@@ -1,10 +1,12 @@
 /**
- *
- *
+ * @description
+ * @author musi
+ * @date 2019-12-04
  * @param {*} a
  * @param {*} b
  * @returns
  */
+
 function equals(a, b) {
   if (a === b) return true;
   if (a instanceof Date && b instanceof Date)

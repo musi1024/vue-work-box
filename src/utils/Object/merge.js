@@ -1,3 +1,11 @@
+/**
+ * @description
+ * @author musi
+ * @date 2019-12-04
+ * @param {*} objs
+ * @returns
+ */
+
 import uniqueBy from '../Array/uniqueBy';
 import equals from '../Object/equals';
 

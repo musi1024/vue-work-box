@@ -1,20 +1,34 @@
 <template>
-  <transition name="popup" @leave="leave">
-    <section class="base-popup">
-      <main class="base-popup-main">
-        <div class="base-popup-container">
+  <transition name="popup" @after-leave="leave">
+    <section class="base-popup" v-show="show" @click.self="clickMask">
+      <ScaleArea>
+        <main class="base-popup-main">
           <slot></slot>
-        </div>
-      </main>
+        </main>
+      </ScaleArea>
     </section>
   </transition>
 </template>
 
 <script>
+import ScaleArea from '@/components/Layout/ScaleArea';
 export default {
   name: 'BasePopup',
-  props: {},
+  components: { ScaleArea },
+  model: {
+    prop: 'show',
+    event: 'change'
+  },
+  props: {
+    show: {
+      type: Boolean,
+      default: false
+    }
+  },
   methods: {
+    clickMask() {
+      this.$emit('mask');
+    },
     leave() {
       this.$emit('leave');
     }
@@ -37,12 +51,6 @@ export default {
     @include flex();
     flex-direction: column;
     transition: all 0.2s ease-in-out;
-  }
-
-  &-container {
-    display: flex;
-    flex-direction: column;
-    position: relative;
   }
 }
 

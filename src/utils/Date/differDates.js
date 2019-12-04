@@ -1,6 +1,7 @@
 /**
- *
- *
+ * @description
+ * @author musi
+ * @date 2019-12-04
  * @param {*} date1
  * @param {*} date2
  * @returns

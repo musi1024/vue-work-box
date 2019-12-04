@@ -1,11 +1,5 @@
 import Vue from 'vue';
-import BaseAlert from '../components/BaseAlert';
-import Message from '../components/Popup/Message';
-
-const list = [
-  ['$alert', BaseAlert],
-  ['$message', Message]
-];
+import createList from '@/custom/createList';
 
 function create(component) {
   return (content, config) => {
@@ -29,7 +23,7 @@ function create(component) {
 
 export default {
   install() {
-    list.map(i => {
+    createList.map(i => {
       Object.defineProperty(Vue.prototype, i[0], {
         get: function get() {
           return create(i[1]);

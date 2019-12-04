@@ -45,7 +45,7 @@ export default {
     /* 是否自动关闭 */
     autoClose: {
       type: Boolean,
-      default: true
+      default: false
     },
     /* 过度动画名 */
     transitionName: {
@@ -100,14 +100,15 @@ export default {
   &-main {
     @include flex();
     @include center();
-    min-width: vw(480);
-    max-width: vw(680);
-    width: max-content;
+    max-width: vw(480);
+    min-width: vw(320);
+    width: fit-content;
     height: fit-content;
-    border-radius: 20vw;
+    border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: vw(20) vw(45);
+    padding: vw(24) vw(40);
     word-break: break-word;
+    white-space: pre-line;
   }
 
   &-close {

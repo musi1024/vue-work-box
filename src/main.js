@@ -10,10 +10,10 @@ import 'core-js/features/string/includes';
 import './rpf/vue/vconsole';
 
 import setShowPopup from '@/plugins/popup';
-setShowPopup(Vue, store);
+setShowPopup(store);
 
-import create from './plugins/create';
-Vue.use(create);
+import alert from './plugins/alert';
+Vue.use(alert);
 
 import preventScroll from './rpf/un/preventScroll';
 preventScroll();

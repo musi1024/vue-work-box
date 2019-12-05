@@ -1,4 +1,6 @@
-function setShowPopup(Vue, store) {
+import Vue from 'vue';
+
+function setShowPopup(store) {
   function showPopup(type, props) {
     store.commit('popup/show', { type, props });
   }

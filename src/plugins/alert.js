@@ -1,12 +1,12 @@
 import Vue from 'vue';
-import createList from '@/custom/createList';
+import BaseAlert from '@/components/BaseAlert';
 
-function create(component) {
+function create() {
   return (content, config) => {
     let props = { content, ...config };
     const vm = new Vue({
       render(h) {
-        return h(component, { props });
+        return h(BaseAlert, { props });
       }
     }).$mount();
 
@@ -23,12 +23,10 @@ function create(component) {
 
 export default {
   install() {
-    createList.map(i => {
-      Object.defineProperty(Vue.prototype, i[0], {
-        get: function get() {
-          return create(i[1]);
-        }
-      });
+    Object.defineProperty(Vue.prototype, '$alert', {
+      get: function get() {
+        return create();
+      }
     });
   }
 };

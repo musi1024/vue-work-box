@@ -1,6 +1,10 @@
+import isObj from '@/utils/Object/isObj';
+
 const state = {
-  test: { show: false, type: null },
-  test2: { show: false, type: null }
+  test1: { show: false, type: null },
+  test2: { show: false, type: null },
+  test3: { show: false, type: null },
+  test4: false
 };
 
 let getters = {};
@@ -12,7 +16,7 @@ Object.keys(state).map(i => {
 
 const mutations = {
   show(state, payload) {
-    if (Object.prototype.toString.call(payload.props) === '[object Object]') {
+    if (isObj(payload.props)) {
       state[payload.type] = {
         ...state[payload.type],
         ...payload.props
@@ -23,9 +27,12 @@ const mutations = {
   }
 };
 
+const actions = {};
+
 export default {
   namespaced: true,
   state,
   getters,
-  mutations
+  mutations,
+  actions
 };

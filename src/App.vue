@@ -5,9 +5,27 @@
 </template>
 
 <script>
+const list = [
+  { name: 'test1', params: { text: 1 } },
+  { name: 'test2', params: { text: 2 } },
+  { name: 'test2', params: { text: 3 } },
+  { name: 'test1', params: { text: 2 } },
+  { name: 'test1', params: { text: 4 } }
+];
+
 export default {
   name: 'App',
-  mounted() {}
+  mounted() {
+    this.handlePopup();
+  },
+  methods: {
+    handlePopup() {
+      list.reduce(async (prePopup, popup) => {
+        await prePopup;
+        await this.$popup(popup.name, popup.params);
+      }, {});
+    }
+  }
 };
 </script>
 

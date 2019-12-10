@@ -9,8 +9,9 @@ import 'core-js/features/string/includes';
 
 import './rpf/vue/vconsole';
 
-import setShowPopup from '@/plugins/popup';
-setShowPopup(store);
+import popup from '@/plugins/popup';
+// setShowPopup(store);
+Vue.use(popup);
 
 import alert from './plugins/alert';
 Vue.use(alert);

@@ -1,5 +1,5 @@
 <template>
-  <transition name="popup" @after-leave="leave">
+  <transition name="popup" @after-enter="onEnter" @after-leave="onLeave">
     <section class="base-popup" v-show="show" @click.self="clickMask">
       <ScaleArea>
         <main class="base-popup-main">
@@ -25,11 +25,22 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      isEnter: false
+    };
+  },
   methods: {
     clickMask() {
-      this.$emit('mask');
+      if (this.isEnter) {
+        this.$emit('mask');
+      }
     },
-    leave() {
+    onEnter() {
+      this.isEnter = true;
+      this.$emit('enter');
+    },
+    onLeave() {
       this.$emit('leave');
     }
   }
@@ -48,6 +59,8 @@ export default {
   z-index: 999;
 
   &-main {
+    @include wh(300, 300);
+    background-color: #ffffff;
     @include flex();
     flex-direction: column;
     transition: all 0.2s ease-in-out;

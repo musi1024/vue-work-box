@@ -10,7 +10,6 @@ import 'core-js/features/string/includes';
 import './rpf/vue/vconsole';
 
 import popup from '@/plugins/popup';
-// setShowPopup(store);
 Vue.use(popup);
 
 import alert from './plugins/alert';

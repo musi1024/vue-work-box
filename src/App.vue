@@ -1,29 +1,42 @@
+<!--
+ * @Author: musi
+ * @Date: 2019-12-11 15:40:49
+ * @LastEditors: musi
+ * @LastEditTime: 2019-12-16 15:00:50
+ * @Description: file content
+ -->
 <template>
   <section id="app">
     <router-view></router-view>
+    {{ test }}
   </section>
 </template>
 
 <script>
-const list = [
-  { name: 'test1', params: { text: 1 } },
-  { name: 'test2', params: { text: 2 } },
-  { name: 'test2', params: { text: 3 } },
-  { name: 'test1', params: { text: 2 } },
-  { name: 'test1', params: { text: 4 } }
-];
+import queueCenter from '@/utils/queueCenter';
+const qc = queueCenter();
 
 export default {
   name: 'App',
+  data() {
+    return {
+      test: false,
+      a: '1'
+    };
+  },
   mounted() {
-    this.handlePopup();
+    qc.add([
+      () => this.changeTest(this.a),
+      () => this.$popup('test1', { text: 'sss' })
+    ]);
+    qc.run();
   },
   methods: {
-    handlePopup() {
-      list.reduce(async (prePopup, popup) => {
-        await prePopup;
-        await this.$popup(popup.name, popup.params);
-      }, {});
+    changeTest(e) {
+      this.test = e;
+      setTimeout(() => {
+        qc.next();
+      }, 2000);
     }
   }
 };
@@ -40,5 +53,9 @@ export default {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+}
+.btn {
+  @include wh(200, 100);
+  background-color: #333333;
 }
 </style>

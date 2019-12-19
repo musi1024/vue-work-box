@@ -5,11 +5,11 @@ const BASE_HACK_LIST = ['12', '13'];
 function createHiddenElement() {
   const div = document.createElement('div');
   div.style = `
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
   `;
   document.body.append(div);
   return div;

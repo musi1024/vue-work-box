@@ -9,10 +9,8 @@ import '@/rpf/vue/vconsole';
 import preventScroll from '@/rpf/un/preventScroll';
 import setShowPopup from '@/plugins/popup';
 import alert from '@/plugins/alert';
-import hackSwapProcesses from '@/rpf/un/hackSwapProcesses';
 
 preventScroll();
-hackSwapProcesses();
 setShowPopup(store);
 Vue.use(alert);
 

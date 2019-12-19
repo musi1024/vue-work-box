@@ -15,7 +15,7 @@ function createHiddenElement() {
   return div;
 }
 
-function init() {
+function hack() {
   const $div = createHiddenElement();
 
   let count = 0;
@@ -31,9 +31,7 @@ function init() {
 function hackIOSSwapProcessesOnCrossSiteNavigation() {
   const IOS_VERSION = getIOSVersion();
   if (!IOS_VERSION) return;
-  if (BASE_HACK_LIST.includes(IOS_VERSION.split('.')[0])) {
-    init();
-  }
+  if (BASE_HACK_LIST.includes(IOS_VERSION.split('.')[0])) hack();
 }
 
 export default hackIOSSwapProcessesOnCrossSiteNavigation;

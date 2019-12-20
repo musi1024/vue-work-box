@@ -1,12 +1,8 @@
-## 0.1.1 (2019-12-20)
+# Changelog
 
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### Bug Fixes
-
-* base button & alert ([6f872d1](https://github.com/musi1024/vue-component-library/commit/6f872d1b5e407fe5467c3b0d42b0b39673f6e906))
-* form lable ([5884a7c](https://github.com/musi1024/vue-component-library/commit/5884a7c4d41b19d2643c0f98a1d39a7b029b85a1))
-* mask ([af49e04](https://github.com/musi1024/vue-component-library/commit/af49e04e0b65bfedc4c76e29728a68eeacba376d))
-* vconsole ([71ae011](https://github.com/musi1024/vue-component-library/commit/71ae011623ff8db9a11cbdf9b40bc24f790fc75f))
+### 0.1.1 (2019-12-20)
 
 
 ### Features
@@ -44,4 +40,9 @@
 * update popup module ([06e976d](https://github.com/musi1024/vue-component-library/commit/06e976d5b32946bb75f1a3d4b504c0565800d74c))
 
 
+### Bug Fixes
 
+* base button & alert ([6f872d1](https://github.com/musi1024/vue-component-library/commit/6f872d1b5e407fe5467c3b0d42b0b39673f6e906))
+* form lable ([5884a7c](https://github.com/musi1024/vue-component-library/commit/5884a7c4d41b19d2643c0f98a1d39a7b029b85a1))
+* mask ([af49e04](https://github.com/musi1024/vue-component-library/commit/af49e04e0b65bfedc4c76e29728a68eeacba376d))
+* vconsole ([71ae011](https://github.com/musi1024/vue-component-library/commit/71ae011623ff8db9a11cbdf9b40bc24f790fc75f))

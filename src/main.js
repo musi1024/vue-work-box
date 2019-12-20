@@ -7,11 +7,11 @@ import 'core-js/features/object/assign';
 import 'core-js/features/string/includes';
 import '@/rpf/vue/vconsole';
 import preventScroll from '@/rpf/un/preventScroll';
-import setShowPopup from '@/plugins/popup';
+import popup from '@/plugins/popup';
 import alert from '@/plugins/alert';
 
 preventScroll();
-setShowPopup(store);
+Vue.use(popup);
 Vue.use(alert);
 
 Vue.config.productionTip = false;

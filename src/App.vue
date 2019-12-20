@@ -1,44 +1,19 @@
 <!--
  * @Author: musi
  * @Date: 2019-12-11 15:40:49
- * @LastEditors: musi
- * @LastEditTime: 2019-12-16 15:00:50
+ * @LastEditors  : musi
+ * @LastEditTime : 2019-12-20 11:29:00
  * @Description: file content
  -->
 <template>
   <section id="app">
     <router-view></router-view>
-    {{ test }}
   </section>
 </template>
 
 <script>
-import queueCenter from '@/utils/queueCenter';
-const qc = queueCenter();
-
 export default {
-  name: 'App',
-  data() {
-    return {
-      test: false,
-      a: '1'
-    };
-  },
-  mounted() {
-    qc.add([
-      () => this.changeTest(this.a),
-      () => this.$popup('test1', { text: 'sss' })
-    ]);
-    qc.run();
-  },
-  methods: {
-    changeTest(e) {
-      this.test = e;
-      setTimeout(() => {
-        qc.next();
-      }, 2000);
-    }
-  }
+  name: 'App'
 };
 </script>
 

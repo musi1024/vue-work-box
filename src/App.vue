@@ -1,19 +1,28 @@
-<!--
- * @Author: musi
- * @Date: 2019-12-11 15:40:49
- * @LastEditors  : musi
- * @LastEditTime : 2019-12-20 11:29:00
- * @Description: file content
- -->
 <template>
   <section id="app">
     <router-view></router-view>
+    <Test1 v-model="show"></Test1>
+    <button @click="toggle">button</button>
   </section>
 </template>
 
 <script>
+import Test1 from '@/components/Popup/Test1';
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Test1
+  },
+  data() {
+    return {
+      show: false
+    };
+  },
+  methods: {
+    toggle() {
+      this.show = !this.show;
+    }
+  }
 };
 </script>
 

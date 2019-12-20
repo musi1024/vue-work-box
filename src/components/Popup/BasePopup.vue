@@ -1,6 +1,6 @@
 <template>
   <transition name="popup" @after-enter="onEnter" @after-leave="onLeave">
-    <section class="base-popup" v-show="show" @click.self="clickMask">
+    <section class="base-popup" @click.self="clickMask">
       <ScaleArea>
         <main class="base-popup-main">
           <slot></slot>
@@ -15,16 +15,6 @@ import ScaleArea from '@/components/Layout/ScaleArea';
 export default {
   name: 'BasePopup',
   components: { ScaleArea },
-  model: {
-    prop: 'show',
-    event: 'change'
-  },
-  props: {
-    show: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
       isEnter: false

@@ -1,6 +1,7 @@
 <template>
-  <BasePopup v-model="visible" @leave="onLeave" @mask="visible = false">
-    <div class="test-wrap 1">{{ param.text }}</div>
+  <BasePopup v-if="show" @mask="close">
+    <div class="test-wrap 1" @click="a = 2">ddd</div>
+    {{ a }}
   </BasePopup>
 </template>
 
@@ -9,9 +10,24 @@ import BasePopup from '@/components/Popup/BasePopup';
 export default {
   name: 'Test1',
   components: { BasePopup },
+  model: {
+    prop: 'show',
+    event: 'change'
+  },
+  props: {
+    show: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      a: 1
+    };
+  },
   methods: {
-    onLeave() {
-      this.resolve('home');
+    close() {
+      this.$emit('change', false);
     }
   }
 };

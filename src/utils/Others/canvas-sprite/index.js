@@ -1,27 +1,12 @@
-import binCache from './binCache';
 import isCrossOrigin from './isCrossOrigin';
-import fetchAsDataURL from './fetchAsDataURL';
-
-function tryFromCache(key) {
-  return new Promise(resolve => {
-    const value = binCache.get(key);
-    if (value) {
-      resolve(value);
-    } else {
-      return fetchAsDataURL(key).then(fetchRes => {
-        binCache.set(fetchRes.url, fetchRes.result);
-        resolve(fetchRes.result);
-      });
-    }
-  });
-}
+import tryFromCache from './tryFromCache';
 
 function loadImage(url) {
   return new Promise((resolve, reject) => {
     // xhr GET max size limit ?
     return tryFromCache(url).then(src => {
       const img = new Image();
-      if (isCrossOrigin(url)) {
+      if (isCrossOrigin(src)) {
         img.crossOrigin = 'anonymous';
       }
       img.onload = () => {
@@ -110,19 +95,6 @@ function CanvasSprite({
       } else {
         frameIndex += 1;
       }
-      /*  if (frameIndex === frames - 1) {
-        if (loop && (loopTimes === undefined || loopTimes - loopCount > 1)) {
-          frameIndex = 0;
-          loopCount++;
-          onLoop && onLoop(loopCount);
-        } else {
-          animPaused = true;
-          window.cancelAnimationFrame(reqId);
-          onEnd && onEnd();
-        }
-      } else {
-        frameIndex += 1;
-      } */
     }
   }
 

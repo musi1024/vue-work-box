@@ -75,7 +75,7 @@ export default {
     } */
   },
   mounted() {
-    if (this.imageUrl) this.init();
+    if (this.imageUrl && this.state !== STATE_MAP.STOP) this.init();
   },
   destroyed() {
     this.cs.destroy && this.cs.destroy();
@@ -87,8 +87,8 @@ export default {
         imageUrl,
         frames,
         fps,
-        loop,
         state,
+        loop,
         loopTimes,
         loopFrames
       } = this;

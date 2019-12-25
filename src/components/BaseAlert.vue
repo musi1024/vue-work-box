@@ -1,5 +1,5 @@
 <template>
-  <transition :name="transitionName" @after-leave="leave">
+  <transition :name="transitionName" @after-enter="enter" @after-leave="leave">
     <section v-show="show" class="base-alert" @click.self="removeAlert">
       <main class="base-alert-main">
         <span class="base-alert-text">{{ content }}</span>
@@ -56,7 +56,6 @@ export default {
   },
   mounted() {
     this.show = true;
-    this.onShow();
     if (this.autoClose) {
       this.timer = setTimeout(() => {
         this.removeAlert();
@@ -70,9 +69,12 @@ export default {
     removeAlert() {
       this.clearTimer();
       this.show = false;
-      this.onClose();
+    },
+    enter() {
+      this.onShow();
     },
     leave() {
+      this.onClose();
       this.remove();
     },
     clearTimer() {

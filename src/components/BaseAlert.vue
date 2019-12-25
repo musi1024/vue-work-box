@@ -1,12 +1,12 @@
 <template>
   <transition :name="transitionName" @after-leave="leave">
-    <section v-show="showAlert" class="base-alert" @click.self="closeAlert">
+    <section v-show="show" class="base-alert" @click.self="removeAlert">
       <main class="base-alert-main">
         <span class="base-alert-text">{{ content }}</span>
         <div
           class="base-alert-close"
           v-if="hasCloseBtn"
-          @click.self="closeAlert"
+          @click.self="removeAlert"
         >
           x
         </div>
@@ -27,27 +27,22 @@ export default {
       type: Function,
       default: () => {}
     },
-    /* 内容 */
     content: {
       type: String,
       default: 'alert'
     },
-    /* 持续时间 */
     showTime: {
       type: Number,
       default: 1500
     },
-    /* 是否有关闭按钮 */
     hasCloseBtn: {
       type: Boolean,
       default: false
     },
-    /* 是否自动关闭 */
     autoClose: {
       type: Boolean,
       default: false
     },
-    /* 过度动画名 */
     transitionName: {
       type: String,
       default: 'alert-fade'
@@ -55,35 +50,33 @@ export default {
   },
   data() {
     return {
-      showAlert: false,
-      lockTime: null
+      show: false,
+      timer: null
     };
   },
   mounted() {
-    this.showAlert = true;
-    this.onShow(this);
+    this.show = true;
+    this.onShow();
     if (this.autoClose) {
-      this.lockTime = setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.removeAlert();
       }, this.showTime);
     }
   },
   beforeDestroy() {
-    this.lockTime && clearTimeout(this.lockTime);
+    this.clearTimer();
   },
   methods: {
-    closeAlert() {
-      if (!this.autoClose) {
-        this.removeAlert();
-      }
-    },
     removeAlert() {
-      this.lockTime && clearTimeout(this.lockTime);
-      this.showAlert = false;
-      this.onClose(this);
+      this.clearTimer();
+      this.show = false;
+      this.onClose();
     },
     leave() {
       this.remove();
+    },
+    clearTimer() {
+      this.timer && clearTimeout(this.timer);
     }
   }
 };
@@ -93,7 +86,7 @@ export default {
 .base-alert {
   @include center(fixed);
   color: #ffffff;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.4s ease-in-out;
   font-size: vw(30);
   z-index: 1000;
 

@@ -72,15 +72,51 @@ function text(ctx, attrs) {
     fill: '#000',
     x: 0,
     y: 0,
+    textAlign: 'start',
     textBaseline: 'top',
+    textOverflow: '',
+    maxWidth: null,
+    lineHeight: 0,
+    wordWrap: true,
     ...attrs
   };
   ctx.save();
-  ctx.textBaseline = dd.textBaseline;
   ctx.fillStyle = dd.fill;
   ctx.font = dd.font;
-  ctx.fillText(dd.text, dd.x, dd.y);
+  ctx.textAlign = dd.textAlign;
+  ctx.textBaseline = dd.textBaseline;
+
+  const { maxWidth } = dd;
+  const texts = dd.text.split('\n');
+  let textList = [];
+  texts.map(text => {
+    if (!maxWidth) return textList.push(text);
+    textList.push(...getText(text));
+    console.log('**debug**', textList);
+  });
+  textList.map((text, index) => {
+    ctx.fillText(text, dd.x, dd.y + dd.lineHeight * index);
+  });
   ctx.restore();
+
+  function getText(text) {
+    if (ctx.measureText(text).width <= maxWidth) return [text];
+    let res = [];
+    let newText = '';
+    for (let i = 0; i < text.length; i++) {
+      let checkText = newText + text[i];
+      let width = ctx.measureText(checkText).width;
+      if (width > maxWidth) {
+        res.push(newText);
+        newText = '';
+      } else {
+        newText = checkText;
+      }
+    }
+    res.push(newText);
+    return res;
+    // return text.slice(0, i - 1) + textOverflow;
+  }
 }
 
 // 矩形

@@ -30,13 +30,13 @@ export default {
         {
           type: 'text',
           font: 'bold 64px Arial',
-          text: '手机身上啊\nss饿了塞阿拉饿了塞阿拉了塞阿拉饿了塞阿拉',
+          text: '一二\n三四六七\n八九十一二三四六七八九十',
           fill: '#e44338',
           x: 0,
           y: 0,
+          strokeWidth: 10,
           lineHeight: 64,
-          maxWidth: 400,
-          textOverflow: '...'
+          maxWidth: 400
         },
         {
           type: 'rect',

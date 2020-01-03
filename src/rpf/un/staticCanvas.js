@@ -90,18 +90,71 @@ function text(ctx, attrs) {
     stroke: '#000',
     strokeWidth: 0,
     textBaseline: 'top',
+    textAlign: 'start',
+    maxWidth: 0,
+    lineHeight: 0,
     x: 0,
     y: 0,
     ...attrs
   };
+  resetXY();
   ctx.save();
-  const { x, y, text, ...restProps } = ctxProps;
+  const {
+    x,
+    y,
+    text,
+    maxWidth,
+    lineHeight,
+    textOverflow,
+    ...restProps
+  } = ctxProps;
   setCtx(ctx, restProps);
-  if (restProps.stroke && restProps.strokeWidth) {
-    ctx.strokeText(text, x, y);
-  }
-  ctx.fillText(text, x, y);
+  getTextList().map((text, index) => {
+    fillText(text, y + lineHeight * index);
+  });
   ctx.restore();
+
+  function resetXY() {
+    if (!ctxProps.maxWidth) return;
+    if (ctxProps.textAlign === 'center') ctxProps.x += ctxProps.maxWidth / 2;
+    if (ctxProps.textAlign === 'end') ctxProps.x += ctxProps.maxWidth;
+  }
+  function getTextList() {
+    const texts = text.split('\n');
+    let textList = [];
+    texts.map(text => {
+      if (!isOverflow(text)) return textList.push(text);
+      if (typeof textOverflow === 'string')
+        return textList.push(handleOverflowText(text));
+      textList.push(...splitOverflowText(text));
+    });
+    return textList;
+  }
+  function handleOverflowText(texts) {
+    let res = '';
+    for (let i = 0; i < texts.length; i++) {
+      if (isOverflow(res + texts[i] + textOverflow)) return res + textOverflow;
+      res += texts[i];
+    }
+  }
+  function splitOverflowText(text) {
+    let res = [];
+    const last = Array.from(text).reduce((acc, curr) => {
+      if (!isOverflow(acc + curr)) return acc + curr;
+      res.push(acc);
+      return curr;
+    });
+    return [...res, last];
+  }
+  function isOverflow(text) {
+    return maxWidth && ctx.measureText(text).width > maxWidth;
+  }
+  function fillText(text, y) {
+    if (restProps.stroke && restProps.strokeWidth) {
+      ctx.strokeText(text, x, y);
+    }
+    ctx.fillText(text, x, y);
+  }
 }
 
 // 矩形

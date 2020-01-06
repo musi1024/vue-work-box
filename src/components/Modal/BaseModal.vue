@@ -1,8 +1,15 @@
+<!--
+ * @Author: musi
+ * @Date: 2019-12-20 15:11:29
+ * @LastEditors: musi
+ * @LastEditTime: 2020-01-06 18:59:29
+ * @Description: file content
+ -->
 <template>
-  <transition name="popup" @after-enter="onEnter" @after-leave="onLeave">
-    <section class="base-popup" @click.self="clickMask">
+  <transition name="modal" @after-enter="onEnter" @after-leave="onLeave">
+    <section class="base-modal" @click.self="clickMask">
       <ScaleArea>
-        <main class="base-popup-main">
+        <main class="base-modal-main">
           <slot></slot>
         </main>
       </ScaleArea>
@@ -13,7 +20,7 @@
 <script>
 import ScaleArea from '@/components/Layout/ScaleArea';
 export default {
-  name: 'BasePopup',
+  name: 'BaseModal',
   components: { ScaleArea },
   data() {
     return {
@@ -38,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss">
-.base-popup {
+.base-modal {
   @include lt(0, 0, fixed);
   @include flex();
   width: 100vw;
@@ -57,14 +64,14 @@ export default {
   }
 }
 
-.popup-enter,
-.popup-leave-active {
+.modal-enter,
+.modal-leave-active {
   opacity: 0;
 }
-.popup-enter .base-popup-main {
+.modal-enter .base-modal-main {
   transform: translate(0, 20%);
 }
-.popup-leave-active .base-popup-main {
+.modal-leave-active .base-modal-main {
   transform: translate(0, -20%);
 }
 </style>

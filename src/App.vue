@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import Test from '@/components/Popup/Test1';
+import createComponent from '@/utils/Others/createComponent';
 import Loading from '@/views/Loading';
 export default {
   name: 'App',
@@ -16,6 +18,9 @@ export default {
     return {
       loading: true
     };
+  },
+  mounted() {
+    createComponent(Test);
   }
 };
 </script>

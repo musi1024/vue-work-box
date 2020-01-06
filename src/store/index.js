@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import popup from './modules/popup';
+import modal from './modules/modal';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
-    popup
+    modal
   }
 });
 

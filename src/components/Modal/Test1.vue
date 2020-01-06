@@ -1,15 +1,15 @@
 <template>
-  <BasePopup v-if="show" @mask="close">
+  <BaseModal v-if="show" @mask="close">
     <div class="test-wrap 1" @click="a = 2">ddd</div>
     {{ a }}
-  </BasePopup>
+  </BaseModal>
 </template>
 
 <script>
-import BasePopup from '@/components/Popup/BasePopup';
+import BaseModal from '@/components/Modal/BaseModal';
 export default {
   name: 'Test1',
-  components: { BasePopup },
+  components: { BaseModal },
   model: {
     prop: 'show',
     event: 'change'

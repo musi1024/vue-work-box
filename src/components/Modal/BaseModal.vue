@@ -1,10 +1,3 @@
-<!--
- * @Author: musi
- * @Date: 2019-12-20 15:11:29
- * @LastEditors: musi
- * @LastEditTime: 2020-01-06 18:59:29
- * @Description: file content
- -->
 <template>
   <transition name="modal" @after-enter="onEnter" @after-leave="onLeave">
     <section class="base-modal" @click.self="clickMask">
@@ -29,9 +22,7 @@ export default {
   },
   methods: {
     clickMask() {
-      if (this.isEnter) {
-        this.$emit('mask');
-      }
+      if (this.isEnter) this.$emit('mask');
     },
     onEnter() {
       this.isEnter = true;

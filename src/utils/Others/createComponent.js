@@ -1,18 +1,34 @@
 import Vue from 'vue';
 
 function createComponent(component, props) {
-  const vm = new Vue({
+  const Component = Vue.extend({
     render: h => h(component, { props })
-  }).$mount();
-
+  });
+  const vm = new Component().$mount();
+  const instance = vm.$children[0];
   document.body.appendChild(vm.$el);
-
-  const comp = vm.$children[0];
-  comp.remove = () => {
-    document.body.removeChild(vm.$el);
-    vm.$destroy();
+  instance.remove = () => {
+    destroy();
   };
-  return comp;
+
+  const onRemove = () => {
+    return new Promise(resolve => {
+      instance.remove = (...args) => {
+        destroy();
+        resolve(...args);
+      };
+    });
+  };
+
+  const destroy = () => {
+    vm.$destroy();
+    document.body.removeChild(vm.$el);
+  };
+
+  return {
+    onRemove,
+    destroy
+  };
 }
 
 export default createComponent;

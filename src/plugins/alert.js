@@ -3,8 +3,7 @@ import BaseAlert from '@/components/BaseAlert';
 
 function alert(content, config) {
   let props = { content, ...config };
-  const component = createComponent(BaseAlert, props);
-  return component;
+  return createComponent(BaseAlert, props);
 }
 
 export default {

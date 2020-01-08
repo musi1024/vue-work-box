@@ -1,8 +1,5 @@
 <template>
-  <BaseModal v-if="show" @mask="close">
-    <div class="test-wrap 1" @click="a = 2">ddd</div>
-    {{ a }}
-  </BaseModal>
+  <BaseModal v-show="show" @mask="close" @leave="leave"></BaseModal>
 </template>
 
 <script>
@@ -10,24 +7,17 @@ import BaseModal from '@/components/Modal/BaseModal';
 export default {
   name: 'Test1',
   components: { BaseModal },
-  model: {
-    prop: 'show',
-    event: 'change'
-  },
-  props: {
-    show: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
-      a: 1
+      show: false
     };
   },
   methods: {
     close() {
-      this.$emit('change', false);
+      this.show = false;
+    },
+    leave() {
+      this.remove();
     }
   }
 };

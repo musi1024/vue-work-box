@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import destroyAll from './destroyAll';
 
 function createComponent(component, props) {
   const Component = Vue.extend({
@@ -7,9 +8,6 @@ function createComponent(component, props) {
   const vm = new Component().$mount();
   const instance = vm.$children[0];
   document.body.appendChild(vm.$el);
-  instance.remove = () => {
-    destroy();
-  };
 
   const onRemove = () => {
     return new Promise(resolve => {
@@ -24,6 +22,11 @@ function createComponent(component, props) {
     vm.$destroy();
     document.body.removeChild(vm.$el);
   };
+
+  instance.remove = () => {
+    destroy();
+  };
+  destroyAll.add(destroy, vm.$el);
 
   return {
     onRemove,

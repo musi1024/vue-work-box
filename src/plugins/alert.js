@@ -1,4 +1,4 @@
-import createComponent from '@/utils/Others/createComponent';
+import createComponent from '@/utils/Component/createComponent';
 import BaseAlert from '@/components/BaseAlert';
 
 function alert(content, config) {

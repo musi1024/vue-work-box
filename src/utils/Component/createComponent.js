@@ -5,13 +5,13 @@ function createComponent(component, props) {
   const Component = Vue.extend({
     render: h => h(component, { props })
   });
-  const vm = new Component().$mount();
-  const instance = vm.$children[0];
-  document.body.appendChild(vm.$el);
+  const instance = new Component().$mount();
+  const comp = instance.$children[0];
+  document.body.appendChild(instance.$el);
 
   const onRemove = () => {
     return new Promise(resolve => {
-      instance.remove = (...args) => {
+      comp.remove = (...args) => {
         destroy();
         resolve(...args);
       };
@@ -19,14 +19,14 @@ function createComponent(component, props) {
   };
 
   const destroy = () => {
-    vm.$destroy();
-    document.body.removeChild(vm.$el);
+    instance.$destroy();
+    document.body.removeChild(instance.$el);
   };
 
-  instance.remove = () => {
+  comp.remove = () => {
     destroy();
   };
-  destroyAll.add(destroy, vm.$el);
+  destroyAll.add(destroy, instance.$el);
 
   return {
     onRemove,

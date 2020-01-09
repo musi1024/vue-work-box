@@ -32,4 +32,9 @@ export default {
   height: 100vh;
   overflow: hidden;
 }
+.test {
+  @include wh(200, 200);
+  margin: vw(20);
+  background-color: blanchedalmond;
+}
 </style>

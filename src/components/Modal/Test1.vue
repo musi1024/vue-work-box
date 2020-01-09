@@ -12,6 +12,9 @@ export default {
       show: false
     };
   },
+  mounted() {
+    this.show = true;
+  },
   methods: {
     close() {
       this.show = false;

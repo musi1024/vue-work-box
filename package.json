@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "async-validator": "^3.2.2",
+    "axios": "^0.19.1",
+    "axios-mock-adapter": "^1.17.0",
     "core-js": "^3.4.3",
     "cross-env": "^6.0.3",
     "normalize.css": "^8.0.1",

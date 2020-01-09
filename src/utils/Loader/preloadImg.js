@@ -1,11 +1,3 @@
-/*
- * @Author: musi
- * @Date: 2019-12-09 17:19:35
- * @LastEditors  : musi
- * @LastEditTime : 2019-12-24 18:02:05
- * @Description: file content
- */
-
 import imgLoader from '@/utils/Loader/imgLoader';
 import chunk from '@/utils/Array/chunk';
 
@@ -43,20 +35,16 @@ async function preloadImg(
     return Promise.all(loadPromiseList);
   }
 
-  if (!list.length) {
-    onFinishAll();
-    return;
-  }
-  if (chunkSize) {
+  if (!list.length) return onFinishAll();
+  if (!chunkSize) {
     const chunks = chunk(list, chunkSize);
     for (let c of chunks) {
       await imgsPreload(c);
     }
-    onFinishAll();
   } else {
     await imgsPreload(list);
-    onFinishAll();
   }
+  onFinishAll();
 }
 
 export default preloadImg;

@@ -1,12 +1,5 @@
-/*
- * @Author: musi
- * @Date: 2019-12-23 16:54:42
- * @LastEditors  : musi
- * @LastEditTime : 2019-12-24 18:32:42
- * @Description: file content
- */
-import { BASE_IGNORE_LIST, BASE_ASYNC_LIST } from '@/custom/preloadImg';
-
+const BASE_IGNORE_LIST = [/\/ignore/];
+const BASE_ASYNC_LIST = [/\/async/];
 const BASE64_REG = /^data:/;
 
 const validator = (value, regList) => regList.some(reg => reg.test(value));

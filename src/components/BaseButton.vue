@@ -9,43 +9,50 @@ export default {
   name: 'BaseButton',
   props: {
     debounce: { type: Number },
-    gate: { type: Number },
-    type: { type: String, default: 'buttom' }
+    throttle: { type: Number },
+    asyncLock: { type: Function },
+    type: { type: String, default: 'button' }
   },
   data() {
     return {
+      lock: false,
       timer: null,
       lastTime: null
     };
   },
   beforeDestroy() {
-    this.timer && clearTimeout(this.timer);
+    this.clearTimeout();
   },
   methods: {
     clickBtn() {
-      if (!this.debounce && !this.gate) {
-        this.$emit('click');
-        return;
-      }
-      if (this.debounce) {
-        this.timer && clearTimeout(this.timer);
-        this.timer = setTimeout(() => {
-          this.checkGate();
-        }, this.debounce);
-        return;
-      }
-      this.checkGate();
+      if (!this.debounce && !this.throttle) return this.handleClick();
+      if (!this.debounce) return this.handleThrottle();
+      this.handleDebounce();
     },
-    checkGate() {
-      if (!this.gate) {
-        this.$emit('click');
-        return;
-      }
-      let now = new Date();
-      if (!this.lastTime || now - this.lastTime > this.gate) {
-        this.$emit('click');
+    handleDebounce() {
+      this.clearTimeout();
+      this.timer = setTimeout(() => {
+        this.handleThrottle();
+      }, this.debounce);
+    },
+    handleThrottle() {
+      if (!this.throttle) return this.handleClick();
+      const now = new Date();
+      if (!this.lastTime || now - this.lastTime > this.throttle) {
+        this.handleClick();
         this.lastTime = new Date();
       }
+    },
+    async handleClick() {
+      if (this.lock) return;
+      if (!this.asyncLock) return this.$emit('click');
+      this.lock = true;
+      const data = await this.asyncLock();
+      this.$emit('click', data);
+      this.lock = false;
+    },
+    clearTimeout() {
+      this.timer && clearTimeout(this.timer);
     }
   }
 };

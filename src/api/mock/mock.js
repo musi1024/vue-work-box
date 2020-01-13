@@ -3,7 +3,7 @@ import responses from './mockData';
 
 function mock(ax) {
   const mo = new MockAdapter(ax, {
-    delayResponse: 500
+    delayResponse: 2500
   });
   mo.onAny().reply(config => {
     const method = config.method.toUpperCase();

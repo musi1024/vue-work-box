@@ -52,7 +52,7 @@ function store() {
 
   const remove = key => {
     const storage = getStorage();
-    if (store[key]) return;
+    if (storage[key]) return;
     storage[key] = undefined;
     setItem({ ...store });
   };

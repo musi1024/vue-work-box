@@ -1,4 +1,4 @@
-import imgLoader from '@/utils/Loader/imgLoader';
+import imgLoader from '@/utils/ImgLoader/loadImg';
 import chunk from '@/utils/Array/chunk';
 
 async function preloadImg(

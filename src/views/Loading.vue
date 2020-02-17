@@ -8,6 +8,12 @@ import preloadImg from '@/utils/ImgLoader/preloadImg';
 const { loadList, asyncList } = preloadImgList;
 export default {
   name: 'Loading',
+  props: {
+    startLoad: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       loaded: 0,

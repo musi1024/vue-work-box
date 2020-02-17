@@ -1,7 +1,9 @@
 <template>
   <section id="app">
-    <router-view></router-view>
-    <Loading v-if="loading" @finish="loading = false"></Loading>
+    <transition name="fade">
+      <router-view v-if="!loading && isReady"></router-view>
+      <Loading v-else :start-load="isReady" @finish="loading = false"></Loading>
+    </transition>
   </section>
 </template>
 
@@ -14,8 +16,14 @@ export default {
   },
   data() {
     return {
+      isReady: false,
       loading: true
     };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isReady = true;
+    }, 1000);
   }
 };
 </script>
@@ -31,10 +39,5 @@ export default {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-}
-.test {
-  @include wh(200, 200);
-  margin: vw(20);
-  background-color: blanchedalmond;
 }
 </style>

@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import preloadImgList from '@/utils/Loader/preloadImgList';
-import preloadImg from '@/utils/Loader/preloadImg';
+import preloadImgList from '@/utils/ImgLoader/preloadImgList';
+import preloadImg from '@/utils/ImgLoader/preloadImg';
 const { loadList, asyncList } = preloadImgList;
 export default {
   name: 'Loading',

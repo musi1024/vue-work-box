@@ -1,4 +1,4 @@
-import isCrossOrigin from './rpf/un/isCrossOrigin';
+import isCrossOrigin from '@/rpf/un/isCrossOrigin';
 
 export default function loadImg(src) {
   return new Promise((resolve, reject) => {

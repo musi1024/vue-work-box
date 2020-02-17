@@ -1,4 +1,6 @@
 import 'normalize.css';
+import '@/style/global.scss';
+import '@/style/animation.scss';
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
@@ -7,12 +9,8 @@ import 'core-js/features/object/assign';
 import 'core-js/features/string/includes';
 import '@/rpf/vue/vconsole';
 import preventScroll from '@/rpf/un/preventScroll';
-import modal from '@/plugins/modal';
-import alert from '@/plugins/alert';
 
 preventScroll();
-Vue.use(modal);
-Vue.use(alert);
 
 Vue.config.productionTip = false;
 

@@ -5,14 +5,14 @@ module.exports = {
   },
   extends: ['plugin:vue/essential', '@vue/prettier'],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   },
   parserOptions: {
     parser: 'babel-eslint'
   },
   globals: {
-    WeixinJSBridge: true,
-    wx: true
+    wx: true,
+    WeixinJSBridge: true
   }
 };

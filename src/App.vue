@@ -21,9 +21,7 @@ export default {
     };
   },
   mounted() {
-    setTimeout(() => {
-      this.isReady = true;
-    }, 1000);
+    this.isReady = true;
   }
 };
 </script>

@@ -5,67 +5,71 @@ function storage(area = localStorage, storeKey = '_store_base_key_') {
   const getStorage = () => parse(area.getItem(storeKey));
   const setItem = value => area.setItem(storeKey, stringify(value));
 
-  const clear = () => area.removeItem(storeKey);
-
   const has = key => {
     const storage = getStorage();
     return Boolean(key && storage && storage[key]);
   };
 
-  const set = (key, value) => {
-    if (!value || typeof value === 'function') {
-      throw Error(`key:${key} value is required and should not be function`);
-    }
+  const set = (key, value = null) => {
     const storage = getStorage();
-    setItem({ ...storage, [key]: value });
+    const oldValue = get(key);
+    let newValue = value;
+    if (typeof value === 'function') {
+      newValue = value(oldValue, storage);
+    }
+    setItem({ ...storage, [key]: newValue });
   };
 
-  const setAll = data => {
-    for (const key in data) {
-      set(key, data[key]);
+  const setMultiple = obj => {
+    const storage = getStorage();
+    let newObj = {};
+    for (const key in obj) {
+      const oldValue = get(key);
+      let newValue = obj[key];
+      if (typeof newValue === 'function') {
+        newValue = newValue(oldValue, storage);
+      }
+      newObj = { ...newObj, [key]: newValue };
     }
+    setItem({ ...storage, ...newObj });
   };
 
   const get = key => {
-    if (!has(key)) {
-      throw Error(`key:${key} is not exist`);
-    }
     const storage = getStorage();
-    return storage[key];
+    const value = has(key) ? storage[key] : null;
+    return value;
   };
 
   const getAll = () => getStorage();
 
-  const add = (key, value) => {
-    const exValue = get(key);
-    let res;
-    if (Array.isArray(exValue)) {
-      res = exValue.concat(value);
-    } else if (typeof exValue === 'object' && typeof value === 'object') {
-      res = { ...exValue, ...value };
-    } else if (typeof exValue === typeof value) {
-      res = value + exValue;
-    } else {
-      res = value;
-    }
-    set(key, res);
-  };
-
   const remove = key => {
+    if (!has(key)) return;
     const storage = getStorage();
-    if (storage[key]) return;
     storage[key] = undefined;
     setItem({ ...storage });
   };
+
+  const removeMultiple = arr => {
+    const storage = getStorage();
+    arr.map(key => {
+      if (!has(key)) return;
+      storage[key] = undefined;
+    });
+    setItem({ ...storage });
+  };
+
+  const clear = () => area.removeItem(storeKey);
+
   return {
     has,
     get,
     getAll,
     set,
-    setAll,
-    add,
+    setMultiple,
     remove,
+    removeMultiple,
     clear
   };
 }
+
 export default storage;

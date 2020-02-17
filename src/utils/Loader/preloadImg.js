@@ -36,7 +36,7 @@ async function preloadImg(
   }
 
   if (!list.length) return onFinishAll();
-  if (!chunkSize) {
+  if (chunkSize) {
     const chunks = chunk(list, chunkSize);
     for (let c of chunks) {
       await imgsPreload(c);

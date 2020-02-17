@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import PhoneForm from '../components/Form/PhoneForm';
-import AddressForm from '../components/Form/AddressForm';
+import PhoneForm from './PhoneForm';
+import AddressForm from './AddressForm';
 export default {
   name: 'FormPage',
   components: { PhoneForm, AddressForm }

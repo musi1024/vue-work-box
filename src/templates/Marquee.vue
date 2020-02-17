@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import MarqueeHorizontal from '../components/Marquee/MarqueeHorizontal';
-import MarqueeVertical from '../components/Marquee/MarqueeVertical';
-import MarqueeVerticalItem from '../components/Marquee/MarqueeVerticalItem';
+import MarqueeHorizontal from '@components/Marquee/MarqueeHorizontal';
+import MarqueeVertical from '@/components/Marquee/MarqueeVertical';
+import MarqueeVerticalItem from '@/components/Marquee/MarqueeVerticalItem';
 export default {
   components: {
     MarqueeHorizontal,

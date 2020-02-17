@@ -25,9 +25,4 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-.test-wrap {
-  @include wh(300, 300);
-  background-color: #fff;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -1,10 +1,7 @@
 import isObj from '@/utils/Object/isObj';
 
 const state = {
-  test1: { show: false, type: null },
-  test2: { show: false, type: null },
-  test3: { show: false, type: null },
-  test4: false
+  modal1: { show: false, type: null }
 };
 
 let getters = {};

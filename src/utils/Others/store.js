@@ -1,7 +1,7 @@
 const BASE_KEY = '_store_';
 const AREA_MAP = { local: localStorage, session: sessionStorage };
 
-function store() {
+function storage() {
   let area = AREA_MAP['local'];
   // utils
   const stringify = value => JSON.stringify(value);
@@ -54,7 +54,7 @@ function store() {
     const storage = getStorage();
     if (storage[key]) return;
     storage[key] = undefined;
-    setItem({ ...store });
+    setItem({ ...storage });
   };
 
   const clear = () => area.removeItem(BASE_KEY);
@@ -80,4 +80,4 @@ function store() {
     setStorageType
   };
 }
-export default store();
+export default storage();

@@ -53,10 +53,10 @@
 </template>
 
 <script>
-import Form from './BaseForm';
-import FormItem from './BaseFormItem';
-import Input from './BaseFormInput';
-import BaseButton from '../BaseButton';
+import Form from '@/components/Form/BaseForm';
+import FormItem from '@/components/Form/BaseFormItem';
+import Input from '@/components/Form/BaseFormInput';
+import BaseButton from '@/components/BaseButton';
 export default {
   name: 'AddressForm',
   components: { Form, FormItem, Input, BaseButton },

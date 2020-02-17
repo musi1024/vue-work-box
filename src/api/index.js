@@ -31,6 +31,15 @@ const api = {
   }
 };
 
+instance.interceptors.request.use(
+  config => {
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
+
 instance.interceptors.response.use(
   res => {
     const { data, config } = res;

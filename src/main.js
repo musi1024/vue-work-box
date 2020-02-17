@@ -9,9 +9,9 @@ import 'core-js/features/object/assign';
 import 'core-js/features/string/includes';
 import '@/rpf/vue/vconsole';
 import preventScroll from '@/rpf/un/preventScroll';
-import vStore from '@/plugins/store';
+import storage from '@/plugins/storage';
 preventScroll();
-Vue.use(vStore);
+Vue.use(storage);
 
 Vue.config.productionTip = false;
 

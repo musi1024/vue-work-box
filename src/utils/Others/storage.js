@@ -1,13 +1,11 @@
-const BASE_KEY = '_store_';
-const AREA_MAP = { local: localStorage, session: sessionStorage };
-
-function storage() {
-  let area = AREA_MAP['local'];
+function storage(area = localStorage, storeKey = '_store_base_key_') {
   // utils
   const stringify = value => JSON.stringify(value);
   const parse = value => JSON.parse(value);
-  const getStorage = () => parse(area.getItem(BASE_KEY));
-  const setItem = value => area.setItem(BASE_KEY, stringify(value));
+  const getStorage = () => parse(area.getItem(storeKey));
+  const setItem = value => area.setItem(storeKey, stringify(value));
+
+  const clear = () => area.removeItem(storeKey);
 
   const has = key => {
     const storage = getStorage();
@@ -29,6 +27,9 @@ function storage() {
   };
 
   const get = key => {
+    if (!has(key)) {
+      throw Error(`key:${key} is not exist`);
+    }
     const storage = getStorage();
     return storage[key];
   };
@@ -56,18 +57,6 @@ function storage() {
     storage[key] = undefined;
     setItem({ ...storage });
   };
-
-  const clear = () => area.removeItem(BASE_KEY);
-
-  const setStorageType = type => {
-    if (!type || !['local', 'session'].includes(type)) {
-      throw Error(
-        `setStorageType type is required and should be local or session`
-      );
-    }
-    area = AREA_MAP[type];
-  };
-
   return {
     has,
     get,
@@ -76,8 +65,7 @@ function storage() {
     setAll,
     add,
     remove,
-    clear,
-    setStorageType
+    clear
   };
 }
-export default storage();
+export default storage;

@@ -1,10 +1,10 @@
-import store from '@/utils/Others/store';
+import storage from '@/utils/Others/storage';
 
 export default {
   install(Vue) {
     Object.defineProperty(Vue.prototype, '$storage', {
       get() {
-        return store;
+        return storage();
       }
     });
   }

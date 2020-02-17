@@ -1,8 +1,6 @@
 <template>
   <section class="home">
-    <div class="safe-area">
-      <div class="home-bg"></div>
-    </div>
+    <div class="safe-area"></div>
   </section>
 </template>
 
@@ -10,17 +8,13 @@
 export default {
   name: 'Home',
   components: {},
-  props: [''],
+  props: {},
   data() {
     return {};
   },
-
   computed: {},
-
   watch: {},
-
   mounted() {},
-
   methods: {}
 };
 </script>
@@ -30,12 +24,6 @@ export default {
   height: 100%;
   @include lt(0, 0);
   @include flex();
-
-  &-bg {
-    width: 100vw;
-    height: 100%;
-    background-color: #333;
-  }
 }
 
 .safe-area {

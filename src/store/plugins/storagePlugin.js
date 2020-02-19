@@ -1,26 +1,36 @@
 import storage from '@/utils/Others/storage';
 
-const key = 'vuex';
-const _storage = storage();
+function setStoragePlugin(options = {}) {
+  const key = options.key || 'vuex';
+  const _storage = storage(options.storage || localStorage);
+  const filterSet = options.filterSet || (() => true);
+  const filterGet = options.filterGet || (() => true);
 
-function filterStorage(storage, state) {
-  let data = {};
-  for (const key in storage) {
-    if (storage.hasOwnProperty(key) && state.hasOwnProperty(key)) {
-      data = { ...data, [key]: storage[key] };
+  function getStorage(storage, state) {
+    let data = {};
+    for (const key in storage) {
+      if (
+        filterGet(key) &&
+        storage.hasOwnProperty(key) &&
+        state.hasOwnProperty(key)
+      ) {
+        data = { ...data, [key]: storage[key] };
+      }
     }
+    return data;
   }
-  return data;
+
+  return function(store) {
+    if (_storage.has(key)) {
+      const data = getStorage(_storage.get(key), store.state);
+      store.replaceState({ ...store.state, ...data });
+    }
+    store.subscribe((mutation, state) => {
+      if (filterSet(mutation)) {
+        _storage.set(key, state);
+      }
+    });
+  };
 }
 
-function storagePlugin(store) {
-  if (_storage.has(key)) {
-    const data = filterStorage(_storage.get(key), store.state);
-    store.replaceState({ ...store.state, ...data });
-  }
-  store.subscribe((mutation, state) => {
-    _storage.set(key, state);
-  });
-}
-
-export default storagePlugin;
+export default setStoragePlugin;

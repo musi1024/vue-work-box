@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import modal from './modules/modal';
-import storagePlugin from './plugins/storagePlugin';
+import setStoragePlugin from './plugins/storagePlugin';
 
 Vue.use(Vuex);
 
@@ -21,7 +21,16 @@ const store = new Vuex.Store({
   modules: {
     modal
   },
-  plugins: [storagePlugin]
+  plugins: [
+    setStoragePlugin({
+      filterSet: mutation => {
+        return mutation.type.split('/')[0] !== 'modal';
+      },
+      filterGet: key => {
+        return key !== 'modal';
+      }
+    })
+  ]
 });
 
 export default store;

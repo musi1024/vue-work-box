@@ -1,8 +1,6 @@
 <template>
   <section class="home">
-    <div class="safe-area">
-      <input v-model="text" type="text" />
-    </div>
+    <div class="safe-area"></div>
   </section>
 </template>
 
@@ -12,23 +10,11 @@ export default {
   components: {},
   props: {},
   data() {
-    return {
-      text: ''
-    };
+    return {};
   },
   computed: {},
-  watch: {
-    text(e) {
-      this.$store.commit('setText', e);
-    }
-  },
-  mounted() {
-    this.text = this.$store.state.text;
-    this.$store.commit('modal/show', {
-      type: 'madol1',
-      props: { show: true }
-    });
-  },
+  watch: {},
+  mounted() {},
   methods: {}
 };
 </script>
@@ -38,10 +24,6 @@ export default {
   height: 100%;
   @include lt(0, 0);
   @include flex();
-
-  input {
-    border: 1px solid red;
-  }
 }
 
 .safe-area {

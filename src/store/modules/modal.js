@@ -13,14 +13,13 @@ Object.keys(state).map(i => {
 
 const mutations = {
   show(state, payload) {
-    if (isObj(payload.props)) {
-      state[payload.type] = {
-        ...state[payload.type],
-        ...payload.props
-      };
-    } else {
-      state[payload.type] = payload.props;
-    }
+    if (!state[payload.type]) throw Error(`${payload.type} is not exist`);
+    state[payload.type] = isObj(payload.props)
+      ? {
+          ...state[payload.type],
+          ...payload.props
+        }
+      : (state[payload.type] = payload.props);
   }
 };
 

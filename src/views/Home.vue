@@ -1,13 +1,16 @@
 <template>
   <section class="home">
-    <div class="safe-area"></div>
+    <div class="safe-area">
+      <MusicBtn />
+    </div>
   </section>
 </template>
 
 <script>
+import MusicBtn from '@/components/MusicBtn';
 export default {
   name: 'Home',
-  components: {},
+  components: { MusicBtn },
   props: {},
   data() {
     return {};

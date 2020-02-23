@@ -9,6 +9,7 @@
 
 <script>
 import Loading from '@/views/Loading';
+
 export default {
   name: 'App',
   components: {

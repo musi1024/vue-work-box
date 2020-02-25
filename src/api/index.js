@@ -12,11 +12,10 @@ const instance = axios.create({
   timeout: 10 * 1000
 });
 
-function handleApi(promise) {
+function handleApiRes(promise) {
   return promise
     .then(res => [null, res])
     .catch(err => {
-      // error modal
       console.log(err);
       return [err, null];
     });
@@ -24,10 +23,10 @@ function handleApi(promise) {
 
 const api = {
   postTest({ id, name }) {
-    return handleApi(instance.post('/test', { id, name }));
+    return handleApiRes(instance.post('/test', { id, name }));
   },
   getTest({ id }) {
-    return handleApi(instance.get('/test', { params: { id } }));
+    return handleApiRes(instance.get('/test', { params: { id } }));
   }
 };
 
